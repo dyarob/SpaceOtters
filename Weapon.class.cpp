@@ -19,11 +19,11 @@ Weapon              &Weapon::operator=(Weapon const & src) {
     return *this;
 }
 
-unsigned int        Weapon::getFireRate() const{
+unsigned int        Weapon::getFireRate(void)               const{
     return this->_fire_rate;
 }
 
-Projectile          &Weapon::getProjectile() const{
+Projectile          &Weapon::getProjectile(void)            const{
     return this->_projectile;
 }
 

@@ -1,10 +1,13 @@
-#include    "AUnit.class.hpp"
+#include    "Vector2D.class.hpp"
 #include    "Weapon.class.hpp"
+#include    "AUnit.class.hpp"
 
 AUnit::_cur_id   = 0;
 
-AUnit::AUnit(unsigned int _id, unsigned int speed, unsigned int height, unsigned int width, int hp, int hp_max, Weapon const & weapon)
-    : _id(AUnit::_cur_id++), _speed(speed), _height(height), _width(width), _hp(hp), _hp_max(hp_max), _weapon(weapon) {
+AUnit::AUnit(unsigned int _id, Vector2D &coord, Vector2D &delta_v, unsigned int speed, 
+        unsigned int height, unsigned int width, int hp, int hp_max, Weapon const & weapon)
+    : _id(AUnit::_cur_id++), _coord(coord), _delta_v(delta_v), _speed(speed),
+    _height(height), _width(width), _hp(hp), _hp_max(hp_max), _weapon(weapon) {
 
 }
 
@@ -15,6 +18,8 @@ AUnit::AUnit(AUnit const & src) {
 
 AUnit           &AUnit::operator=(AUnit const & src) {
     this->_id               = src._id;
+    this->_coord            = src._coord;
+    this->_delta_v          = src->_delta_v;
     this->_speed            = src._speed;
     this->_height           = src._height;
     this->_width            = src._width;
@@ -49,8 +54,16 @@ unsigned int    AUnit::getHpMax(void)   const {
     return this->_hp_max;
 }
 
-Weapon const &  AUnit::getWeapon(void)  const {
+Weapon const    &AUnit::getWeapon(void) const {
     return this->_weapon;
+}
+
+Vector2D const  &AUnit::getCoord(void)  const {
+    return this->_coord;
+}
+
+Vector2D const  &AUnit::getDeltaV(void) const {
+    return this->_delta_v;
 }
 
 AUnit::~AUnit() {
