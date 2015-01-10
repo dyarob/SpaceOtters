@@ -37,6 +37,9 @@ public:
     Vector2D const  &getCoord(void)         const;
     Vector2D const  &getDeltaV(void)        const;
     virtual void    shoot(Weapon const &)   const = 0;
+
+    void            move(Vector2D &delta_v);
+    void            setDeltaV(Vector2D &delta_v);
     virtual         ~AUnit(void);
 };
 

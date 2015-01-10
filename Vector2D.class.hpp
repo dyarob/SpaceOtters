@@ -22,6 +22,8 @@ class       Vector2D {
         
         int               getX(void)   const;
         int               getY(void)   const;
+        void              setX(int x);
+        void              setY(int y);
 
         virtual         ~Vector2D(void);
 };

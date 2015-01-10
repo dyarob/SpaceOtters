@@ -62,6 +62,14 @@ Vector2D const  &AUnit::getDeltaV(void) const {
     return this->_delta_v;
 }
 
+void            AUnit::move(Vector2D &delta_v) {
+    this->_delta_v += delta_v;
+}
+
+void            AUnit::setDeltaV(Vector2D &delta_v) {
+    this->_delta_v = delta_v;
+}
+
 AUnit::~AUnit() {
 
 }
