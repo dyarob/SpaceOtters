@@ -48,6 +48,14 @@ int                     Vector2D::getY(void)               const{
     return this->_y;
 }
 
+void                    Vector2D::setX(int x) {
+    this->_x = x;
+}
+
+void                    Vector2D::setY(int y) {
+    this->_y = y;
+}
+
 Vector2D::~Vector2D(void) {
 
 }
