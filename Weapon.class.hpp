@@ -17,6 +17,7 @@ class       Weapon {
         Weapon          &operator=(Weapon const &);
         
         unsigned int    getFireRate(void)   const;
+
         Projectile      &fire(void);
         virtual         ~Weapon(void);
 };

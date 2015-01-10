@@ -2,6 +2,7 @@
 # define    _AUNIT_HPP_
 
 # include   <iostream>
+# include   "Vector2D.class.hpp"
 # include   "Weapon.class.hpp"
 
 class       AUnit {
@@ -21,7 +22,8 @@ protected:
     Weapon          _weapon;
 
 public:
-    AUnit(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, int, Weapon const &);
+    AUnit(unsigned int, Vector2D &, Vector2D &, unsigned int, unsigned int,
+        unsigned int, unsigned int, unsigned int, int, Weapon const &);
     AUnit(AUnit const & src);
 
     AUnit           &operator=(AUnit const &);
@@ -34,6 +36,8 @@ public:
     unsigned int    getHp(void)             const;
     unsigned int    getHpMax(void)          const;
     Weapon  const   &getWeapon(void)        const;
+    Vector2D const  &getCoord(void)         const;
+    Vector2D const  &getDeltaV(void)        const;
     virtual void    shoot(Weapon const &)   const = 0;
     virtual         ~AUnit(void);
 };
