@@ -13,7 +13,9 @@ int		main( void )
 	//wrefresh(game->win);
 	EnemyBase	*truc = new EnemyBase( *(new Vector2D(3, 5)), *(new Vector2D(1, 0)) );
 
-	//refresh();
+	//List		*test = new List ( (AUnit*)truc );
+	//(void)test;
+	refresh();
 	mvwprintw(game->win, 1, 1, "x");
 	wrefresh(game->win);
 	game->draw(truc);
@@ -33,7 +35,5 @@ int		main( void )
 		voila = voila->next;
 	}
 	*/
-	List		*test = new List ( (AUnit*)truc );
-	(void)test;
 	return (0);
 }
