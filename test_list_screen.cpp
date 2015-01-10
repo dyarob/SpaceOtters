@@ -12,12 +12,25 @@ int		main( void )
 	WinUI_screen *game = new WinUI_screen();
 	//wrefresh(game->win);
 	EnemyBase	*truc = new EnemyBase( *(new Vector2D(3, 5)), *(new Vector2D(1, 0)) );
+	EnemyBase	*truc2 = new EnemyBase( *(new Vector2D(4, 6)), *(new Vector2D(1, 0)) );
+	EnemyBase	*truc3 = new EnemyBase( *(new Vector2D(5, 7)), *(new Vector2D(1, 0)) );
 
-	//refresh();
+	List		*test = new List ( (AUnit*)truc );
+	test = test->push(truc2);
+	test = test->push(truc3);
+	//(void)test;
+	refresh();
 	mvwprintw(game->win, 1, 1, "x");
 	wrefresh(game->win);
+	/*
 	game->draw(truc);
 	wrefresh(game->win);
+	*/
+	/*
+	game->draw_all( test );
+	wrefresh(game->win);
+	*/
+	game->update( test );
 	getch();
 	endwin();
 
@@ -33,7 +46,5 @@ int		main( void )
 		voila = voila->next;
 	}
 	*/
-	List		*test = new List ( (AUnit*)truc );
-	(void)test;
 	return (0);
 }

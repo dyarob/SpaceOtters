@@ -1,10 +1,11 @@
-#ifndef     _WINUI_SCREEN_HPP_
+  #ifndef     _WINUI_SCREEN_HPP_
 # define    _WINUI_SCREEN_HPP_
 
 # include   <iostream>
 # include   <ncurses.h>
-#include "WinUI.class.hpp"
+# include	"WinUI.class.hpp"
 # include	"AUnit.class.hpp"
+# include	"List.struct.hpp"
 
 class       WinUI_screen : public WinUI
 {
@@ -13,6 +14,8 @@ class       WinUI_screen : public WinUI
 
     public:
 		void	draw ( AUnit* u );
+		void	draw_all ( List* l );
+		void	update ( List* l );
 
         WinUI_screen(void);
         WinUI_screen(unsigned int, unsigned int, unsigned int, unsigned int);

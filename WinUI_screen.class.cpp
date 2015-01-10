@@ -5,6 +5,23 @@
 
 // ----- Adelie modif ----
 
+void	WinUI_screen::update ( List* l )
+{
+	werase ( win );
+	box( win, 0, 0 );
+	draw_all ( l );
+	wrefresh ( win );
+}
+
+void	WinUI_screen::draw_all ( List* l )
+{
+	while (l)
+	{
+		draw( l->u );
+		l = l->next;
+	}
+}
+
 void	WinUI_screen::draw ( AUnit* u )
 {
 	Vector2D v = u->getCoord( );

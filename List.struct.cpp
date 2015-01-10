@@ -43,6 +43,7 @@ void	List::delete_all ( )
 */
 
 List::List(void)
+	: u(NULL), next(NULL)
 {
 }
 
