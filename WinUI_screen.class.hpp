@@ -4,6 +4,7 @@
 # include   <iostream>
 # include   <ncurses.h>
 #include "WinUI.class.hpp"
+# include	"AUnit.class.hpp"
 
 class       WinUI_screen : public WinUI
 {
@@ -11,6 +12,8 @@ class       WinUI_screen : public WinUI
     protected:
 
     public:
+		void	draw ( AUnit* u );
+
         WinUI_screen(void);
         WinUI_screen(unsigned int, unsigned int, unsigned int, unsigned int);
         WinUI_screen(WinUI_screen const &src);

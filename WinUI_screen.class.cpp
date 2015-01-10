@@ -1,4 +1,17 @@
 #include    "WinUI_screen.class.hpp"
+#include	"Vector2D.class.hpp"
+#include	<ncurses.h>
+
+
+// ----- Adelie modif ----
+
+void	WinUI_screen::draw ( AUnit* u )
+{
+	Vector2D v = u->getCoord( );
+	mvwprintw( win, v.getX(), v.getY(), "O" );
+}
+
+//--------------------
 
 WinUI_screen::WinUI_screen(void) : WinUI()
 {
