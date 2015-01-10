@@ -1,21 +1,9 @@
 
-
 #include "WinUI.class.hpp"
+#include "WinUI_screen.class.hpp"
 
 int main( void ){	
-	// WINDOW *my_win;
-	// int startx, starty, width, height;
-
-	// initscr();			/* Start curses mode 		*/
-	// cbreak();			/* Line buffering disabled, Pass on
-	// 					 * everty thing to me 		*/
-	// keypad(stdscr, TRUE);		/* I need that nifty F1 	*/
-
-	// height =10; 
-	// width = 15;
-	// starty = (LINES - height) / 2;	/* Calculating for a center placement */
-	// startx = (COLS - width) / 2;	/* of the window		*/
-	WinUI *game = new WinUI();
+	WinUI_screen *game = new WinUI_screen();
 	WinUI *BoxText = new WinUI(120, 4, 30, 0);
 
 	printw("Press F1 to exit");
