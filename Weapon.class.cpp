@@ -1,19 +1,18 @@
 #include    "Projectile.class.hpp"
 #include    "Weapon.class.hpp"
+#include 	"Vector2D.class.hpp"
 
-Weapon::Weapon(unsigned int fire_rate, Projectile &projectile)
-    : _fire_rate(fire_rate), _projectile(projectile) {
+Weapon::Weapon(unsigned int fire_rate)
+    : _fire_rate(fire_rate) {
 
 }
 
-Weapon::Weapon(Weapon const &src)
-    : _projectile(src._projectile) {
+Weapon::Weapon(Weapon const &src) {
     *this = src;
 }
 
 Weapon              &Weapon::operator=(Weapon const & src) {
     this->_fire_rate    = src._fire_rate;
-    this->_projectile   = src._projectile;
     return *this;
 }
 
@@ -21,8 +20,8 @@ unsigned int        Weapon::getFireRate(void)               const{
     return this->_fire_rate;
 }
 
-Projectile          &Weapon::getProjectile(void)            const{
-    return this->_projectile;
+Projectile      	&Weapon::fire(Vector2D *coord, Vector2D *delta_v) {
+    return (*(new Projectile(1, 1, 1, *coord, *delta_v)));
 }
 
 Weapon::~Weapon(void) {

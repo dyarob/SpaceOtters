@@ -2,7 +2,8 @@
 # define    _WEAPON_HPP_
 
 # include   <iostream>
-#include    "Projectile.class.hpp"
+# include   "Projectile.class.hpp"
+# include   "Vector2D.class.hpp"
 
 class       Weapon {
 
@@ -11,19 +12,17 @@ private:
 
 protected:
     unsigned int    _fire_rate;
-    Projectile      &_projectile;
 
 public:
-    Weapon(unsigned int, Projectile &projectile);
+    Weapon(unsigned int);
     Weapon(Weapon const &src);
 
-    Weapon          &operator=(Weapon const &);
+    Weapon              &operator=(Weapon const &);
     
-    unsigned int    getFireRate(void)       const;
-    Projectile      &getProjectile(void)    const;
+    unsigned int        getFireRate(void)       const;
 
-    Projectile      &fire(void);
-    virtual         ~Weapon(void);
+    virtual Projectile  &fire(Vector2D *coord, Vector2D *delta_v);
+    virtual             ~Weapon(void);
 };
 
 #endif      /* _WEAPON_HPP_ */
