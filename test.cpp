@@ -1,34 +1,20 @@
 
 
 #include "WinUI.class.hpp"
+#include "WinUI_dialogBox.class.hpp"
 
 int main( void ){	
-	// WINDOW *my_win;
-	// int startx, starty, width, height;
 
-	// initscr();			/* Start curses mode 		*/
-	// cbreak();			/* Line buffering disabled, Pass on
-	// 					 * everty thing to me 		*/
-	// keypad(stdscr, TRUE);		/* I need that nifty F1 	*/
+	WinUI *game = new WinUI(120, 30, 3, 0);
+	WinUI_dialogBox *BoxText = new WinUI_dialogBox(120, 5, 33, 0);
+	WinUI_dialogBox *BoxHead = new WinUI_dialogBox(120, 3, 0, 0);
 
-	// height =10; 
-	// width = 15;
-	// starty = (LINES - height) / 2;	/* Calculating for a center placement */
-	// startx = (COLS - width) / 2;	/* of the window		*/
-	WinUI *game = new WinUI();
-	WinUI *BoxText = new WinUI(120, 4, 30, 0);
-
-	printw("Press F1 to exit");
-	refresh();
-	// my_win = create_newwin(height, width, starty, startx);
-
-	mvwprintw(game->win, 1, 1, "x");
 	wrefresh(game->win);
+	while (1){
+		BoxText->fixeDialog("Bonjour les gens!");
+		BoxHead->fixeDialog("Titre test");
+	}
 
-	mvwprintw(BoxText->win, 2, 2, "y");
-	wrefresh(BoxText->win);
-	
-	getch();
 	game->destroyWin();
 	BoxText->destroyWin();
 

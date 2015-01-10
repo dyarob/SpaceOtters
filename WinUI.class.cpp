@@ -3,23 +3,26 @@
 WinUI::WinUI(void)
 : _width(120), _height(30), _startX(0), _startY(0), _heightMap(60){
 	initscr();
+	curs_set(0);
 	cbreak();
-	keypad(stdscr, true);
 	this->win = this->createWin();
 }
 
 WinUI::WinUI(unsigned int width, unsigned int height, unsigned int x, unsigned y)
 : _width(width), _height(height), _startX(x), _startY(y), _heightMap(height * 3){
 	this->win = this->createWin();
+	curs_set(0);
 	initscr();
 	cbreak();
-	keypad(stdscr, true);
 	this->win = this->createWin();
 }
 
 WinUI::WinUI(WinUI const & src)
 : _width(src.getWidth()), _height(src.getHeight()), _startX(src.getStartX()), 
 _startY(src.getStartY()), _heightMap(src.getHeight() * 3){
+	curs_set(0);
+	initscr();
+	cbreak();
 	this->win = this->createWin();
 }
 
@@ -37,8 +40,8 @@ WinUI &				WinUI::operator=(WinUI const & src) {
 }
 
 WINDOW			*WinUI::createWin(void){
-	WINDOW *local_win;
 
+	WINDOW *local_win;
 	local_win = newwin(this->getHeight(), this->getWidth(), this->getStartX(), this->getStartY());
 	box(local_win, 0 , 0);		/* 0, 0 gives default characters 
 	wrefresh(local_win);		 Show that box 		*/
