@@ -2,8 +2,12 @@
 # define                _PROJECTILES_HPP_
 
 # include               <iostream>
+#include                "Vector2D.class.hpp"
 
 class                   Projectile {
+    private:
+        Projectile(void);
+
     protected:
         unsigned int    _damage;
         unsigned int    _speed;
@@ -13,7 +17,6 @@ class                   Projectile {
         Vector2D        &_delta_v;
 
     public:
-        Projectile(void);
         Projectile(unsigned int, unsigned int, unsigned int, unsigned int, Vector2D &, Vector2D &);
         Projectile(Projectile const & src);
         

@@ -1,14 +1,12 @@
 #include "Projectile.class.hpp"
-
-Projectile::Projectile(void) {
-
-}
+#include "Vector2D.class.hpp"
 
 Projectile::Projectile(unsigned int damage, unsigned int speed, unsigned int width, unsigned int height, Vector2D &coord, Vector2D &delta_v)
     : _damage(damage), _speed(speed), _width(width), _height(height), _coord(coord), _delta_v(delta_v) {
 }
 
-Projectile::Projectile(Projectile const & src) {
+Projectile::Projectile(Projectile const &src)
+    : _coord(src._coord), _delta_v(src._delta_v){
     *this = src;
 }
 
@@ -28,10 +26,6 @@ unsigned int        Projectile::getDamage(void)         const {
 
 unsigned int        Projectile::getSpeed(void)          const {
     return this->_speed;
-}
-
-unsigned int        Projectile::getAcceleration(void)   const {
-    return this->_acceleration;
 }
 
 unsigned int        Projectile::getHeight(void)         const {

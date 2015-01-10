@@ -7,8 +7,6 @@
 
 class       AUnit {
 
-unsigned int        cur_id;
-
 private:
     AUnit(void);
 
@@ -20,10 +18,13 @@ protected:
     unsigned int    _hp;
     unsigned int    _hp_max;
     Weapon          _weapon;
+    Vector2D        &_coord;
+    Vector2D        &_delta_v;
 
 public:
-    AUnit(unsigned int, Vector2D &, Vector2D &, unsigned int, unsigned int,
-        unsigned int, unsigned int, unsigned int, int, Weapon const &);
+    static unsigned int _cur_id;
+    AUnit(unsigned int speed, unsigned int height, unsigned int width,
+        int hp, int hp_max, Weapon const &, Vector2D &coord, Vector2D &delta_v);
     AUnit(AUnit const & src);
 
     AUnit           &operator=(AUnit const &);
