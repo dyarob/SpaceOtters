@@ -6,17 +6,26 @@
 #    By: stherman <stherman@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/11/20 14:58:54 by stherman          #+#    #+#              #
-#    Updated: 2015/01/10 10:17:49 by stherman         ###   ########.fr        #
+#    Updated: 2015/01/10 22:11:53 by jgirard          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
-CC          = g++ -O3
+CC          = /usr/bin/g++
 
-NAME        = phonebook
+NAME        = ft_retro
 
 SRCDIR      = ./src/
 
-SRC         = $(SRCDIR)main.cpp     \
+SRC         =	$(SRCDIR)main.cpp			\
+				Vector2D.class.cpp			\
+				Weapon.class.cpp			\
+				WeaponBase.class.cpp		\
+				Projectile.class.cpp		\
+				ProjectileBase.class.cpp	\
+				EnemyBase.class.cpp			\
+				DelayEvent.class.cpp		\
+				Event.class.cpp				\
+				AUnit.class.cpp
 
 OBJ         = $(SRC:.cpp=.o)
 
