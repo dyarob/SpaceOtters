@@ -1,20 +1,18 @@
-#include    "Weapon.hpp"
-
-Weapon::Weapon(void) {
-
-}
+#include    "Projectile.class.hpp"
+#include    "Weapon.class.hpp"
 
 Weapon::Weapon(unsigned int fire_rate, Projectile &projectile)
-    : _fire_rate(fireRate), _projectile(projectile) {
+    : _fire_rate(fire_rate), _projectile(projectile) {
 
 }
 
-Weapon::Weapon(Weapon const & src) {
+Weapon::Weapon(Weapon const &src)
+    : _projectile(src._projectile) {
     *this = src;
 }
 
 Weapon              &Weapon::operator=(Weapon const & src) {
-    this->_fireRate     = src._fireRate;
+    this->_fire_rate    = src._fire_rate;
     this->_projectile   = src._projectile;
     return *this;
 }

@@ -1,6 +1,7 @@
 #include    "Vector2D.class.hpp"
 
-Vector2D::Vector2D(void) _x(0), _y(0) {
+Vector2D::Vector2D(void)
+    : _x(0), _y(0) {
 
 }
 
@@ -29,6 +30,14 @@ Vector2D              &Vector2D::operator+=(Vector2D const &rhs) {
     this->_x        += rhs.getX();
     this->_y        += rhs.getY();
     return *this;
+}
+
+Vector2D              Vector2D::operator+(Vector2D const &rhs) {
+    return Vector2D(this->getX() + rhs.getX(), this->getY() + rhs.getY());
+}
+
+Vector2D              Vector2D::operator-(Vector2D const &rhs) {
+    return Vector2D(this->getX() - rhs.getX(), this->getY() - rhs.getY());
 }
 
 int                     Vector2D::getX(void)               const{

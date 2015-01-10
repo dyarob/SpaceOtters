@@ -17,6 +17,8 @@ class       Vector2D {
         Vector2D          &operator=(Vector2D const &);
         Vector2D          &operator-=(Vector2D const &rhs);
         Vector2D          &operator+=(Vector2D const &rhs);
+        Vector2D          operator+(Vector2D const &rhs);
+        Vector2D          operator-(Vector2D const &rhs);
         
         int               getX(void)   const;
         int               getY(void)   const;
