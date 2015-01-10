@@ -12,7 +12,6 @@ private:
 
 protected:
     unsigned int    _id;
-    unsigned int    _speed;
     unsigned int    _height;
     unsigned int    _width;
     unsigned int    _hp;
