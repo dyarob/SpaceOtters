@@ -20,13 +20,19 @@ static void do_resize(int sig)
 	sigwinchReceived = true;
 }
 
+
+
+# include   "EnemyBase.class.hpp"
+
 void	updatePositions(List *units)
 {
 	for (List *l = units; l; l = l->next) {
 		l->u->move(l->u->getDeltaV());
+		/*
 		if (l->u->getCoord().getY() < 0)
 			l->delete_one(units, l);
 		l->u->detect_collision( units, l );
+		*/
 	}
 }
 
@@ -54,6 +60,7 @@ int main() {
 
 	start_color();
 	init_color(COLOR_RED, 700, 0, 0);
+
 	while (running) {
 
 		if (!player->getHp())
@@ -70,12 +77,14 @@ int main() {
 
 		currentFrame++;
 		timer.start();
-		events.exec();
+
+		events.exec(&units, currentFrame);
 		ch = game->keyEvent(player);
 		if ( ch == std::string("espace"))
 			units = units->push(player->shoot());
 		else if ( ch == std::string("escape"))
 			break;
+
 		updatePositions(units);
 		game->update(units);
 		BoxText->fixeDialog("GrosBoGoss Francky, BoGoss James", currentFrame / 10, 1);

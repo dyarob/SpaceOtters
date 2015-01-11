@@ -2,6 +2,7 @@
 # define    _LIST_STRUCT_HPP_
 
 # include   <iostream>
+# include   <fstream>
 # include   <ncurses.h>
 # include	"AGameObject.class.hpp"
 
@@ -22,6 +23,7 @@ class       List {
 		AGameObject	*u;
 		List	*next;
 
+        void save_all ( List *list );
 		List	*push ( AGameObject *unit );
 		List	*delete_one ( List *list, List *to_delete );
 		//void	delete_all ();

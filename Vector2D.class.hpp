@@ -6,8 +6,8 @@
 class       Vector2D {
 
     protected:
-        unsigned int    _x;
-        unsigned int    _y;
+        int    _x;
+        int    _y;
 
     public:
         Vector2D(void);
