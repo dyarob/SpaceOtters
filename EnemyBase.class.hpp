@@ -12,7 +12,7 @@ private:
     EnemyBase(void);
 
 public:
-    EnemyBase(Vector2D &coord, Vector2D &delta_v);
+    EnemyBase(Vector2D &coord, Vector2D &delta_v, int pattern);
     EnemyBase(EnemyBase const & src);
 
     EnemyBase           &operator=(EnemyBase const &);

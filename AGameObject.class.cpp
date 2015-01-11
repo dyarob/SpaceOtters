@@ -71,13 +71,6 @@ void            AGameObject::move(Vector2D &delta_v, int currentFrame) {
     }
     if (abs_X != 0 && currentFrame % abs_X == 0) {
         this->_coord.setX(this->_coord.getX() + (1 * signe_X));
-
-        std::ofstream o("log", std::ios::app);
-        o << "move X : [from] " << this->_coord.getX();
-
-        this->_coord.setX(this->_coord.getX() + (1 * signe_X));
-        
-        o << "[to] " << this->_coord.getX() << std::endl;
     }
 
     if (delta_v.getY() < 0) {
@@ -87,15 +80,16 @@ void            AGameObject::move(Vector2D &delta_v, int currentFrame) {
         abs_Y = delta_v.getY();
     }
     if (abs_Y != 0 && currentFrame % abs_Y == 0) {
-
         this->_coord.setY(this->_coord.getY() + (1 * signe_Y));
-
-
     }
 }
 
 void            AGameObject::setDeltaV(Vector2D &delta_v) {
     this->_delta_v = delta_v;
+}
+
+int             AGameObject::getPattern(void) const  {
+    return (this->_pattern);
 }
 
 AGameObject::~AGameObject() {

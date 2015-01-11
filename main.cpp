@@ -9,17 +9,63 @@
 #include <mutex>
 
 
-
 # include   "EnemyBase.class.hpp"
 
 void	updatePositions(List *units, int currentFrame)
 {
+
 	for (List *l = units; l; l = l->next) {
+		/* move element */
 		l->u->move(l->u->getDeltaV(), currentFrame);
-
-
 		if (l->u->getCoord().getY() < 0)
 			l = List::delete_one(units, l);
+		/* change pattern for everyone but Player's shippu */
+		if (l->u->getId() != 0) {
+			// pattern un coup en bas un coup en haut
+			if (l->u->getPattern() == 1) {
+				if (currentFrame % 100 == 1) {
+					if (l->u->getDeltaV().getX() == 0 || l->u->getDeltaV().getX() == -100) {
+						// on ne sort pas de la map
+						if (l->u->getCoord().getX() > 2)
+							l->u->getDeltaV().setX(100);
+					} else {
+						// on ne sort pas de la map
+						if (l->u->getCoord().getX() < 28)
+							l->u->getDeltaV().setX(-100);
+					}
+				}
+			}
+			if (l->u->getPattern() == 2) {
+				if (l->u->getCoord().getY() <= 100) {
+					if (l->u->getDeltaV().getX() == 0 && l->u->getCoord().getX() != 20) {
+						l->u->getDeltaV().setX(10);
+					}
+					if (l->u->getCoord().getX() > 20) {
+						l->u->getDeltaV().setX(-5);
+					} else if (l->u->getCoord().getX() == 20) {
+						l->u->getDeltaV().setX(0);
+						if (l->u->getCoord().getY() <= 50) {
+							l->u->getDeltaV().setY(std::rand() % 10 + 5);
+						}
+					}
+				}
+			}
+			if (l->u->getPattern() == 3) {
+				if (l->u->getCoord().getY() <= 100) {
+					if (l->u->getDeltaV().getX() == 0 && l->u->getCoord().getX() != 10) {
+						l->u->getDeltaV().setX(10);
+					}
+					if (l->u->getCoord().getX() > 10) {
+						l->u->getDeltaV().setX(-5);
+					} else if (l->u->getCoord().getX() == 10) {
+						l->u->getDeltaV().setX(0);
+						if (l->u->getCoord().getY() <= 50) {
+							l->u->getDeltaV().setY(- 1 * (std::rand() % 10) - 5);
+						}
+					}
+				}
+			}
+		}
 	}
 }
 
@@ -39,7 +85,7 @@ int main() {
 	WinUI_dialogBox *BoxText = new WinUI_dialogBox(120, 3, 31, 0);
 
 	// srand
-	//std::srand(std::time(NULL));
+	std::srand(std::time(NULL));
 
 	while (running) {
 		currentFrame++;

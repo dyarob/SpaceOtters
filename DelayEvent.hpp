@@ -4,12 +4,12 @@
 # include <iostream>
 # include "List.struct.hpp"
 
-# define FRAME_MIN_TO_POP_CHAIN 500
-# define FRAME_MAX_TO_POP_CHAIN 1000
-# define CHAIN_MIN_LENGTH 3
-# define CHAIN_MAX_LENGTH 9
-# define CHAIN_MIN_SPACING 100
-# define CHAIN_MAX_SPACING 300
+# define FRAME_MIN_TO_POP_CHAIN 150
+# define FRAME_MAX_TO_POP_CHAIN 225
+# define CHAIN_MIN_LENGTH 2
+# define CHAIN_MAX_LENGTH 5
+# define CHAIN_MIN_SPACING 5
+# define CHAIN_MAX_SPACING 10
 # define TEMP_WIN_X 120
 # define TEMP_WIN_Y 30
 # define SPAWN_Y_PADDING 2
@@ -28,7 +28,7 @@ public:
 
 private:
 	DelayEvent( DelayEvent const & cp );
-	void		createDelayedEnemy( List **, int, int, int );
+	void		createDelayedEnemy( List **, int, int, int, int );
 	DelayEvent &	operator=(DelayEvent const &);
 	static const int	framesToFillMainShipWeapon = 30;
 

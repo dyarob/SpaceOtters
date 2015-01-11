@@ -13,6 +13,7 @@ class AGameObject {
 		unsigned int _width;
 		unsigned int _hp;
 		unsigned int _hp_max;
+    	unsigned int _pattern;
 		Vector2D	 &_coord;
 		Vector2D	 &_delta_v;
 
@@ -33,6 +34,8 @@ class AGameObject {
 		unsigned int    getHpMax(void)          const;
 		Vector2D 		&getCoord(void)         const;
 		Vector2D 		&getDeltaV(void)        const;
+   		int		        getPattern(void)        const;
+
 
 		void            move(Vector2D &delta_v, int currentFrame);
 		void            setDeltaV(Vector2D &delta_v);

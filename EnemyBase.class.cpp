@@ -3,9 +3,9 @@
 #include    "Weapon.class.hpp"
 #include    "EnemyBase.class.hpp"
 
-EnemyBase::EnemyBase(Vector2D &coord, Vector2D &delta_v)
+EnemyBase::EnemyBase(Vector2D &coord, Vector2D &delta_v, int pattern)
     : AUnit(1, 1, 3, 3, *(new WeaponBase()), coord, delta_v) {
-
+        this->_pattern = pattern;
 }
 
 EnemyBase::EnemyBase(EnemyBase const &src)
@@ -23,6 +23,7 @@ EnemyBase           &EnemyBase::operator=(EnemyBase const & src) {
     this->_hp               = src._hp;
     this->_hp               = src._hp_max;
     this->_weapon           = src._weapon;
+    this->_pattern           = src._pattern;
 
     return *this;
 }
