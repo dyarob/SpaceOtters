@@ -1,0 +1,223 @@
+AGameObject.class.cpp:    this->_id++;
+AGameObject.class.cpp:    this->_id               = src._id;
+AGameObject.class.cpp:    this->_coord            = src._coord;
+AGameObject.class.cpp:    this->_delta_v          = src._delta_v;
+AGameObject.class.cpp:    this->_height           = src._height;
+AGameObject.class.cpp:    this->_width            = src._width;
+AGameObject.class.cpp:    this->_hp               = src._hp;
+AGameObject.class.cpp:    this->_hp               = src._hp_max;
+AGameObject.class.cpp:    return this->_id;
+AGameObject.class.cpp:    return this->_height;
+AGameObject.class.cpp:    return this->_width;
+AGameObject.class.cpp:    return this->_hp;
+AGameObject.class.cpp:    return this->_hp_max;
+AGameObject.class.cpp:    return this->_coord;
+AGameObject.class.cpp:    return this->_delta_v;
+AGameObject.class.cpp:        abs_X = delta_v.getX() * -1 ;
+AGameObject.class.cpp:        signe_X = -1;
+AGameObject.class.cpp:        this->_coord.setX(this->_coord.getX() + (1 * signe_X));
+AGameObject.class.cpp:        o << "move X : [from] " << this->_coord.getX();
+AGameObject.class.cpp:        this->_coord.setX(this->_coord.getX() + (1 * signe_X));
+AGameObject.class.cpp:        o << "[to] " << this->_coord.getX() << std::endl;
+AGameObject.class.cpp:        abs_Y = delta_v.getY() * -1 ;
+AGameObject.class.cpp:        signe_Y = -1;
+AGameObject.class.cpp:        o << "move Y {" << this->getId() << "}: [from] " << this->_coord.getY();
+AGameObject.class.cpp:        this->_coord.setY(this->_coord.getY() + (1 * signe_Y));
+AGameObject.class.cpp:        o << " [to] " << this->_coord.getY() << std::endl;
+AGameObject.class.cpp:    this->_delta_v = delta_v;
+Binary file AGameObject.class.o matches
+AUnit.class.cpp:    this->_id               = src._id;
+AUnit.class.cpp:    this->_coord            = src._coord;
+AUnit.class.cpp:    this->_delta_v          = src._delta_v;
+AUnit.class.cpp:    this->_height           = src._height;
+AUnit.class.cpp:    this->_width            = src._width;
+AUnit.class.cpp:    this->_hp               = src._hp;
+AUnit.class.cpp:    this->_hp               = src._hp_max;
+AUnit.class.cpp:    this->_weapon           = src._weapon;
+AUnit.class.cpp:    return this->_weapon;
+Binary file AUnit.class.o matches
+DelayEvent.class.cpp:	this->randomChain(units);
+DelayEvent.class.cpp:		//randomWait = (std::rand() % (FRAME_MAX_TO_POP_CHAIN - FRAME_MIN_TO_POP_CHAIN)) + FRAME_MIN_TO_POP_CHAIN;
+DelayEvent.class.cpp:		randomWait = -1;
+DelayEvent.class.cpp:		int chainLength = (std::rand() % (CHAIN_MAX_LENGTH - CHAIN_MIN_LENGTH)) + CHAIN_MIN_LENGTH;
+DelayEvent.class.cpp:		int chainSpacing = (std::rand() % (CHAIN_MAX_SPACING - CHAIN_MIN_SPACING)) + CHAIN_MIN_SPACING;
+DelayEvent.class.cpp:		int chainSpawnY = (std::rand() % (TEMP_WIN_Y - SPAWN_Y_PADDING * 2)) + SPAWN_Y_PADDING;
+DelayEvent.class.cpp:			this->createDelayedEnemy( units, enemyType, (chainSpacing * i), chainSpawnY);
+DelayEvent.class.cpp:		Vector2D * b = new Vector2D(0, -10);
+DelayEvent.class.cpp:		*units = (*units)->push(newEnnemy);
+Binary file DelayEvent.class.o matches
+EnemyBase.class.cpp:    this->_id++;
+EnemyBase.class.cpp:    this->_id               = src._id;
+EnemyBase.class.cpp:    this->_coord            = src._coord;
+EnemyBase.class.cpp:    this->_delta_v          = src._delta_v;
+EnemyBase.class.cpp:    this->_height           = src._height;
+EnemyBase.class.cpp:    this->_width            = src._width;
+EnemyBase.class.cpp:    this->_hp               = src._hp;
+EnemyBase.class.cpp:    this->_hp               = src._hp_max;
+EnemyBase.class.cpp:    this->_weapon           = src._weapon;
+EnemyBase.class.cpp:    delete &this->_weapon;
+Binary file EnemyBase.class.o matches
+List.struct.cpp:	ret->u = unit;
+List.struct.cpp:	ret->next = this;
+List.struct.cpp:		o << "_id :" << ptr->u->getId() << std::endl
+List.struct.cpp:		<< "_height :" << ptr->u->getHeight() << std::endl
+List.struct.cpp:		<< "_width :" << ptr->u->getWidth() << std::endl
+List.struct.cpp:		<< "_hp :" << ptr->u->getHp() << std::endl
+List.struct.cpp:		<< "_hp_max :" << ptr->u->getHpMax() << std::endl
+List.struct.cpp:		<< "_coord :" << ptr->u->getCoord().getX() << " <> " << ptr->u->getCoord().getY() << std::endl
+List.struct.cpp:		<< "_delta_v :" << ptr->u->getDeltaV().getX() << " <> "  << ptr->u->getDeltaV().getY() << std::endl
+List.struct.cpp:		ptr = ptr->next;
+List.struct.cpp:		save = to_delete->next;
+List.struct.cpp:	while ( list->next )
+List.struct.cpp:		if ( list->next == to_delete )
+List.struct.cpp:			list->next = to_delete->next;
+List.struct.cpp:		list = list->next;
+List.struct.cpp:	while ( save->next )
+List.struct.cpp:	this->u = src.u;
+List.struct.cpp:	this->next = src.next;
+Binary file List.struct.o matches
+Makefile:HDFLAGS     = -I./includes/
+Makefile:LDFLAGS     = -lncurses
+Makefile:CFLAGS      = $(HDFLAGS) -Wall -Werror -Wextra -ansi -pedantic -g
+Makefile:RM          = rm -rf
+Makefile:			@echo "\033[1;32m[Linking] \t\033[0m: \033[0;32m" | tr -d '\n'
+Makefile:			$(CC) -o $@ $^ $(LDFLAGS) 
+Makefile:			@echo "\033[0m" | tr -d '\n'
+Makefile:			@echo "\033[1;33m[Cleaning] \t\033[0m: \033[0;31m" | tr -d '\n'
+Makefile:			@echo "\033[0m" | tr -d '\n'
+Makefile:			@echo "\033[1;31m[Fcleaning] \t\033[0m: \033[0;31m" | tr -d '\n'
+Makefile:			@echo "\033[0m" | tr -d '\n'
+Makefile:			@echo "\033[1;36m[Compiling] \t\033[0m: \033[1;37m" | tr -d '\n'
+Makefile:			$(CC) $(CFLAGS) -c $< -o $@
+Makefile:			@echo "\033[0m" | tr -d '\n'
+Player.class.cpp:    this->_id++;
+Player.class.cpp:    this->_id               = src._id;
+Player.class.cpp:    this->_coord            = src._coord;
+Player.class.cpp:    this->_delta_v          = src._delta_v;
+Player.class.cpp:    this->_height           = src._height;
+Player.class.cpp:    this->_width            = src._width;
+Player.class.cpp:    this->_hp               = src._hp;
+Player.class.cpp:    this->_hp               = src._hp_max;
+Player.class.cpp:    this->_weapon           = src._weapon;
+Player.class.cpp:    delete &this->_weapon;
+Binary file Player.class.o matches
+Projectile.class.cpp:    this->_damage           = src._damage;
+Projectile.class.cpp:    this->_width            = src._width;
+Projectile.class.cpp:    this->_height           = src._height;
+Projectile.class.cpp:    this->_coord            = src._coord;
+Projectile.class.cpp:    this->_delta_v          = src._delta_v;
+Projectile.class.cpp:    return this->_damage;
+Binary file Projectile.class.o matches
+ProjectileBase.class.cpp:    this->_damage           = src.getDamage();
+ProjectileBase.class.cpp:    this->_width            = src._width;
+ProjectileBase.class.cpp:    this->_height           = src._height;
+ProjectileBase.class.cpp:    this->_coord            = src._coord;
+ProjectileBase.class.cpp:    this->_delta_v          = src._delta_v;
+Binary file ProjectileBase.class.o matches
+README.md:retro shoot-them-up
+Timer.class.cpp:	sec = _endAt.tv_sec - _startAt.tv_sec;
+Timer.class.cpp:	usec = _endAt.tv_usec - _startAt.tv_usec;
+Timer.class.cpp:		usleep(CLOCKS_PER_SEC / _framerate - mtime);
+Timer.class.cpp:	return ((now.tv_sec - _createdAt.tv_sec) * 1000000 + (now.tv_usec - _createdAt.tv_usec));
+Binary file Timer.class.o matches
+Vector2D.class.cpp:    this->_x        = src.getX();
+Vector2D.class.cpp:    this->_y        = src.getY();
+Vector2D.class.cpp:Vector2D              &Vector2D::operator-=(Vector2D const &rhs) {
+Vector2D.class.cpp:    this->_x        -= rhs.getX();
+Vector2D.class.cpp:    this->_y        -= rhs.getY();
+Vector2D.class.cpp:    this->_x        += rhs.getX();
+Vector2D.class.cpp:    this->_y        += rhs.getY();
+Vector2D.class.cpp:    return Vector2D(this->getX() + rhs.getX(), this->getY() + rhs.getY());
+Vector2D.class.cpp:Vector2D              Vector2D::operator-(Vector2D const &rhs) {
+Vector2D.class.cpp:    return Vector2D(this->getX() - rhs.getX(), this->getY() - rhs.getY());
+Vector2D.class.cpp:    return this->_x;
+Vector2D.class.cpp:    return this->_y;
+Vector2D.class.cpp:    this->_x = x;
+Vector2D.class.cpp:    this->_y = y;
+Vector2D.class.hpp:        Vector2D          &operator-=(Vector2D const &rhs);
+Vector2D.class.hpp:        Vector2D          operator-(Vector2D const &rhs);
+Binary file Vector2D.class.o matches
+Weapon.class.cpp:    this->_fire_rate    = src._fire_rate;
+Weapon.class.cpp:    return this->_fire_rate;
+Binary file Weapon.class.o matches
+WeaponBase.class.cpp:    this->_fire_rate    = src._fire_rate;
+Binary file WeaponBase.class.o matches
+WinUI.class.cpp:	this->win = this->createWin();
+WinUI.class.cpp:	this->win = this->createWin();
+WinUI.class.cpp:	this->win = this->createWin();
+WinUI.class.cpp:	this->win = this->createWin();
+WinUI.class.cpp:	this->destroyWin();
+WinUI.class.cpp:	this->_height = src.getHeight();
+WinUI.class.cpp:	this->_width = src.getHeight();
+WinUI.class.cpp:	this->_heightMap = src.getHeight() * 3;
+WinUI.class.cpp:	this->_startX = src.getStartX();
+WinUI.class.cpp:	this->_startY = src.getStartY();
+WinUI.class.cpp:	local_win = newwin(this->getHeight(), this->getWidth(), this->getStartX(), this->getStartY());
+WinUI.class.cpp:	return this->_width;
+WinUI.class.cpp:	return this->_height;
+WinUI.class.cpp:	return this->_startX;
+WinUI.class.cpp:	return this->_startY;
+Binary file WinUI.class.o matches
+WinUI_dialogBox.class.cpp:	this->destroyWin();
+WinUI_dialogBox.class.cpp:	this->_height = src.getHeight();
+WinUI_dialogBox.class.cpp:	this->_width = src.getHeight();
+WinUI_dialogBox.class.cpp:	this->_heightMap = src.getHeight() * 3;
+WinUI_dialogBox.class.cpp:	this->_startX = src.getStartX();
+WinUI_dialogBox.class.cpp:	this->_startY = src.getStartY();
+WinUI_dialogBox.class.cpp:		mvwprintw(win, getHeight() / 2, getWidth() - i, str.substr(0, i).c_str());
+WinUI_dialogBox.class.cpp:	for (unsigned int i = 0; tab->length() > i;i++){
+Binary file WinUI_dialogBox.class.o matches
+WinUI_screen.class.cpp:// ----- Adelie modif ----
+WinUI_screen.class.cpp:			player->getCoord() += *(new Vector2D(-1,0));
+WinUI_screen.class.cpp:			player->getCoord() += *(new Vector2D(0,-1));
+WinUI_screen.class.cpp:			player->shoot();
+WinUI_screen.class.cpp:			player->getCoord() += *(new Vector2D(0,1));
+WinUI_screen.class.cpp:			player->getCoord() += *(new Vector2D(1,0));
+WinUI_screen.class.cpp:		draw( l->u );
+WinUI_screen.class.cpp:		l = l->next;
+WinUI_screen.class.cpp:	Vector2D v = u->getCoord( );
+WinUI_screen.class.cpp://--------------------
+WinUI_screen.class.cpp:	this->destroyWin();
+WinUI_screen.class.cpp:	this->_height = src.getHeight();
+WinUI_screen.class.cpp:	this->_width = src.getHeight();
+WinUI_screen.class.cpp:	this->_heightMap = src.getHeight() * 3;
+WinUI_screen.class.cpp:	this->_startX = src.getStartX();
+WinUI_screen.class.cpp:	this->_startY = src.getStartY();
+Binary file WinUI_screen.class.o matches
+Binary file ft_retro matches
+log:move Y {3}: [from] 0 [to] -1
+log:move Y {1}: [from] 0 [to] -1
+log:move Y {4}: [from] 0 [to] -1
+main.cpp:	for (List *l = units; l; l = l->next) {
+main.cpp:		l->u->move(l->u->getDeltaV());
+main.cpp:		if (l->u->getCoord().getY() < 0)
+main.cpp:		if (game->keyEvent(player) == std::string("espace"))
+main.cpp:			units = units->push(player->shoot());
+main.cpp:		game->update(units);
+main.cpp:		BoxText->fixeDialog("GrosBoGoss Francky", currentFrame / 10, 1);
+Binary file main.o matches
+test.cpp:	test = test->push(truc2);
+test.cpp:	test = test->push(truc3);
+test.cpp:	test = test->push(player);
+test.cpp:	//test = test->push(p);
+test.cpp:	//test = test->push(player->shoot( ));
+test.cpp:		BoxText->translateDialog("Bonjour les gens!");
+test.cpp:		//BoxHead->fixeDialog(BoxHead->keyEvent());
+test.cpp:		game->keyEvent(player);
+test.cpp:		game->update(test);
+test.cpp:	game->destroyWin();
+test.cpp:	BoxHead->destroyWin();
+test.cpp:	BoxText->destroyWin();
+test_list_screen.cpp:	//wrefresh(game->win);
+test_list_screen.cpp:		test = test->push(truc2);
+test_list_screen.cpp:		test = test->push(truc3);
+test_list_screen.cpp:	mvwprintw(game->win, 1, 1, "x");
+test_list_screen.cpp:	wrefresh(game->win);
+test_list_screen.cpp:	game->draw(truc);
+test_list_screen.cpp:	wrefresh(game->win);
+test_list_screen.cpp:	game->draw_all( test );
+test_list_screen.cpp:	wrefresh(game->win);
+test_list_screen.cpp:	game->update( test );
+test_list_screen.cpp:	voila = voila->push(bluh);
+test_list_screen.cpp:		std::cout << *voila->o << std::endl;
+test_list_screen.cpp:		voila = voila->next;

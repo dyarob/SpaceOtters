@@ -19,12 +19,19 @@ static void do_resize(int sig)
 	sigwinchReceived = true;
 }
 
-void	updatePositions(List *units)
+
+
+# include   "EnemyBase.class.hpp"
+
+void	updatePositions(List *units, int currentFrame)
 {
+    std::ofstream o("log", std::ios::app);
+    o << "move got called" << std::endl;
 	for (List *l = units; l; l = l->next) {
-		l->u->move(l->u->getDeltaV());
+		l->u->move(l->u->getDeltaV(), currentFrame);
 		if (l->u->getCoord().getY() < 0)
-			l->delete_one(units, l);
+			l = List::delete_one(units, l);
+		l->u->detect_collision(units, l);
 	}
 }
 
@@ -47,7 +54,6 @@ int main() {
 	WinUI_dialogBox	*BoxText = new WinUI_dialogBox(120, 3, 31, 0);
 
 	start_color();
-	init_color(COLOR_RED, 700, 0, 0);
 	while (running) {
 
 		if (sigwinchReceived)
@@ -59,13 +65,14 @@ int main() {
 
 		currentFrame++;
 		timer.start();
-		events.exec();
+		events.exec(&units, currentFrame);
 		ch = game->keyEvent(player);
 		if ( ch == std::string("espace"))
 			units = units->push(player->shoot());
 		else if ( ch == std::string("escape"))
 			break;
-		updatePositions(units);
+
+		updatePositions(units, currentFrame);
 		game->update(units);
 		BoxText->fixeDialog("GrosBoGoss Francky, BoGoss James", currentFrame / 10, 1);
 		timer.stop();

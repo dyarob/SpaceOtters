@@ -1,5 +1,6 @@
 #ifndef GAME_OBJECT_HPP
 #define GAME_OBJECT_HPP
+# include   <fstream>
 
 #include "Vector2D.class.hpp"
 
@@ -39,7 +40,7 @@ class AGameObject {
 		int				getFgColor(void)		const;
 		int				getBgColor(void)		const;
 
-		void            move(Vector2D &delta_v);
+		void            move(Vector2D &delta_v, int currentFrame);
 		void            setDeltaV(Vector2D &delta_v);
 };
 
