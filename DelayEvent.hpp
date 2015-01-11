@@ -21,8 +21,9 @@ class DelayEvent {
 public:
 	DelayEvent( void );
 	~DelayEvent( void );
-	
-	void exec( List	**units, int currentFrame ); // fonction principale qui est appellée à chaque tick 
+
+	// fonction principale qui est appellée à chaque tick 
+	void exec( List	**units, int); 
 
 	void	randomChain( List **units );
 

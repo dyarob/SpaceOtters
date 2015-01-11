@@ -29,7 +29,6 @@ AUnit           &AUnit::operator=(AUnit const & src) {
     this->_hp               = src._hp;
     this->_hp               = src._hp_max;
     this->_weapon           = src._weapon;
-
     return *this;
 }
 

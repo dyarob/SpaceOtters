@@ -5,10 +5,7 @@ WinUI::WinUI(void)
 	initscr();
 	curs_set(0);
 	noecho();
-//	cbreak();
 	this->win = this->createWin();
-	keypad(stdscr, true);
-	nodelay(stdscr, true);
 }
 
 WinUI::WinUI(unsigned int width, unsigned int height, unsigned int x, unsigned y)
@@ -17,7 +14,6 @@ WinUI::WinUI(unsigned int width, unsigned int height, unsigned int x, unsigned y
 	curs_set(0);
 	initscr();
 	noecho();
-//	cbreak();
 	this->win = this->createWin();
 }
 
@@ -27,7 +23,6 @@ _startY(src.getStartY()), _heightMap(src.getHeight() * 3){
 	curs_set(0);
 	initscr();
 	noecho();
-//	cbreak();
 	this->win = this->createWin();
 }
 

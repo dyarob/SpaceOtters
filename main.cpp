@@ -97,31 +97,22 @@ int main() {
 
 	signal(SIGWINCH, do_resize);
 
-	//WinUI_dialogBox	*BoxHead = new WinUI_dialogBox(120, 3, 1, 0);
-	WinUI_screen	*game = new WinUI_screen(120, 30, 1, 0);
-	WinUI_dialogBox	*BoxText = new WinUI_dialogBox(120, 3, 31, 0);
+	WinUI_dialogBox	*BoxHead = new WinUI_dialogBox(120, 3, 0, 0);
+	WinUI_screen	*game = new WinUI_screen(120, 30, 3, 0);
+	WinUI_dialogBox	*BoxText = new WinUI_dialogBox(120, 3, 33, 0);
 
 	// srand
 	std::srand(std::time(NULL));
 
-	// TEST COLLISIONS
-	EnemyBase	*truc = new EnemyBase( *(new Vector2D(3, 25)), *(new Vector2D(0, 0)), -1 );
-	units = units->push(truc);
-
 	start_color();
 	while (running) {
-		if (!player->getHp())
-			break;
-
-		if (!player->getHp())
-		{
-			break;
+		if (!player->getHp()){
+			break;			
 		}
-
-		if (sigwinchReceived)
-		{
-			game = new WinUI_screen(120, 30, 1, 0);
-			BoxText = new WinUI_dialogBox(120, 3, 31, 0);
+		if (sigwinchReceived){
+			BoxHead = new WinUI_dialogBox(120, 3, 0, 0);
+			game = new WinUI_screen(120, 30, 3, 0);
+			BoxText = new WinUI_dialogBox(120, 3, 33, 0);
 			sigwinchReceived = false;
 		}
 
@@ -136,11 +127,12 @@ int main() {
 
 		updatePositions(&units, currentFrame);
 		game->update(units);
-		BoxText->fixeDialog("GrosBoGoss Francky, BoGoss James", currentFrame / 10, 1);
+		BoxHead->fixeDialog("Stage 1", 5, 1);
+		BoxText->fixeDialog("Score:", currentFrame / 10, 1);
 		timer.stop();
 		timer.wait();
 	}
-
+	delete BoxHead;
 	delete player;
 	delete units;
 	delete BoxText;
