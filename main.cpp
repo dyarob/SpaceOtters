@@ -12,7 +12,7 @@ void	updatePositions(List *units)
 {
 	for (List *l = units; l; l = l->next) {
 		l->u->move(l->u->getDeltaV());
-		if (l->u->getCoord().getX() < 0)
+		if (l->u->getCoord().getY() < 0)
 			l->delete_one(units, l);
 	}
 }
@@ -24,7 +24,7 @@ int main() {
 	unsigned int	currentFrame(0);
 	DelayEvent		events;
 	Vector2D		playerPos(15, 5);
-	Vector2D		playerVel(0, 1);
+	Vector2D		playerVel(0, 0);
 	Player			*player = new Player(playerPos, playerVel);
 	List			*units = new List(player);
 	//WinUI_dialogBox *BoxHead = new WinUI_dialogBox(120, 3, 1, 0);
@@ -35,10 +35,11 @@ int main() {
 		currentFrame++;
 		timer.start();
 		events.exec();
-		game->keyEvent(player);
+		if (game->keyEvent(player) == std::string("espace"))
+			units = units->push(player->shoot());
 		updatePositions(units);
 		game->update(units);
-		BoxText->fixeDialog("toto", currentFrame / 10, 1);
+		BoxText->fixeDialog("GrosBoGoss Francky", currentFrame / 10, 1);
 		timer.stop();
 		timer.wait();
 	}

@@ -4,7 +4,9 @@
 
 Projectile    *AUnit::shoot(void)   const
 {
-	return ( NULL );
+	Vector2D	*pos = new Vector2D(_coord);
+	Vector2D	*vel = new Vector2D(0, 1);
+	return (_weapon.fire(pos, vel));
 }
 
 AUnit::AUnit(unsigned int height, unsigned int width, int hp,

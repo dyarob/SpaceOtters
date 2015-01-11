@@ -58,7 +58,7 @@ Vector2D		&AGameObject::getDeltaV(void) const {
 }
 
 void            AGameObject::move(Vector2D &delta_v) {
-    this->_delta_v += delta_v;
+    this->_coord += delta_v;
 }
 
 void            AGameObject::setDeltaV(Vector2D &delta_v) {

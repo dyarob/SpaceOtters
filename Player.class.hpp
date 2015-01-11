@@ -20,7 +20,6 @@ public:
 
     WeaponBase          &getWeapon(void);
 
-    //Projectile*    shoot(Weapon const &)   const;
     ~Player();
 };
 
