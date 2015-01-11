@@ -4,11 +4,44 @@
 
 unsigned int AGameObject::_cur_id = 0;
 
+//----COLLISION ------
+List*		AGameObject::detect_collision( List **l, List *thiis )
+{
+	Vector2D	voila;
+	List		*save = *l;
+	List		*tmp = thiis->next;
+
+	while ( *l )
+	{
+		voila = (*l)->u->getCoord();
+		if ( _coord.getX() == voila.getX() && _coord.getY() == voila.getY() && this != (*l)->u )
+		{
+			thiis->u->setHp(0);
+			save = List::delete_one( save, thiis );
+			(*l)->u->setHp(0);
+			*l = List::delete_one( save, *l );
+			return tmp;
+		}
+		*l = (*l)->next;
+	}
+	*l = save;
+	return tmp;
+}
+
+void		AGameObject::setHp(unsigned int hp)
+{
+	this->_hp = hp;
+}
+//----------------
+
 AGameObject::AGameObject(unsigned int height, unsigned int width, int hp,
     int hp_max, Vector2D &coord, Vector2D &delta_v)
     : _id(AGameObject::_cur_id++), _height(height), _width(width), _hp(hp),
-    _hp_max(hp_max), _coord(coord), _delta_v(delta_v) {
-
+    _hp_max(hp_max), _coord(coord), _delta_v(delta_v)
+{
+	_skin = '>';
+	_fgColor = 7;
+	_bgColor = 0;
 }
 
 AGameObject::AGameObject(AGameObject const &src)
@@ -55,6 +88,18 @@ Vector2D		&AGameObject::getCoord(void)  const {
 
 Vector2D		&AGameObject::getDeltaV(void) const {
     return this->_delta_v;
+}
+
+char			AGameObject::getSkin(void) const {
+	return _skin;
+}
+
+int				AGameObject::getFgColor(void) const {
+	return _fgColor;
+}
+
+int				AGameObject::getBgColor(void) const {
+	return _bgColor;
 }
 
 void            AGameObject::move(Vector2D &delta_v, int currentFrame) {

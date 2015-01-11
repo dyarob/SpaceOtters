@@ -8,7 +8,11 @@ void		Projectile::update( void )
 
 Projectile::Projectile(unsigned int damage, unsigned int width, unsigned int height, Vector2D &coord, Vector2D &delta_v)
     : AGameObject(width, height, 1, 1, coord, delta_v), _damage(damage)
-{}
+{
+	_skin = '-';
+	_fgColor = 1;
+	_bgColor = 0;
+}
 
 Projectile::Projectile(Projectile const &src)
     : AGameObject(src) {

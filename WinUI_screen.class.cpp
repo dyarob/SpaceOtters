@@ -9,20 +9,28 @@ std::string		WinUI_screen::keyEvent(Player *player){
 	int  ch  = getch();
 	switch (ch){
 		case 'w':
-			player->getCoord() += *(new Vector2D(-1,0));
+			if (player->getCoord().getX() > 1)
+				player->getCoord() += *(new Vector2D(-1,0));
 			return "haut";
 		case 'a':
-			player->getCoord() += *(new Vector2D(0,-1));
+			if (player->getCoord().getY() > 1)
+				player->getCoord() += *(new Vector2D(0,-1));
 			return "gauche";
 		case ' ':
 			player->shoot();
 			return "espace";
 		case 'd':
-			player->getCoord() += *(new Vector2D(0,1));
+			if (player->getCoord().getY() < (int)_width - 2)
+				player->getCoord() += *(new Vector2D(0,1));
 			return "droite";
 		case 's':
-			player->getCoord() += *(new Vector2D(1,0));
+			if (player->getCoord().getX() < (int)_height - 2)
+				player->getCoord() += *(new Vector2D(1,0));
 			return "bas";
+		case 27:	// escape
+			if (getch() == -1)
+				return "escape";
+			return "nothing";
 		default:
 			return "je met ce que je veux!";
 }
@@ -48,7 +56,17 @@ void	WinUI_screen::draw_all ( List* l )
 void	WinUI_screen::draw ( AGameObject* u )
 {
 	Vector2D v = u->getCoord( );
-	mvwprintw( win, v.getX(), v.getY(), ">" );
+	if (has_colors()) {
+		init_pair(u->getId(), u->getFgColor(), u->getBgColor());
+		wattron(win, COLOR_PAIR(u->getId()));
+		char c = u->getSkin();
+		mvwprintw( win, v.getX(), v.getY(), &c);
+		wattroff(win, COLOR_PAIR(u->getId()));
+	}
+	else {
+		char c = u->getSkin();
+		mvwprintw( win, v.getX(), v.getY(), &c);
+	}
 }
 
 //--------------------
@@ -70,7 +88,6 @@ WinUI_screen::WinUI_screen(WinUI_screen const & src)
 
 WinUI_screen::~WinUI_screen(void)
 {
-	this->destroyWin();
 }
 
 WinUI_screen &	WinUI_screen::operator=(WinUI_screen const & src) {
