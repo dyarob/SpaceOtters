@@ -23,6 +23,8 @@ std::string		WinUI_screen::keyEvent(Player *player){
 		case 's':
 			player->getCoord() += *(new Vector2D(1,0));
 			return "bas";
+		case 27:	// escape
+			return "escape";
 		default:
 			return "je met ce que je veux!";
 }
