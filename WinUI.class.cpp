@@ -75,7 +75,8 @@ std::string		WinUI::keyEvent(void){
 void            WinUI::destroyWin(void){
 	wborder(win, ' ', ' ', ' ',' ',' ',' ',' ',' ');
 	wrefresh(win);
-	delwin(win);	
+	delwin(win);
+	endwin();
 }
 
 unsigned int    WinUI::getWidth(void) const{

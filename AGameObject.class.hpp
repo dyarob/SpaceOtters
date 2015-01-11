@@ -1,7 +1,12 @@
 #ifndef GAME_OBJECT_HPP
 #define GAME_OBJECT_HPP
+# include   <fstream>
 
 #include "Vector2D.class.hpp"
+#include "List.struct.hpp"
+
+
+class List;
 
 class AGameObject {
 
@@ -12,6 +17,9 @@ class AGameObject {
 		unsigned int _width;
 		unsigned int _hp;
 		unsigned int _hp_max;
+		char		 _skin;
+		int			 _fgColor;
+		int			 _bgColor;
 		Vector2D	 &_coord;
 		Vector2D	 &_delta_v;
 
@@ -32,9 +40,14 @@ class AGameObject {
 		unsigned int    getHpMax(void)          const;
 		Vector2D 		&getCoord(void)         const;
 		Vector2D 		&getDeltaV(void)        const;
-
-		int        		move(Vector2D &delta_v);
+		char			getSkin(void)			const;
+		int				getFgColor(void)		const;
+		int				getBgColor(void)		const;
+		void            move(Vector2D &delta_v, int currentFrame);
 		void            setDeltaV(Vector2D &delta_v);
+		void			setHp(unsigned int hp);
+
+		List*			detect_collision( List **l, List *thiis );
 };
 
 #endif
