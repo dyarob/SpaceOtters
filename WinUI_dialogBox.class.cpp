@@ -28,10 +28,13 @@ WinUI_dialogBox &		WinUI_dialogBox::operator=(WinUI_dialogBox const & src) {
     return *this;
 }
 
-void				WinUI_dialogBox::fixeDialog(std::string str){
+void				WinUI_dialogBox::fixeDialog(std::string str, unsigned int x, unsigned int y){
 	werase(win);
 	box(win, 0, 0);
-	mvwprintw(win, this->getHeight() / 2, this->getWidth() / 10, str.c_str());
+	unsigned	xp, yp;
+	xp = x % getWidth();
+	yp = y % getHeight();
+	mvwprintw(win, yp, xp, str.c_str());
 	wrefresh(win);
 	return;
 }

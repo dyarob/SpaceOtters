@@ -19,7 +19,7 @@ void	updatePositions(List *units)
 
 int main() {
 
-	Timer 			timer(10);
+	Timer 			timer(100);
 	bool 			running(true);
 	unsigned int	currentFrame(0);
 	DelayEvent		events;
@@ -29,7 +29,7 @@ int main() {
 	List			*units = new List(player);
 	//WinUI_dialogBox *BoxHead = new WinUI_dialogBox(120, 3, 1, 0);
 	WinUI_screen *game = new WinUI_screen(120, 30, 1, 0);
-	WinUI_dialogBox *BoxText = new WinUI_dialogBox(120, 3, currentFrame % 32, 0);
+	WinUI_dialogBox *BoxText = new WinUI_dialogBox(120, 3, 31, 0);
 
 	while (running) {
 		currentFrame++;
@@ -38,6 +38,7 @@ int main() {
 		game->keyEvent(player);
 		updatePositions(units);
 		game->update(units);
+		BoxText->fixeDialog("toto", currentFrame / 10, 1);
 		timer.stop();
 		timer.wait();
 	}

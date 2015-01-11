@@ -48,7 +48,7 @@ void	WinUI_screen::draw_all ( List* l )
 void	WinUI_screen::draw ( AGameObject* u )
 {
 	Vector2D v = u->getCoord( );
-	mvwprintw( win, v.getX(), v.getY(), "O" );
+	mvwprintw( win, v.getX(), v.getY(), ">" );
 }
 
 //--------------------

@@ -16,7 +16,7 @@ class       WinUI_dialogBox : public WinUI {
 
         WinUI_dialogBox       &operator=(WinUI_dialogBox const &);
         
-        void        fixeDialog(std::string);
+        void        fixeDialog(std::string, unsigned int, unsigned int);
         void        translateDialog(std::string);
         void        tabInfoDial(std::string *);
 };
