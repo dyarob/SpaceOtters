@@ -19,7 +19,7 @@ public:
 
     WeaponBase          &getWeapon(void);
 
-    void    shoot(void)   const;
+    Projectile    *shoot(void)   const;
     ~EnemyBase();
 };
 

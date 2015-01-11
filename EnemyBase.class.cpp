@@ -31,6 +31,8 @@ EnemyBase::~EnemyBase() {
     delete &this->_weapon;
 }
 
-void	EnemyBase::shoot( ) const
+Projectile	*EnemyBase::shoot( ) const
 {
+	Vector2D	r = _coord + Vector2D(0, 1);
+	return ( _weapon.fire( &r, new Vector2D(1, 1)));
 }

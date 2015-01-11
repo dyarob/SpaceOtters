@@ -4,8 +4,9 @@
 
 unsigned int AUnit::_cur_id = 0;
 
-void    AUnit::shoot(void)   const
+Projectile    *AUnit::shoot(void)   const
 {
+	return ( NULL );
 }
 
 AUnit::AUnit(unsigned int height, unsigned int width, int hp,

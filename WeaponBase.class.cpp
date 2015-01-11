@@ -16,8 +16,8 @@ WeaponBase          &WeaponBase::operator=(WeaponBase const & src) {
     return *this;
 }
 
-ProjectileBase      &WeaponBase::fire(Vector2D *coord, Vector2D *delta_v) {
-    return (*(new ProjectileBase(*coord, *delta_v)));
+ProjectileBase      *WeaponBase::fire(Vector2D *coord, Vector2D *delta_v) {
+    return ( new ProjectileBase(*coord, *delta_v));
 }
 
 WeaponBase::~WeaponBase(void) {
