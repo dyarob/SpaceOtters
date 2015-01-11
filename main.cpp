@@ -19,7 +19,7 @@ void	updatePositions(List *units)
 
 int main() {
 
-	Timer 			timer(100);
+	Timer 			timer(10);
 	bool 			running(true);
 	unsigned int	currentFrame(0);
 	DelayEvent		events;
@@ -29,10 +29,9 @@ int main() {
 	List			*units = new List(player);
 	//WinUI_dialogBox *BoxHead = new WinUI_dialogBox(120, 3, 1, 0);
 	WinUI_screen *game = new WinUI_screen(120, 30, 1, 0);
-	WinUI_dialogBox *BoxText = new WinUI_dialogBox(120, 3, 31, 0);
+	WinUI_dialogBox *BoxText = new WinUI_dialogBox(120, 3, currentFrame % 32, 0);
 
 	while (running) {
-		BoxText->translateDialog("Bonjour les gens!");
 		currentFrame++;
 		timer.start();
 		events.exec();
@@ -46,5 +45,4 @@ int main() {
 	delete player;
 	delete units;
 	delete game;
-	delete BoxText;
 }
