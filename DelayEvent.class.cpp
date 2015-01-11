@@ -17,16 +17,14 @@ void	DelayEvent::exec(List	**units, int currentFrame) {
 
 // génère une chaine d'ennemis aleatoire, d'une longueur aleatoire d'ennemis aleatoires.
 void	DelayEvent::randomChain( List **units ) {
-	static int randomWait = 100;
+	static int randomWait = 200; // first ennemies pop time
 	static int currentCount = 0;
 
 	currentCount++;
 
 	if (randomWait == 0) {
-		randomWait = (std::rand() % (FRAME_MAX_TO_POP_CHAIN - FRAME_MIN_TO_POP_CHAIN)) + FRAME_MIN_TO_POP_CHAIN;
-
-		std::ofstream o("log", std::ios::app);
-		o << "rand :" << randomWait << std::endl;
+		//randomWait = (std::rand() % (FRAME_MAX_TO_POP_CHAIN - FRAME_MIN_TO_POP_CHAIN)) + FRAME_MIN_TO_POP_CHAIN;
+		randomWait = -1;
 	}
 
 	if (currentCount == randomWait) {
@@ -38,10 +36,8 @@ void	DelayEvent::randomChain( List **units ) {
 		int enemyType = std::rand() % NUMBER_OF_ENEMY_TYPES;
 
 		for (int i = 0; i < chainLength; i++) {
-			this->createDelayedEnemy( units, enemyType, (chainSpacing * (i + 1)), chainSpawnY);
+			this->createDelayedEnemy( units, enemyType, (chainSpacing * i), chainSpawnY);
 		}
-
-		//exit(0);
 	}
 }
 
@@ -50,10 +46,9 @@ void	DelayEvent::createDelayedEnemy( List **units , int type, int delay, int spa
 	EnemyBase *newEnnemy = NULL; 
 
 	if (type == ENEMYBASE) {
-		Vector2D * a = new Vector2D(spawn_y, TEMP_WIN_X + (delay));
+		Vector2D * a = new Vector2D(spawn_y, TEMP_WIN_X + (delay / 10));
 		Vector2D * b = new Vector2D(0, -10);
 		newEnnemy = new EnemyBase(*a, *b);
-
 	}
 	if (newEnnemy != NULL)
 		*units = (*units)->push(newEnnemy);

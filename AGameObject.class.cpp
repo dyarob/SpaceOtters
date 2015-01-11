@@ -57,8 +57,7 @@ Vector2D		&AGameObject::getDeltaV(void) const {
     return this->_delta_v;
 }
 
-void            AGameObject::move(Vector2D &delta_v) {
-    static int move = 0;
+void            AGameObject::move(Vector2D &delta_v, int currentFrame) {
     int abs_X;
     int abs_Y;
     int signe_X = 1;
@@ -70,8 +69,16 @@ void            AGameObject::move(Vector2D &delta_v) {
     } else {
         abs_X = delta_v.getX();
     }
-    if (abs_X != 0 && move % abs_X == 0)
+    if (abs_X != 0 && currentFrame % abs_X == 0) {
         this->_coord.setX(this->_coord.getX() + (1 * signe_X));
+
+        std::ofstream o("log", std::ios::app);
+        o << "move X : [from] " << this->_coord.getX();
+
+        this->_coord.setX(this->_coord.getX() + (1 * signe_X));
+        
+        o << "[to] " << this->_coord.getX() << std::endl;
+    }
 
     if (delta_v.getY() < 0) {
         abs_Y = delta_v.getY() * -1 ;
@@ -79,11 +86,17 @@ void            AGameObject::move(Vector2D &delta_v) {
     } else {
         abs_Y = delta_v.getY();
     }
-    if (abs_Y != 0 && move % abs_Y == 0)
+    if (abs_Y != 0 && currentFrame % abs_Y == 0) {
+
+        std::ofstream o("log", std::ios::app);
+        o << "move Y {" << this->getId() << "}: [from] " << this->_coord.getY();
+
         this->_coord.setY(this->_coord.getY() + (1 * signe_Y));
-   
-    move++;
-}
+
+        o << " [to] " << this->_coord.getY() << std::endl;
+
+    }
+   }
 
 void            AGameObject::setDeltaV(Vector2D &delta_v) {
     this->_delta_v = delta_v;

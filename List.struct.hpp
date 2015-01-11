@@ -21,7 +21,7 @@ class       List {
 
         void save_all ( List *list );
 		List	*push ( AGameObject *unit );
-		List	*delete_one ( List *list, List *to_delete );
+		static List	*delete_one ( List *list, List *to_delete );
 		//void	delete_all ();
 };
 
