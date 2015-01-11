@@ -12,6 +12,7 @@ SRC         =	$(SRCDIR)main.cpp			\
 				Projectile.class.cpp		\
 				ProjectileBase.class.cpp	\
 				EnemyBase.class.cpp			\
+				DelayEvent.class.cpp		\
 				AUnit.class.cpp				\
 				WinUI_dialogBox.class.cpp	\
 				WinUI_screen.class.cpp		\
