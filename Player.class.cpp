@@ -3,9 +3,12 @@
 #include    "Weapon.class.hpp"
 #include    "Player.class.hpp"
 
+Skin	*Player::skin(new Skin('>', 7, 0));
+
+
 Player::Player(Vector2D &coord, Vector2D &delta_v)
     : AUnit(1, 1, 3, 3, *(new WeaponBase()), coord, delta_v) {
-
+	_skin = Player::skin;
 }
 
 Player::Player(Player const &src)

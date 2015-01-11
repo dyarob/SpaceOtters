@@ -8,6 +8,7 @@
 class                   BlockBase : public Block {
     private:
         BlockBase(void);
+		static Skin* skin;
 
     public:
         BlockBase(Vector2D &);

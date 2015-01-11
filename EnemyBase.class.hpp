@@ -10,6 +10,7 @@ class       EnemyBase : public AUnit {
 
 private:
     EnemyBase(void);
+	static Skin* skin;
 
 public:
     EnemyBase(Vector2D &coord, Vector2D &delta_v, int pattern);

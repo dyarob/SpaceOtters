@@ -7,6 +7,7 @@
 
 class                   Block : public AGameObject {
     protected:
+		static Skin		*skin;
         Block(void);
 
     public:

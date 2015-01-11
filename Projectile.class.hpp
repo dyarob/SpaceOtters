@@ -8,6 +8,7 @@ class                   Projectile : public AGameObject {
     protected:
         Projectile(void);
         unsigned int    _damage;
+		static Skin*	skin;
 
     public:
         Projectile(unsigned int, unsigned int, unsigned int, Vector2D &, Vector2D &);

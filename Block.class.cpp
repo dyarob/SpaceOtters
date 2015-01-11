@@ -1,6 +1,9 @@
 #include "Block.class.hpp"
 #include "Vector2D.class.hpp"
 
+
+Skin		*Block::skin( new Skin( '%', 1, 0) );
+
 void		Block::update( void )
 {
 	_coord += Vector2D(0,1);
@@ -9,9 +12,7 @@ void		Block::update( void )
 Block::Block(unsigned int width, unsigned int height, Vector2D &coord)
     : AGameObject(width, height, 1, 1, coord, *(new Vector2D(0,B_SPEED)))
 {
-	_skin = 'X';
-	_fgColor = 1;
-	_bgColor = 0;
+	_skin = skin;
 }
 
 Block::Block(Block const &src)
