@@ -24,7 +24,9 @@ std::string		WinUI_screen::keyEvent(Player *player){
 			player->getCoord() += *(new Vector2D(1,0));
 			return "bas";
 		case 27:	// escape
-			return "escape";
+			if (getch() == -1)
+				return "escape";
+			return "nothing";
 		default:
 			return "je met ce que je veux!";
 }
@@ -50,7 +52,17 @@ void	WinUI_screen::draw_all ( List* l )
 void	WinUI_screen::draw ( AGameObject* u )
 {
 	Vector2D v = u->getCoord( );
-	mvwprintw( win, v.getX(), v.getY(), ">" );
+	if (has_colors()) {
+		init_pair(u->getId(), u->getFgColor(), u->getBgColor());
+		wattron(win, COLOR_PAIR(u->getId()));
+		char c = u->getSkin();
+		mvwprintw( win, v.getX(), v.getY(), &c);
+		wattroff(win, COLOR_PAIR(u->getId()));
+	}
+	else {
+		char c = u->getSkin();
+		mvwprintw( win, v.getX(), v.getY(), &c);
+	}
 }
 
 //--------------------
@@ -72,7 +84,6 @@ WinUI_screen::WinUI_screen(WinUI_screen const & src)
 
 WinUI_screen::~WinUI_screen(void)
 {
-	this->destroyWin();
 }
 
 WinUI_screen &	WinUI_screen::operator=(WinUI_screen const & src) {

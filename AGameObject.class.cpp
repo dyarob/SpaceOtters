@@ -31,8 +31,11 @@ void		AGameObject::setHp(unsigned int hp)
 AGameObject::AGameObject(unsigned int height, unsigned int width, int hp,
     int hp_max, Vector2D &coord, Vector2D &delta_v)
     : _id(AGameObject::_cur_id++), _height(height), _width(width), _hp(hp),
-    _hp_max(hp_max), _coord(coord), _delta_v(delta_v) {
-
+    _hp_max(hp_max), _coord(coord), _delta_v(delta_v)
+{
+	_skin = '>';
+	_fgColor = 7;
+	_bgColor = 0;
 }
 
 AGameObject::AGameObject(AGameObject const &src)
@@ -79,6 +82,18 @@ Vector2D		&AGameObject::getCoord(void)  const {
 
 Vector2D		&AGameObject::getDeltaV(void) const {
     return this->_delta_v;
+}
+
+char			AGameObject::getSkin(void) const {
+	return _skin;
+}
+
+int				AGameObject::getFgColor(void) const {
+	return _fgColor;
+}
+
+int				AGameObject::getBgColor(void) const {
+	return _bgColor;
 }
 
 void            AGameObject::move(Vector2D &delta_v) {

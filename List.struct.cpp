@@ -17,7 +17,7 @@ List	*List::delete_one ( List *list, List *to_delete )
 	if ( list == to_delete )
 	{
 		save = to_delete->next;
-		delete list;
+		//delete list;
 		return ( save );
 	}
 	while ( list->next )

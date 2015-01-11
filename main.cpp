@@ -20,20 +20,6 @@ static void do_resize(int sig)
 	sigwinchReceived = true;
 }
 
-static void finish(int sig)
-{
-    endwin();
-
-	/*
-	delete player;
-	delete units;
-	delete game;
-	*/
-
-	(void)sig;
-    exit(0);
-}
-
 void	updatePositions(List *units)
 {
 	for (List *l = units; l; l = l->next) {
@@ -56,7 +42,6 @@ int main() {
 	Player			*player = new Player(playerPos, playerVel);
 	List			*units = new List(player);
 
-	(void) signal(SIGINT, finish);      /* arrange interrupts to terminate */
 	signal(SIGWINCH, do_resize);
 
 	//WinUI_dialogBox	*BoxHead = new WinUI_dialogBox(120, 3, 1, 0);
@@ -67,6 +52,8 @@ int main() {
 	EnemyBase	*truc = new EnemyBase( *(new Vector2D(3, 25)), *(new Vector2D(0, 0)) );
 	units = units->push(truc);
 
+	start_color();
+	init_color(COLOR_RED, 700, 0, 0);
 	while (running) {
 
 		if (!player->getHp())
@@ -76,7 +63,6 @@ int main() {
 
 		if (sigwinchReceived)
 		{
-			//WinUI_dialogBox	*BoxHead = new WinUI_dialogBox(120, 3, 1, 0);
 			game = new WinUI_screen(120, 30, 1, 0);
 			BoxText = new WinUI_dialogBox(120, 3, 31, 0);
 			sigwinchReceived = false;
@@ -92,12 +78,14 @@ int main() {
 			break;
 		updatePositions(units);
 		game->update(units);
-		BoxText->fixeDialog("GrosBoGoss Francky", currentFrame / 10, 1);
+		BoxText->fixeDialog("GrosBoGoss Francky, BoGoss James", currentFrame / 10, 1);
 		timer.stop();
 		timer.wait();
-	std::cout <<  typeid(player).name() << std::endl;
-	std::cout <<  typeid(Player*).name() << std::endl;
 	}
 
-	finish(0);
+	delete player;
+	delete units;
+	delete BoxText;
+	delete game;
+	return (0);
 }
