@@ -52,7 +52,17 @@ void	WinUI_screen::draw_all ( List* l )
 void	WinUI_screen::draw ( AGameObject* u )
 {
 	Vector2D v = u->getCoord( );
-	mvwprintw( win, v.getX(), v.getY(), ">" );
+	if (has_colors()) {
+		init_pair(u->getId(), u->getFgColor(), u->getBgColor());
+		wattron(win, COLOR_PAIR(u->getId()));
+		char c = u->getSkin();
+		mvwprintw( win, v.getX(), v.getY(), &c);
+		wattroff(win, COLOR_PAIR(u->getId()));
+	}
+	else {
+		char c = u->getSkin();
+		mvwprintw( win, v.getX(), v.getY(), &c);
+	}
 }
 
 //--------------------

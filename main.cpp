@@ -4,9 +4,20 @@
 #include "List.struct.hpp"
 #include "WinUI_screen.class.hpp"
 #include "WinUI_dialogBox.class.hpp"
+#include <cstdlib>
 #include <iostream>
 #include <thread>
 #include <mutex>
+#include <signal.h>
+
+static int	sigwinchReceived = true;
+
+static void do_resize(int sig)
+{
+	(void)sig;
+	endwin();
+	sigwinchReceived = true;
+}
 
 void	updatePositions(List *units)
 {
@@ -28,12 +39,24 @@ int main() {
 	Vector2D		playerVel(0, 0);
 	Player			*player = new Player(playerPos, playerVel);
 	List			*units = new List(player);
+
+	signal(SIGWINCH, do_resize);
+
 	//WinUI_dialogBox	*BoxHead = new WinUI_dialogBox(120, 3, 1, 0);
 	WinUI_screen	*game = new WinUI_screen(120, 30, 1, 0);
 	WinUI_dialogBox	*BoxText = new WinUI_dialogBox(120, 3, 31, 0);
 
+	start_color();
+	init_color(COLOR_RED, 700, 0, 0);
 	while (running) {
-		//signal(SIDWINCH, do_resize);
+
+		if (sigwinchReceived)
+		{
+			game = new WinUI_screen(120, 30, 1, 0);
+			BoxText = new WinUI_dialogBox(120, 3, 31, 0);
+			sigwinchReceived = false;
+		}
+
 		currentFrame++;
 		timer.start();
 		events.exec();
@@ -44,7 +67,7 @@ int main() {
 			break;
 		updatePositions(units);
 		game->update(units);
-		BoxText->fixeDialog("GrosBoGoss Francky", currentFrame / 10, 1);
+		BoxText->fixeDialog("GrosBoGoss Francky, BoGoss James", currentFrame / 10, 1);
 		timer.stop();
 		timer.wait();
 	}

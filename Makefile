@@ -5,6 +5,7 @@ NAME        = ft_retro
 SRCDIR      = ./src/
 
 SRC         =	AGameObject.class.cpp		\
+				main.cpp					\
 				Vector2D.class.cpp			\
 				Weapon.class.cpp			\
 				WeaponBase.class.cpp		\
@@ -19,8 +20,7 @@ SRC         =	AGameObject.class.cpp		\
 				WinUI.class.cpp				\
 				List.struct.cpp				\
 				Timer.class.cpp				\
-				DelayEvent.class.cpp		\
-				main.cpp
+				DelayEvent.class.cpp		
 
 OBJ         = $(SRC:.cpp=.o)
 

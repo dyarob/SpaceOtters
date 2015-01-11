@@ -12,6 +12,9 @@ class AGameObject {
 		unsigned int _width;
 		unsigned int _hp;
 		unsigned int _hp_max;
+		char		 _skin;
+		int			 _fgColor;
+		int			 _bgColor;
 		Vector2D	 &_coord;
 		Vector2D	 &_delta_v;
 
@@ -32,6 +35,9 @@ class AGameObject {
 		unsigned int    getHpMax(void)          const;
 		Vector2D 		&getCoord(void)         const;
 		Vector2D 		&getDeltaV(void)        const;
+		char			getSkin(void)			const;
+		int				getFgColor(void)		const;
+		int				getBgColor(void)		const;
 
 		void            move(Vector2D &delta_v);
 		void            setDeltaV(Vector2D &delta_v);
