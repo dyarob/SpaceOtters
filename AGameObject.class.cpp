@@ -58,7 +58,31 @@ Vector2D		&AGameObject::getDeltaV(void) const {
 }
 
 void            AGameObject::move(Vector2D &delta_v) {
-    this->_coord += delta_v;
+    static int move = 0;
+    int abs_X;
+    int abs_Y;
+    int signe_X = 1;
+    int signe_Y = 1;
+
+    if (delta_v.getX() < 0) {
+        abs_X = delta_v.getX() * -1 ;
+        signe_X = -1;
+    } else {
+        abs_X = delta_v.getX();
+    }
+    if (abs_X != 0 && move % abs_X == 0)
+        this->_coord.setX(this->_coord.getX() + (1 * signe_X));
+
+    if (delta_v.getY() < 0) {
+        abs_Y = delta_v.getY() * -1 ;
+        signe_Y = -1;
+    } else {
+        abs_Y = delta_v.getY();
+    }
+    if (abs_Y != 0 && move % abs_Y == 0)
+        this->_coord.setY(this->_coord.getY() + (1 * signe_Y));
+   
+    move++;
 }
 
 void            AGameObject::setDeltaV(Vector2D &delta_v) {
