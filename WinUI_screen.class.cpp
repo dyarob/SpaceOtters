@@ -9,19 +9,23 @@ std::string		WinUI_screen::keyEvent(Player *player){
 	int  ch  = getch();
 	switch (ch){
 		case 'w':
-			player->getCoord() += *(new Vector2D(-1,0));
+			if (player->getCoord().getX() > 1)
+				player->getCoord() += *(new Vector2D(-1,0));
 			return "haut";
 		case 'a':
-			player->getCoord() += *(new Vector2D(0,-1));
+			if (player->getCoord().getY() > 1)
+				player->getCoord() += *(new Vector2D(0,-1));
 			return "gauche";
 		case ' ':
 			player->shoot();
 			return "espace";
 		case 'd':
-			player->getCoord() += *(new Vector2D(0,1));
+			if (player->getCoord().getY() < (int)_width - 2)
+				player->getCoord() += *(new Vector2D(0,1));
 			return "droite";
 		case 's':
-			player->getCoord() += *(new Vector2D(1,0));
+			if (player->getCoord().getX() < (int)_height - 2)
+				player->getCoord() += *(new Vector2D(1,0));
 			return "bas";
 		case 27:	// escape
 			if (getch() == -1)

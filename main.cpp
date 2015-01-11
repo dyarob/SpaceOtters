@@ -24,16 +24,16 @@ static void do_resize(int sig)
 
 # include   "EnemyBase.class.hpp"
 
-void	updatePositions(List *units)
+void	updatePositions(List **units, int currentFrame)
 {
-	for (List *l = units; l; l = l->next) {
-		l->u->move(l->u->getDeltaV());
-		/*
+	List *head = *units;
+	for (List *l = *units; l;) {
+		l->u->move(l->u->getDeltaV(), currentFrame);
 		if (l->u->getCoord().getY() < 0)
-			l->delete_one(units, l);
-		l->u->detect_collision( units, l );
-		*/
+			head = List::delete_one(*units, l);
+		l = l->u->detect_collision( &head, l );
 	}
+	*units = head;
 }
 
 int main() {
@@ -59,9 +59,9 @@ int main() {
 	units = units->push(truc);
 
 	start_color();
-	init_color(COLOR_RED, 700, 0, 0);
-
 	while (running) {
+		if ( !player )
+			break;
 
 		if (!player->getHp())
 		{
@@ -77,7 +77,6 @@ int main() {
 
 		currentFrame++;
 		timer.start();
-
 		events.exec(&units, currentFrame);
 		ch = game->keyEvent(player);
 		if ( ch == std::string("espace"))
@@ -85,7 +84,7 @@ int main() {
 		else if ( ch == std::string("escape"))
 			break;
 
-		updatePositions(units);
+		updatePositions(&units, currentFrame);
 		game->update(units);
 		BoxText->fixeDialog("GrosBoGoss Francky, BoGoss James", currentFrame / 10, 1);
 		timer.stop();

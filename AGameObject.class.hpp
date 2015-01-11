@@ -1,5 +1,6 @@
 #ifndef GAME_OBJECT_HPP
 #define GAME_OBJECT_HPP
+# include   <fstream>
 
 #include "Vector2D.class.hpp"
 #include "List.struct.hpp"
@@ -42,12 +43,11 @@ class AGameObject {
 		char			getSkin(void)			const;
 		int				getFgColor(void)		const;
 		int				getBgColor(void)		const;
-
+		void            move(Vector2D &delta_v, int currentFrame);
 		void            setDeltaV(Vector2D &delta_v);
 		void			setHp(unsigned int hp);
 
-		void			detect_collision( List *l, List *thiis );
-		void            move(Vector2D &delta_v);
+		List*			detect_collision( List **l, List *thiis );
 };
 
 #endif
