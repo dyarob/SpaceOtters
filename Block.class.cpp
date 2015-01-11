@@ -2,7 +2,7 @@
 #include "Vector2D.class.hpp"
 
 
-Skin		*Block::skin( new Skin( '%', 1, 0) );
+Skin		*Block::skin( new Skin( '%', 5, 0) );
 
 void		Block::update( void )
 {
