@@ -6,7 +6,7 @@
 #    By: stherman <stherman@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/11/20 14:58:54 by stherman          #+#    #+#              #
-#    Updated: 2015/01/11 13:49:10 by dmansour         ###   ########.fr        #
+#    Updated: 2015/01/11 13:55:30 by dmansour         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -16,23 +16,27 @@ NAME        = ft_retro
 
 SRCDIR      = ./src/
 
-SRC         =	$(SRCDIR)main.cpp			\
-				Vector2D.class.cpp			\
+SRC         =	Vector2D.class.cpp			\
 				Weapon.class.cpp			\
 				WeaponBase.class.cpp		\
 				Projectile.class.cpp		\
 				ProjectileBase.class.cpp	\
 				EnemyBase.class.cpp			\
 				DelayEvent.class.cpp		\
-				AUnit.class.cpp
+				AUnit.class.cpp				\
+				WinUI_dialogBox.class.cpp	\
+				WinUI_screen.class.cpp		\
+				WinUI.class.cpp				\
+				List.struct.cpp				\
+				test.cpp			
 
 OBJ         = $(SRC:.cpp=.o)
 
 HDFLAGS     = -I./includes/
 
-LDFLAGS     =
+LDFLAGS     = -lncurses
 
-CFLAGS      = $(HDFLAGS) -Wall -Werror -Wextra -ansi -pedantic
+CFLAGS      = $(HDFLAGS) -Wall -Werror -Wextra -ansi -pedantic -g
 
 RM          = rm -rf
 
@@ -40,7 +44,7 @@ all:        $(NAME)
 
 $(NAME):    $(OBJ)
 			@echo "\033[1;32m[Linking] \t\033[0m: \033[0;32m" | tr -d '\n'
-			$(CC) -o $@ $^ $(LDFLAGS)
+			$(CC) -o $@ $^ $(LDFLAGS) 
 			@echo "\033[0m" | tr -d '\n'
 
 clean:
@@ -61,3 +65,7 @@ re:         fclean all
 			@echo "\033[0m" | tr -d '\n'
 
 .PHONY:     all clean re fclean
+
+				# $(SRCDIR)main.cpp			\
+				# DelayEvent.class.cpp		\
+				# Event.class.cpp

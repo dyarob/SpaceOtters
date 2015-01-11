@@ -2,7 +2,7 @@
 # define DELAYEVENT_HPP
 
 # include <iostream>
-# include "Event.class.hpp"
+# include "List.struct.hpp"
 
 # define FRAME_MIN_TO_POP_CHAIN 500
 # define FRAME_MAX_TO_POP_CHAIN 3000
@@ -14,7 +14,7 @@
 # define TEMP_WIN_Y 30
 # define SPAWN_Y_PADDING 2
 # define NUMBER_OF_ENEMY_TYPES 1
-# define ENEMYBASE 1
+# define ENEMYBASE 0
 
 class DelayEvent {
 
@@ -24,14 +24,13 @@ public:
 	
 	void exec( void ); // fonction principale qui est appellée à chaque tick 
 
-	Event &randomChain();
+	void	randomChain();
 
 private:
 	DelayEvent( DelayEvent const & cp );
 	void		createDelayedEnemy(int, int, int);
 	DelayEvent &	operator=(DelayEvent const &);
-	Event		firstEvent;
-	Event		lastEvent;
+	List		*enemyEvents;
 	static const int	framesToFillMainShipWeapon = 30;
 
 

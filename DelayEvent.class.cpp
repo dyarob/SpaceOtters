@@ -10,15 +10,12 @@ DelayEvent::~DelayEvent(void){
 }
 
 void DelayEvent::exec() {
-	// créer aléatoirement des chaines d'units
-
+	this->randomChain();
 	// recharger la weapon du vaisseau joueur
-
-
 }
 
 // génère une chaine d'ennemis aleatoire, d'une longueur aleatoire d'ennemis aleatoires.
-Event	&	DelayEvent::randomChain() {
+void			DelayEvent::randomChain() {
 	static int randomWait = (std::rand() % (FRAME_MAX_TO_POP_CHAIN - FRAME_MIN_TO_POP_CHAIN)) + FRAME_MIN_TO_POP_CHAIN;
 	static int currentCount = 0;
 	currentCount++;
@@ -31,16 +28,19 @@ Event	&	DelayEvent::randomChain() {
 		int enemyType = std::rand() % NUMBER_OF_ENEMY_TYPES;
 
 		for (int i = 0; i < chainLength; i++) {
-			lastEvent.pushBack(enemyType, (chainSpacing * (i + 1)), chainSpawnY);
+			this->createDelayedEnemy(enemyType, (chainSpacing * (i + 1)), chainSpawnY);
 		}
-		return this->lastEvent;
 	}
-	return this->firstEvent;
 }
 
 // push un ennemi aléatoire dans la file d'attente
 void DelayEvent::createDelayedEnemy(int type, int delay, int spawn_y) {
-	lastEvent.pushBack(type, delay, spawn_y);
+	EnemyBase *newEnnemy = NULL; 
+	if (type == ENEMYBASE) {
+		Vector2D a(TEMP_WIN_X + delay, spawn_y), b(-10, 0);
+		newEnnemy = new EnemyBase(a, b);
+	}
+	enemyEvents->push(newEnnemy);
 }
 	
 std::ostream &		operator<<(std::ostream & o, DelayEvent const & rhs){

@@ -4,6 +4,10 @@
 
 unsigned int AUnit::_cur_id = 0;
 
+void    AUnit::shoot(void)   const
+{
+}
+
 AUnit::AUnit(unsigned int height, unsigned int width, int hp,
     int hp_max, Weapon &weapon, Vector2D &coord, Vector2D &delta_v)
     : _id(AUnit::_cur_id++), _height(height), _width(width), _hp(hp),
@@ -54,7 +58,7 @@ Weapon const    &AUnit::getWeapon(void) const {
     return this->_weapon;
 }
 
-Vector2D const  &AUnit::getCoord(void)  const {
+Vector2D   &AUnit::getCoord(void)  const {
     return this->_coord;
 }
 

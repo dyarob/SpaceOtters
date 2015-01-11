@@ -15,8 +15,8 @@ Vector2D::Vector2D(Vector2D const &src) {
 }
 
 Vector2D              &Vector2D::operator=(Vector2D const &src) {
-    this->_x        = src._x;
-    this->_y        = src._y;
+    this->_x        = src.getX();
+    this->_y        = src.getY();
     return *this;
 }
 
