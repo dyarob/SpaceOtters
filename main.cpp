@@ -1,6 +1,7 @@
 #include "Timer.class.hpp"
 #include "Player.class.hpp"
 #include "EnemyBase.class.hpp"
+#include "BlockBase.class.hpp"
 #include "DelayEvent.hpp"
 #include "List.struct.hpp"
 #include "WinUI_screen.class.hpp"
@@ -10,6 +11,10 @@
 #include <thread>
 #include <mutex>
 #include <signal.h>
+#include "EnemyBase.class.hpp"
+
+#define H_MAP 30
+#define W_SCREEN 120
 
 static int	sigwinchReceived = true;
 
@@ -20,8 +25,19 @@ static void do_resize(int sig)
 	sigwinchReceived = true;
 }
 
+void	generateBlocks(List **units)
+{
+	int	nb_of_blks = rand() % 2;
+	BlockBase	*b;
+	int x;
 
-# include   "EnemyBase.class.hpp"
+	for (int i = 0; i < nb_of_blks; ++i)
+	{
+		x = rand() % H_MAP;
+		b = new BlockBase( *(new Vector2D(x, W_SCREEN) ) );
+		*units = (*units)->push( b );
+	}
+}
 
 void	updatePositions(List **units, int currentFrame)
 {
@@ -29,8 +45,8 @@ void	updatePositions(List **units, int currentFrame)
 	for (List *l = *units; l;) {
 		/* move element */
 		l->u->move(l->u->getDeltaV(), currentFrame);
-		if (l->u->getCoord().getY() < 0)
-			head = List::delete_one(*units, l);
+		if (l->u->getCoord().getY() <= 0)
+			head = List::delete_one(head, l);
 		/* change pattern for everyone but Player's shippu */
 		if (l->u->getId() != 0) {
 			// pattern un coup en bas un coup en haut
@@ -104,20 +120,35 @@ int main() {
 	// srand
 	std::srand(std::time(NULL));
 
+	// TEST BLOCKS
+	BlockBase	*b1 = new BlockBase( *(new Vector2D(23, 15) ) );
+	units = units->push( b1 );
+	BlockBase	*b2 = new BlockBase( *(new Vector2D(24, 15) ) );
+	units = units->push( b2 );
+	BlockBase	*b3 = new BlockBase( *(new Vector2D(23, 16) ) );
+	units = units->push( b3 );
+	BlockBase	*b4 = new BlockBase( *(new Vector2D(4, 15) ) );
+	units = units->push( b4 );
+	BlockBase	*b5 = new BlockBase( *(new Vector2D(3, 15) ) );
+	units = units->push( b5 );
+
 	start_color();
-	while (running) {
-		if (!player->getHp()){
-			break;			
-		}
-		if (sigwinchReceived){
+	while (running)
+	{
+		if (!player->getHp())
+			break;
+
+		if (sigwinchReceived)
+		{
 			BoxHead = new WinUI_dialogBox(120, 3, 0, 0);
-			game = new WinUI_screen(120, 30, 3, 0);
-			BoxText = new WinUI_dialogBox(120, 3, 33, 0);
+			game = new WinUI_screen(120, 30, 1, 0);
+			BoxText = new WinUI_dialogBox(120, 3, 31, 0);
 			sigwinchReceived = false;
 		}
 
 		currentFrame++;
 		timer.start();
+		generateBlocks(&units);
 		events.exec(&units, currentFrame);
 		ch = game->keyEvent(player);
 		if ( ch == std::string("espace"))

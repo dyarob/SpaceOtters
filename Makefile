@@ -6,11 +6,14 @@ SRCDIR      = ./src/
 
 SRC         =	AGameObject.class.cpp		\
 				main.cpp					\
+				Block.class.cpp				\
+				BlockBase.class.cpp			\
 				Vector2D.class.cpp			\
 				Weapon.class.cpp			\
 				WeaponBase.class.cpp		\
 				Projectile.class.cpp		\
 				ProjectileBase.class.cpp	\
+				Skin.class.cpp				\
 				Player.class.cpp			\
 				EnemyBase.class.cpp			\
 				DelayEvent.class.cpp		\

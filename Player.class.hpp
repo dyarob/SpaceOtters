@@ -11,6 +11,7 @@ class       Player : public AUnit {
 
 private:
     Player(void);
+	static Skin*	skin;
 
 public:
     Player(Vector2D &coord, Vector2D &delta_v);

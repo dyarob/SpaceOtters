@@ -23,9 +23,11 @@ class       List {
 		AGameObject	*u;
 		List	*next;
 
-        void save_all ( List *list );
+        // void save_all ( List *list );
 		List	*push ( AGameObject *unit );
+        char     type;
 		static List	*delete_one ( List *list, List *to_delete );
+        void        setType(char);
 		//void	delete_all ();
 };
 

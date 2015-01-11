@@ -8,24 +8,24 @@ List	*List::push ( AGameObject *unit )
 	return ( ret );
 }
 
-void	List::save_all ( List *list ) {
-	List	*ptr = list;
-	std::ofstream o("log", std::ios::app);
+// void	List::save_all ( List *list ) {
+// 	List	*ptr = list;
+// 	std::ofstream o("log", std::ios::app);
 
-	while ( ptr ) {
+// 	while ( ptr ) {
 
-		o << "_id :" << ptr->u->getId() << std::endl
-		<< "_height :" << ptr->u->getHeight() << std::endl
-		<< "_width :" << ptr->u->getWidth() << std::endl
-		<< "_hp :" << ptr->u->getHp() << std::endl
-		<< "_hp_max :" << ptr->u->getHpMax() << std::endl
-		<< "_coord :" << ptr->u->getCoord().getX() << " <> " << ptr->u->getCoord().getY() << std::endl
-		<< "_delta_v :" << ptr->u->getDeltaV().getX() << " <> "  << ptr->u->getDeltaV().getY() << std::endl
-		<< std::endl;
+// 		o << "_id :" << ptr->u->getId() << std::endl
+// 		<< "_height :" << ptr->u->getHeight() << std::endl
+// 		<< "_width :" << ptr->u->getWidth() << std::endl
+// 		<< "_hp :" << ptr->u->getHp() << std::endl
+// 		<< "_hp_max :" << ptr->u->getHpMax() << std::endl
+// 		<< "_coord :" << ptr->u->getCoord().getX() << " <> " << ptr->u->getCoord().getY() << std::endl
+// 		<< "_delta_v :" << ptr->u->getDeltaV().getX() << " <> "  << ptr->u->getDeltaV().getY() << std::endl
+// 		<< std::endl;
 
-		ptr = ptr->next;
-	}
-}
+// 		ptr = ptr->next;
+// 	}
+// }
 
 List	*List::delete_one ( List *list, List *to_delete )
 {
@@ -70,7 +70,7 @@ List::List(void)
 }
 
 List::List(AGameObject *unit, List *nxt)
-	: u(unit), next(nxt)
+	: u(unit), next(nxt), type('i')
 {
 }
 
