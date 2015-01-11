@@ -37,7 +37,7 @@ void			DelayEvent::randomChain() {
 void DelayEvent::createDelayedEnemy(int type, int delay, int spawn_y) {
 	EnemyBase *newEnnemy = NULL; 
 	if (type == ENEMYBASE) {
-		Vector2D a(TEMP_WIN_X + delay, spawn_y), b(-10, 0);
+		Vector2D a(TEMP_WIN_X + delay / 10, spawn_y), b(-10, 0);
 		newEnnemy = new EnemyBase(a, b);
 	}
 	enemyEvents->push(newEnnemy);
