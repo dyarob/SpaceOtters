@@ -1,5 +1,6 @@
 #include "Timer.class.hpp"
 #include "Player.class.hpp"
+#include "EnemyBase.class.hpp"
 #include "DelayEvent.hpp"
 #include "List.struct.hpp"
 #include "WinUI_screen.class.hpp"
@@ -23,16 +24,18 @@ static void do_resize(int sig)
 
 # include   "EnemyBase.class.hpp"
 
-void	updatePositions(List *units, int currentFrame)
+void	updatePositions(List **units, int currentFrame)
 {
+	List *head = *units;
     std::ofstream o("log", std::ios::app);
     o << "move got called" << std::endl;
-	for (List *l = units; l; l = l->next) {
+	for (List *l = *units; l;) {
 		l->u->move(l->u->getDeltaV(), currentFrame);
 		if (l->u->getCoord().getY() < 0)
-			l = List::delete_one(units, l);
-		l->u->detect_collision(units, l);
+			head = List::delete_one(*units, l);
+		l = l->u->detect_collision( &head, l );
 	}
+	*units = head;
 }
 
 int main() {
@@ -53,8 +56,17 @@ int main() {
 	WinUI_screen	*game = new WinUI_screen(120, 30, 1, 0);
 	WinUI_dialogBox	*BoxText = new WinUI_dialogBox(120, 3, 31, 0);
 
+	// TEST COLLISIONS
+	EnemyBase	*truc = new EnemyBase( *(new Vector2D(3, 25)), *(new Vector2D(0, 0)) );
+	units = units->push(truc);
+
 	start_color();
 	while (running) {
+
+		if (!player->getHp())
+		{
+			break;
+		}
 
 		if (sigwinchReceived)
 		{
@@ -72,7 +84,7 @@ int main() {
 		else if ( ch == std::string("escape"))
 			break;
 
-		updatePositions(units, currentFrame);
+		updatePositions(&units, currentFrame);
 		game->update(units);
 		BoxText->fixeDialog("GrosBoGoss Francky, BoGoss James", currentFrame / 10, 1);
 		timer.stop();

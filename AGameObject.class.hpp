@@ -3,6 +3,10 @@
 # include   <fstream>
 
 #include "Vector2D.class.hpp"
+#include "List.struct.hpp"
+
+
+class List;
 
 class AGameObject {
 
@@ -42,6 +46,9 @@ class AGameObject {
 
 		void            move(Vector2D &delta_v, int currentFrame);
 		void            setDeltaV(Vector2D &delta_v);
+		void			setHp(unsigned int hp);
+
+		List*			detect_collision( List **l, List *thiis );
 };
 
 #endif

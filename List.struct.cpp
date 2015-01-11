@@ -31,13 +31,16 @@ List	*List::delete_one ( List *list, List *to_delete )
 {
 	List	*save = list;
 
+	if (!(list && to_delete))
+		return NULL;
+
 	if ( list == to_delete )
 	{
 		save = to_delete->next;
 		delete list;
 		return ( save );
 	}
-	while ( list->next )
+	while ( list )
 	{
 		if ( list->next == to_delete )
 		{

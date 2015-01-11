@@ -6,9 +6,13 @@
 # include   <ncurses.h>
 # include	"AGameObject.class.hpp"
 
+class		AGameObject;
+class		Player;
+
 class       List {
 
     public:
+		static int		player_dead;
         List(void);
         List( AGameObject* unit, List *nxt = NULL);
         List(List const &src);
