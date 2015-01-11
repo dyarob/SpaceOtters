@@ -33,7 +33,7 @@ class AGameObject {
 		Vector2D 		&getCoord(void)         const;
 		Vector2D 		&getDeltaV(void)        const;
 
-		void            move(Vector2D &delta_v);
+		int        		move(Vector2D &delta_v);
 		void            setDeltaV(Vector2D &delta_v);
 };
 

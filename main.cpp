@@ -36,7 +36,8 @@ static void finish(int sig)
 void	updatePositions(List *units)
 {
 	for (List *l = units; l; l = l->next) {
-		l->u->move(l->u->getDeltaV());
+		if (!l->u->move(l->u->getDeltaV()))
+			l->delete_one(units, l);
 		if (l->u->getCoord().getY() < 0)
 			l->delete_one(units, l);
 	}
@@ -62,6 +63,8 @@ int main() {
 	WinUI_dialogBox	*BoxText = new WinUI_dialogBox(120, 3, 31, 0);
 
 	while (running) {
+		if ( !player )
+			break;
 
 		if (sigwinchReceived)
 		{
