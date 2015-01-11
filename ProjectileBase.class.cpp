@@ -12,7 +12,7 @@ ProjectileBase::ProjectileBase(ProjectileBase const &src)
 }
 
 ProjectileBase      &ProjectileBase::operator=(ProjectileBase const &src) {
-    this->_damage           = src._damage;
+    this->_damage           = src.getDamage();
     this->_width            = src._width;
     this->_height           = src._height;
     this->_coord            = src._coord;

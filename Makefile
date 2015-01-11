@@ -1,26 +1,16 @@
-#******************************************************************************#
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: stherman <stherman@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2013/11/20 14:58:54 by stherman          #+#    #+#              #
-#    Updated: 2015/01/11 13:55:30 by dmansour         ###   ########.fr        #
-#                                                                              #
-#******************************************************************************#
-
 CC          = /usr/bin/g++
 
 NAME        = ft_retro
 
 SRCDIR      = ./src/
 
-SRC         =	Vector2D.class.cpp			\
+SRC         =	AGameObject.class.cpp		\
+				Vector2D.class.cpp			\
 				Weapon.class.cpp			\
 				WeaponBase.class.cpp		\
 				Projectile.class.cpp		\
 				ProjectileBase.class.cpp	\
+				Player.class.cpp			\
 				EnemyBase.class.cpp			\
 				DelayEvent.class.cpp		\
 				AUnit.class.cpp				\
@@ -28,7 +18,9 @@ SRC         =	Vector2D.class.cpp			\
 				WinUI_screen.class.cpp		\
 				WinUI.class.cpp				\
 				List.struct.cpp				\
-				test.cpp			
+				Timer.class.cpp				\
+				DelayEvent.class.cpp		\
+				main.cpp
 
 OBJ         = $(SRC:.cpp=.o)
 

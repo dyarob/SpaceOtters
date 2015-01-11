@@ -25,7 +25,8 @@ int main( void ){
 	test = test->push(truc3);
 	test = test->push(player);
 	//test = test->push(p);
-
+	
+	//test = test->push(player->shoot( ));
 	while (1){
 		BoxText->translateDialog("Bonjour les gens!");
 		//BoxHead->fixeDialog(BoxHead->keyEvent());

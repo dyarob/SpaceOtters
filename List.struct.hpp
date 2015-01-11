@@ -3,22 +3,22 @@
 
 # include   <iostream>
 # include   <ncurses.h>
-# include	"AUnit.class.hpp"
+# include	"AGameObject.class.hpp"
 
 class       List {
 
     public:
         List(void);
-        List( AUnit* unit, List *nxt = NULL);
+        List( AGameObject* unit, List *nxt = NULL);
         List(List const &src);
         ~List(void);
 
         List          &operator=(List const &);
 
-		AUnit	*u;
+		AGameObject	*u;
 		List	*next;
 
-		List	*push ( AUnit *unit );
+		List	*push ( AGameObject *unit );
 		List	*delete_one ( List *list, List *to_delete );
 		//void	delete_all ();
 };

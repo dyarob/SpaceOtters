@@ -5,6 +5,7 @@
 # include   "AUnit.class.hpp"
 # include   "Vector2D.class.hpp"
 # include   "WeaponBase.class.hpp"
+# include	"Projectile.class.hpp"
 
 class       Player : public AUnit {
 
@@ -19,7 +20,6 @@ public:
 
     WeaponBase          &getWeapon(void);
 
-    void    shoot(Weapon const &)   const;
     ~Player();
 };
 

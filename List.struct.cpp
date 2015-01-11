@@ -1,6 +1,6 @@
 #include    "List.struct.hpp"
 
-List	*List::push ( AUnit *unit )
+List	*List::push ( AGameObject *unit )
 {
 	List	*ret = new List( );
 	ret->u = unit;
@@ -47,7 +47,7 @@ List::List(void)
 {
 }
 
-List::List(AUnit *unit, List *nxt)
+List::List(AGameObject *unit, List *nxt)
 	: u(unit), next(nxt)
 {
 }

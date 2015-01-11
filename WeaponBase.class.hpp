@@ -16,7 +16,7 @@ public:
 
     WeaponBase              &operator=(WeaponBase const &);
     
-    virtual ProjectileBase  &fire(Vector2D *coord, Vector2D *delta_v);
+    virtual ProjectileBase  *fire(Vector2D *coord, Vector2D *delta_v);
     virtual                 ~WeaponBase(void);
 };
 

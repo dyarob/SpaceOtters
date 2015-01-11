@@ -7,11 +7,11 @@ void		Projectile::update( void )
 }
 
 Projectile::Projectile(unsigned int damage, unsigned int width, unsigned int height, Vector2D &coord, Vector2D &delta_v)
-    : _damage(damage),  _width(width), _height(height), _coord(coord), _delta_v(delta_v) {
-}
+    : AGameObject(width, height, 1, 1, coord, delta_v), _damage(damage)
+{}
 
 Projectile::Projectile(Projectile const &src)
-    : _coord(src._coord), _delta_v(src._delta_v){
+    : AGameObject(src) {
     *this = src;
 }
 
@@ -26,18 +26,6 @@ Projectile          &Projectile::operator=(Projectile const & src) {
 
 unsigned int        Projectile::getDamage(void)         const {
     return this->_damage;
-}
-
-unsigned int        Projectile::getHeight(void)         const {
-    return this->_height;
-}
-
-Vector2D const      &Projectile::getCoord(void)         const {
-    return this->_coord;
-}
-
-Vector2D const      &Projectile::getDeltaV(void)        const {
-    return this->_delta_v;
 }
 
 Projectile::~Projectile(void) {

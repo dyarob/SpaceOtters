@@ -15,7 +15,7 @@ void DelayEvent::exec() {
 }
 
 // génère une chaine d'ennemis aleatoire, d'une longueur aleatoire d'ennemis aleatoires.
-void			DelayEvent::randomChain() {
+void	DelayEvent::randomChain() {
 	static int randomWait = (std::rand() % (FRAME_MAX_TO_POP_CHAIN - FRAME_MIN_TO_POP_CHAIN)) + FRAME_MIN_TO_POP_CHAIN;
 	static int currentCount = 0;
 	currentCount++;
