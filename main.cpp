@@ -4,9 +4,34 @@
 #include "List.struct.hpp"
 #include "WinUI_screen.class.hpp"
 #include "WinUI_dialogBox.class.hpp"
+#include <cstdlib>
 #include <iostream>
 #include <thread>
 #include <mutex>
+#include <signal.h>
+
+static int	sigwinchReceived = true;
+
+static void do_resize(int sig)
+{
+	(void)sig;
+	endwin();
+	sigwinchReceived = true;
+}
+
+static void finish(int sig)
+{
+    endwin();
+
+	/*
+	delete player;
+	delete units;
+	delete game;
+	*/
+
+	(void)sig;
+    exit(0);
+}
 
 void	updatePositions(List *units)
 {
@@ -28,12 +53,26 @@ int main() {
 	Vector2D		playerVel(0, 0);
 	Player			*player = new Player(playerPos, playerVel);
 	List			*units = new List(player);
+
+	(void) signal(SIGINT, finish);      /* arrange interrupts to terminate */
+	signal(SIGWINCH, do_resize);
+
 	//WinUI_dialogBox	*BoxHead = new WinUI_dialogBox(120, 3, 1, 0);
 	WinUI_screen	*game = new WinUI_screen(120, 30, 1, 0);
 	WinUI_dialogBox	*BoxText = new WinUI_dialogBox(120, 3, 31, 0);
 
 	while (running) {
-		//signal(SIDWINCH, do_resize);
+
+		if (sigwinchReceived)
+		{
+			//WinUI_dialogBox	*BoxHead = new WinUI_dialogBox(120, 3, 1, 0);
+			//delete game;
+			game = new WinUI_screen(120, 30, 1, 0);
+			//delete BoxText;
+			BoxText = new WinUI_dialogBox(120, 3, 31, 0);
+			sigwinchReceived = false;
+		}
+
 		currentFrame++;
 		timer.start();
 		events.exec();
@@ -49,9 +88,5 @@ int main() {
 		timer.wait();
 	}
 
-	delete player;
-	delete units;
-	delete game;
-	endwin( );
-	return (0);
+	finish(0);
 }
