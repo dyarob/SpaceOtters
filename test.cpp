@@ -24,7 +24,7 @@ int main( void ){
 	while (1){
 		game->update(test);
 		BoxText->translateDialog("Bonjour les gens!");
-		BoxHead->fixeDialog(WinUI::keyEvent());
+		BoxHead->fixeDialog("WinUI::keyEvent()");
 	}
 	while (1){
 	}
@@ -33,12 +33,6 @@ int main( void ){
 	BoxText->destroyWin();
 
 
-	endwin();			/* End curses mode		  */
+	endwin();
 	return 0;
 }
-
-
-           KEY_DOWN        The four arrow keys ...
-           KEY_UP
-           KEY_LEFT
-           KEY_RIGHT
