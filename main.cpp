@@ -14,8 +14,6 @@
 
 void	updatePositions(List *units, int currentFrame)
 {
-    std::ofstream o("log", std::ios::app);
-    o << "move got called" << std::endl;
 	for (List *l = units; l; l = l->next) {
 		l->u->move(l->u->getDeltaV(), currentFrame);
 

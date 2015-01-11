@@ -23,8 +23,7 @@ void	DelayEvent::randomChain( List **units ) {
 	currentCount++;
 
 	if (randomWait == 0) {
-		//randomWait = (std::rand() % (FRAME_MAX_TO_POP_CHAIN - FRAME_MIN_TO_POP_CHAIN)) + FRAME_MIN_TO_POP_CHAIN;
-		randomWait = -1;
+		randomWait = (std::rand() % (FRAME_MAX_TO_POP_CHAIN - FRAME_MIN_TO_POP_CHAIN)) + FRAME_MIN_TO_POP_CHAIN;
 	}
 
 	if (currentCount == randomWait) {

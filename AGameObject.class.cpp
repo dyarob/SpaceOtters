@@ -88,15 +88,11 @@ void            AGameObject::move(Vector2D &delta_v, int currentFrame) {
     }
     if (abs_Y != 0 && currentFrame % abs_Y == 0) {
 
-        std::ofstream o("log", std::ios::app);
-        o << "move Y {" << this->getId() << "}: [from] " << this->_coord.getY();
-
         this->_coord.setY(this->_coord.getY() + (1 * signe_Y));
 
-        o << " [to] " << this->_coord.getY() << std::endl;
 
     }
-   }
+}
 
 void            AGameObject::setDeltaV(Vector2D &delta_v) {
     this->_delta_v = delta_v;
