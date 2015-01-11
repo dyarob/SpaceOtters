@@ -1,4 +1,4 @@
-#include "Timer.hpp"
+#include "Timer.class.hpp"
 
 Timer::Timer()
 	: _framerate(0),
@@ -34,6 +34,7 @@ Timer& Timer::operator=(Timer const& rhs)
 	_framerate = rhs.getFramerate();
 	_startAt = rhs.getStart();
 	_endAt = rhs.getEnd();
+	return *this;
 }
 
 unsigned int	Timer::getFramerate() const 	{ return _framerate; }

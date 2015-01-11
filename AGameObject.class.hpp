@@ -30,8 +30,8 @@ class AGameObject {
 		unsigned int    getWidth(void)          const;
 		unsigned int    getHp(void)             const;
 		unsigned int    getHpMax(void)          const;
-		Vector2D const  &getCoord(void)         const;
-		Vector2D const  &getDeltaV(void)        const;
+		Vector2D 		&getCoord(void)         const;
+		Vector2D 		&getDeltaV(void)        const;
 
 		void            move(Vector2D &delta_v);
 		void            setDeltaV(Vector2D &delta_v);

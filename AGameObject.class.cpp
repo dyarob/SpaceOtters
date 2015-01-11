@@ -49,11 +49,11 @@ unsigned int    AGameObject::getHpMax(void)   const {
     return this->_hp_max;
 }
 
-Vector2D const  &AGameObject::getCoord(void)  const {
+Vector2D		&AGameObject::getCoord(void)  const {
     return this->_coord;
 }
 
-Vector2D const  &AGameObject::getDeltaV(void) const {
+Vector2D		&AGameObject::getDeltaV(void) const {
     return this->_delta_v;
 }
 

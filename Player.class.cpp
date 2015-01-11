@@ -31,6 +31,8 @@ Player::~Player() {
     delete &this->_weapon;
 }
 
-void	Player::shoot( Weapon const & ) const
+/*
+Projectile*		Player::shoot( Weapon const & ) const
 {
 }
+*/

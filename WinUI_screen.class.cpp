@@ -4,7 +4,7 @@
 
 // ----- Adelie modif ----
 
-std::string		WinUI_screen::keyEvent(AUnit *player){
+std::string		WinUI_screen::keyEvent(Player *player){
 	timeout(0);
 	int  ch  = getch();
 	switch (ch){
@@ -45,7 +45,7 @@ void	WinUI_screen::draw_all ( List* l )
 	}
 }
 
-void	WinUI_screen::draw ( AUnit* u )
+void	WinUI_screen::draw ( AGameObject* u )
 {
 	Vector2D v = u->getCoord( );
 	mvwprintw( win, v.getX(), v.getY(), "O" );

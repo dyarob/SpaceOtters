@@ -3,7 +3,8 @@
 
 # include   <iostream>
 # include	"WinUI.class.hpp"
-# include	"AUnit.class.hpp"
+# include	"AGameObject.class.hpp"
+# include	"Player.class.hpp"
 # include	"List.struct.hpp"
 # include    "Vector2D.class.hpp"
 
@@ -13,7 +14,7 @@ class       WinUI_screen : public WinUI
     protected:
 
     public:
-		void	draw ( AUnit* u );
+		void	draw ( AGameObject* u );
 		void	draw_all ( List* l );
 		void	update ( List* l );
 
@@ -24,7 +25,7 @@ class       WinUI_screen : public WinUI
 
         WinUI_screen          &operator=(WinUI_screen const &);
         
-        std::string  keyEvent(AUnit *player);
+        std::string  keyEvent(Player *player);
 };
 
 #endif      /* _WINUI_SCREEN_HPP_ */
