@@ -51,7 +51,7 @@ int main() {
 
 	delete player;
 	delete units;
+	delete BoxText;
 	delete game;
-	endwin( );
 	return (0);
 }
