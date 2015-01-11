@@ -2,6 +2,10 @@
 #define GAME_OBJECT_HPP
 
 #include "Vector2D.class.hpp"
+#include "List.struct.hpp"
+
+
+class List;
 
 class AGameObject {
 
@@ -33,8 +37,11 @@ class AGameObject {
 		Vector2D 		&getCoord(void)         const;
 		Vector2D 		&getDeltaV(void)        const;
 
-		void            move(Vector2D &delta_v);
 		void            setDeltaV(Vector2D &delta_v);
+		void			setHp(unsigned int hp);
+
+		void			detect_collision( List *l, List *thiis );
+		void            move(Vector2D &delta_v);
 };
 
 #endif

@@ -4,6 +4,30 @@
 
 unsigned int AGameObject::_cur_id = 0;
 
+//----COLLISION ------
+void		AGameObject::detect_collision( List *l, List *thiis )
+{
+	Vector2D	voila;
+	List		*save = l;
+
+	while ( l )
+	{
+		voila = l->u->getCoord();
+		if ( _coord.getX() == voila.getX() && _coord.getY() == voila.getY() && this != l->u )
+		{
+			save->delete_one( save, l );
+			save->delete_one( save, thiis );
+		}
+		l = l->next;
+	}
+}
+
+void		AGameObject::setHp(unsigned int hp)
+{
+	this->_hp = hp;
+}
+//----------------
+
 AGameObject::AGameObject(unsigned int height, unsigned int width, int hp,
     int hp_max, Vector2D &coord, Vector2D &delta_v)
     : _id(AGameObject::_cur_id++), _height(height), _width(width), _hp(hp),

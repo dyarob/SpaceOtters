@@ -1,5 +1,6 @@
 #include "Timer.class.hpp"
 #include "Player.class.hpp"
+#include "EnemyBase.class.hpp"
 #include "DelayEvent.hpp"
 #include "List.struct.hpp"
 #include "WinUI_screen.class.hpp"
@@ -39,6 +40,7 @@ void	updatePositions(List *units)
 		l->u->move(l->u->getDeltaV());
 		if (l->u->getCoord().getY() < 0)
 			l->delete_one(units, l);
+		l->u->detect_collision( units, l );
 	}
 }
 
@@ -61,14 +63,21 @@ int main() {
 	WinUI_screen	*game = new WinUI_screen(120, 30, 1, 0);
 	WinUI_dialogBox	*BoxText = new WinUI_dialogBox(120, 3, 31, 0);
 
+	// TEST COLLISIONS
+	EnemyBase	*truc = new EnemyBase( *(new Vector2D(3, 25)), *(new Vector2D(0, 0)) );
+	units = units->push(truc);
+
 	while (running) {
+
+		if (!player->getHp())
+		{
+			break;
+		}
 
 		if (sigwinchReceived)
 		{
 			//WinUI_dialogBox	*BoxHead = new WinUI_dialogBox(120, 3, 1, 0);
-			//delete game;
 			game = new WinUI_screen(120, 30, 1, 0);
-			//delete BoxText;
 			BoxText = new WinUI_dialogBox(120, 3, 31, 0);
 			sigwinchReceived = false;
 		}
@@ -86,6 +95,8 @@ int main() {
 		BoxText->fixeDialog("GrosBoGoss Francky", currentFrame / 10, 1);
 		timer.stop();
 		timer.wait();
+	std::cout <<  typeid(player).name() << std::endl;
+	std::cout <<  typeid(Player*).name() << std::endl;
 	}
 
 	finish(0);

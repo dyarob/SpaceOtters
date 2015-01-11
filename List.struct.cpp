@@ -12,6 +12,8 @@ List	*List::delete_one ( List *list, List *to_delete )
 {
 	List	*save = list;
 
+	to_delete->u->setHp(0);
+
 	if ( list == to_delete )
 	{
 		save = to_delete->next;
