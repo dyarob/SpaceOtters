@@ -2,7 +2,6 @@
 # define DELAYEVENT_HPP
 
 # include <iostream>
-# include "Event.class.hpp"
 
 # define FRAME_MIN_TO_POP_CHAIN 500
 # define FRAME_MAX_TO_POP_CHAIN 3000
@@ -24,14 +23,12 @@ public:
 	
 	void exec( void ); // fonction principale qui est appellée à chaque tick 
 
-	Event &randomChain();
+	void	 randomChain();
 
 private:
 	DelayEvent( DelayEvent const & cp );
 	void		createDelayedEnemy(int, int, int);
 	DelayEvent &	operator=(DelayEvent const &);
-	Event		firstEvent;
-	Event		lastEvent;
 	static const int	framesToFillMainShipWeapon = 30;
 
 
