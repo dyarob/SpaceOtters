@@ -3,6 +3,7 @@
 #include    "AGameObject.class.hpp"
 
 unsigned int AGameObject::_cur_id = 0;
+Skin*		 AGameObject::skin( new Skin('0', 7, 0));
 
 //----COLLISION ------
 List*		AGameObject::detect_collision( List **l, List *thiis )
@@ -39,9 +40,7 @@ AGameObject::AGameObject(unsigned int height, unsigned int width, int hp,
     : _id(AGameObject::_cur_id++), _height(height), _width(width), _hp(hp),
     _hp_max(hp_max), _coord(coord), _delta_v(delta_v)
 {
-	_skin = '>';
-	_fgColor = 7;
-	_bgColor = 0;
+	_skin = skin;
 }
 
 AGameObject::AGameObject(AGameObject const &src)
@@ -90,16 +89,12 @@ Vector2D		&AGameObject::getDeltaV(void) const {
     return this->_delta_v;
 }
 
-char			AGameObject::getSkin(void) const {
+Skin*			AGameObject::getSkin(void) const {
 	return _skin;
 }
 
-int				AGameObject::getFgColor(void) const {
-	return _fgColor;
-}
-
-int				AGameObject::getBgColor(void) const {
-	return _bgColor;
+void			AGameObject::setSkin(Skin* skin) {
+	_skin = skin;
 }
 
 void            AGameObject::move(Vector2D &delta_v, int currentFrame) {

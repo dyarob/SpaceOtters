@@ -11,6 +11,7 @@ SRC         =	AGameObject.class.cpp		\
 				WeaponBase.class.cpp		\
 				Projectile.class.cpp		\
 				ProjectileBase.class.cpp	\
+				Skin.class.cpp				\
 				Player.class.cpp			\
 				EnemyBase.class.cpp			\
 				DelayEvent.class.cpp		\

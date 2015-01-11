@@ -1,6 +1,8 @@
 #include "Projectile.class.hpp"
 #include "Vector2D.class.hpp"
 
+Skin*	Projectile::skin(new Skin('-', 4, 0));
+
 void		Projectile::update( void )
 {
 	_coord += Vector2D(0,1);
@@ -9,9 +11,7 @@ void		Projectile::update( void )
 Projectile::Projectile(unsigned int damage, unsigned int width, unsigned int height, Vector2D &coord, Vector2D &delta_v)
     : AGameObject(width, height, 1, 1, coord, delta_v), _damage(damage)
 {
-	_skin = '-';
-	_fgColor = 1;
-	_bgColor = 0;
+	_skin = skin;
 }
 
 Projectile::Projectile(Projectile const &src)
