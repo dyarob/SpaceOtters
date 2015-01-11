@@ -1,6 +1,11 @@
 #include "Projectile.class.hpp"
 #include "Vector2D.class.hpp"
 
+void		Projectile::update( void )
+{
+	_coord += Vector2D(0,1);
+}
+
 Projectile::Projectile(unsigned int damage, unsigned int width, unsigned int height, Vector2D &coord, Vector2D &delta_v)
     : _damage(damage),  _width(width), _height(height), _coord(coord), _delta_v(delta_v) {
 }

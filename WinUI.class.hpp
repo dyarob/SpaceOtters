@@ -20,7 +20,7 @@ class       WinUI {
         WinUI(unsigned int, unsigned int, unsigned int, unsigned int);
         WinUI(WinUI const &src);
         ~WinUI(void);
-        static std::string  keyEvent(void);
+        std::string  keyEvent(void);
 
         WinUI               &operator=(WinUI const &);
         

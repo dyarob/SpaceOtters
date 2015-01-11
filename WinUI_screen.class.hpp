@@ -24,6 +24,7 @@ class       WinUI_screen : public WinUI
 
         WinUI_screen          &operator=(WinUI_screen const &);
         
+        std::string  keyEvent(AUnit *player);
 };
 
 #endif      /* _WINUI_SCREEN_HPP_ */

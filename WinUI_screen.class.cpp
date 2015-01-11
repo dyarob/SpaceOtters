@@ -4,6 +4,30 @@
 
 // ----- Adelie modif ----
 
+std::string		WinUI_screen::keyEvent(AUnit *player){
+	timeout(0);
+	int  ch  = getch();
+	switch (ch){
+		case 'w':
+			player->getCoord() += *(new Vector2D(-1,0));
+			return "haut";
+		case 'a':
+			player->getCoord() += *(new Vector2D(0,-1));
+			return "gauche";
+		case ' ':
+			player->shoot();
+			return "espace";
+		case 'd':
+			player->getCoord() += *(new Vector2D(0,1));
+			return "droite";
+		case 's':
+			player->getCoord() += *(new Vector2D(1,0));
+			return "bas";
+		default:
+			return "je met ce que je veux!";
+}
+}
+
 void	WinUI_screen::update ( List* l )
 {
 	werase ( win );

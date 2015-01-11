@@ -18,6 +18,7 @@ class                   Projectile {
     public:
         Projectile(unsigned int, unsigned int, unsigned int, Vector2D &, Vector2D &);
         Projectile(Projectile const & src);
+        virtual ~Projectile();
         
         Projectile      &operator=(Projectile const &);
         
@@ -27,7 +28,8 @@ class                   Projectile {
         Vector2D const  &getCoord(void)     const;
         Vector2D const  &getDeltaV(void)    const;
         
-        virtual ~Projectile();
+
+		void			update( void );
 };
 
 #endif                  /* !_PROJECTILES_HPP_ */

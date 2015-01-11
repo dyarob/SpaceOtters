@@ -6,7 +6,7 @@
 #    By: stherman <stherman@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/11/20 14:58:54 by stherman          #+#    #+#              #
-#    Updated: 2015/01/10 22:11:53 by jgirard          ###   ########.fr        #
+#    Updated: 2015/01/11 11:23:43 by avannest         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -35,7 +35,7 @@ HDFLAGS     = -I./includes/
 
 LDFLAGS     = -lncurses
 
-CFLAGS      = $(HDFLAGS) -Wall -Werror -Wextra -ansi -pedantic
+CFLAGS      = $(HDFLAGS) -Wall -Werror -Wextra -ansi -pedantic -g
 
 RM          = rm -rf
 
