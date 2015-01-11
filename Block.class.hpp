@@ -3,7 +3,7 @@
 
 # include               <iostream>
 # include                "AGameObject.class.hpp"
-# define				B_SPEED -1
+# define				B_SPEED -2
 
 class                   Block : public AGameObject {
     protected:
