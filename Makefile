@@ -6,7 +6,7 @@
 #    By: stherman <stherman@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/11/20 14:58:54 by stherman          #+#    #+#              #
-#    Updated: 2015/01/10 22:11:53 by jgirard          ###   ########.fr        #
+#    Updated: 2015/01/11 13:49:10 by dmansour         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -24,7 +24,6 @@ SRC         =	$(SRCDIR)main.cpp			\
 				ProjectileBase.class.cpp	\
 				EnemyBase.class.cpp			\
 				DelayEvent.class.cpp		\
-				Event.class.cpp				\
 				AUnit.class.cpp
 
 OBJ         = $(SRC:.cpp=.o)
