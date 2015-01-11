@@ -1,8 +1,9 @@
-#ifndef     _WINUI_HPP_
-# define    _WINUI_HPP_
+#ifndef     _WINUI_CLASS_HPP_
+# define    _WINUI_CLASS_HPP_
 
-# include   <iostream>
-# include   <ncurses.h>
+# include <iostream>
+# include <ncurses.h>
+# include <string>
 
 class       WinUI {
 
@@ -19,17 +20,18 @@ class       WinUI {
         WinUI(unsigned int, unsigned int, unsigned int, unsigned int);
         WinUI(WinUI const &src);
         ~WinUI(void);
+        static std::string  keyEvent(void);
 
-        WinUI          &operator=(WinUI const &);
+        WinUI               &operator=(WinUI const &);
         
-        WINDOW          *createWin(void);
-        void            destroyWin(void);
-        unsigned int    getWidth(void) const;
-        unsigned int    getHeight(void) const;
-        unsigned int    getStartX(void) const;
-        unsigned int    getStartY(void) const;
+        WINDOW              *createWin(void);
+        void                destroyWin(void);
+        unsigned int        getWidth(void) const;
+        unsigned int        getHeight(void) const;
+        unsigned int        getStartX(void) const;
+        unsigned int        getStartY(void) const;
 
-        WINDOW          *win;
+        WINDOW              *win;
 };
 
-#endif      /* _WINUI_HPP_ */
+#endif  // **********       _WINUI_CLASS_HPP_

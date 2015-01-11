@@ -4,7 +4,7 @@ WinUI::WinUI(void)
 : _width(120), _height(30), _startX(0), _startY(0), _heightMap(60){
 	initscr();
 	curs_set(0);
-	cbreak();
+//	cbreak();
 	this->win = this->createWin();
 }
 
@@ -13,7 +13,7 @@ WinUI::WinUI(unsigned int width, unsigned int height, unsigned int x, unsigned y
 	this->win = this->createWin();
 	curs_set(0);
 	initscr();
-	cbreak();
+//	cbreak();
 	this->win = this->createWin();
 }
 
@@ -22,7 +22,7 @@ WinUI::WinUI(WinUI const & src)
 _startY(src.getStartY()), _heightMap(src.getHeight() * 3){
 	curs_set(0);
 	initscr();
-	cbreak();
+//	cbreak();
 	this->win = this->createWin();
 }
 
@@ -43,9 +43,31 @@ WINDOW			*WinUI::createWin(void){
 
 	WINDOW *local_win;
 	local_win = newwin(this->getHeight(), this->getWidth(), this->getStartX(), this->getStartY());
-	box(local_win, 0 , 0);		/* 0, 0 gives default characters 
-	wrefresh(local_win);		 Show that box 		*/
+	box(local_win, 0 , 0); 
+	wrefresh(local_win); 		
 	return local_win;
+}
+
+std::string		WinUI::keyEvent(void){
+	int  ch  = getch();
+	switch (ch){
+		case KEY_BACKSPACE:
+			return "espace";
+		break;
+		case KEY_DOWN:
+			return "bas";
+		break;
+		case KEY_UP:
+			return "haut";
+		break;
+		case KEY_LEFT:
+			return "gauche";
+		break;
+		case KEY_RIGHT:
+			return "droite";
+		break;
+	}
+	return "RAS";
 }
 
 void            WinUI::destroyWin(void){

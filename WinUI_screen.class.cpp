@@ -1,6 +1,5 @@
 #include    "WinUI_screen.class.hpp"
-#include	"Vector2D.class.hpp"
-#include	<ncurses.h>
+
 
 
 // ----- Adelie modif ----
@@ -30,7 +29,8 @@ void	WinUI_screen::draw ( AUnit* u )
 
 //--------------------
 
-WinUI_screen::WinUI_screen(void) : WinUI()
+WinUI_screen::WinUI_screen(void) 
+: WinUI()
 {
 }
 

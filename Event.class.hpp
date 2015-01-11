@@ -2,7 +2,7 @@
 # define 	EVENT_CLASS_HPP
 
 # define	FIRSTNODE 0
-# define	NULL 0
+# define	NULLL 0
 
 class		Event{
 	private:

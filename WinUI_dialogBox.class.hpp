@@ -1,8 +1,6 @@
 #ifndef     _WINUI_DIALOGBOX_CLASS_HPP_
 # define    _WINUI_DIALOGBOX_CLASS_HPP_
 
-# include <iostream>
-# include <ncurses.h>
 # include "WinUI.class.hpp"
 
 class       WinUI_dialogBox : public WinUI {

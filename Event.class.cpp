@@ -1,9 +1,9 @@
 #include "Event.class.hpp"
 
-Event::Event() : _type(FIRSTNODE), _next(NULL), _prev(NULL) {
+Event::Event() : _type(FIRSTNODE), _next(NULLL, _prev(NULLL) {
 }
 
-Event::Event(int type, int delay, int posY) : _type(type), _delay(delay), _posY(posY), _next(NULL), _prev(NULL) {
+Event::Event(int type, int delay, int posY) : _type(type), _delay(delay), _posY(posY), _next(NULLL), _prev(NULLL) {
 }
 
 Event::Event(Event const & e) {

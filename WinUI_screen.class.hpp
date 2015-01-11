@@ -1,11 +1,11 @@
-  #ifndef     _WINUI_SCREEN_HPP_
+#ifndef     _WINUI_SCREEN_HPP_
 # define    _WINUI_SCREEN_HPP_
 
 # include   <iostream>
-# include   <ncurses.h>
 # include	"WinUI.class.hpp"
 # include	"AUnit.class.hpp"
 # include	"List.struct.hpp"
+# include    "Vector2D.class.hpp"
 
 class       WinUI_screen : public WinUI
 {
