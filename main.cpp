@@ -114,8 +114,8 @@ int main() {
 	//lvl->init(BoxText);
 	int				lvlId = 0;
 	Level			*lvls[NB_LVL];
-	lvls[0] = new Level ("Level 1 - Asteroid field", -2 );
-	lvls[1] = new Level ("Level 2 - Asteroid field", -3 );
+	lvls[0] = new Level ("Level 1 - Asteroid field", -3 );
+	lvls[1] = new Level ("Level 2 - Asteroid field", -2 );
 	lvls[2] = new Level ("Level 3 - Asteroid field", -1 );
 
 	// srand

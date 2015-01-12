@@ -4,12 +4,11 @@
 
 void	AsteroidField::generateBlocks(List **units)
 {
-	int	nb_of_blks = rand() % 2;
+	int	nb_of_blks = rand() % 10;
 	BlockBase	*b;
 	int x;
 
-	for (int i = 0; i < nb_of_blks; ++i)
-	{
+	if (!nb_of_blks) {
 		x = rand() % H_MAP;
 		b = new BlockBase( *(new Vector2D(x, W_SCREEN)), b_speed );
 		*units = (*units)->push( b, 'a' );
