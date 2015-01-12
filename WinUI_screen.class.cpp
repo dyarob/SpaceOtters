@@ -30,7 +30,7 @@ std::string		WinUI_screen::keyEvent(Player *player){
 		case 27:	// escape
 			if (getch() == -1)
 				return "escape";
-			return "nothing";
+			return "segfault";
 		default:
 			return "je met ce que je veux!";
 }
@@ -78,9 +78,6 @@ void	WinUI_screen::draw ( AGameObject* u )
 				}
 			}
 			wattroff(win, COLOR_PAIR(u->getSkin()->getId()));
-		}
-		else {
-			std::cout << "EROOORRRRRR";
 		}
 	}
 }

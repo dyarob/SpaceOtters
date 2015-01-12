@@ -9,14 +9,13 @@ DelayEvent::~DelayEvent(void){
 	return;
 }
 
-void	DelayEvent::exec(List	**units, int currentFrame) {
-	this->randomChain(units);
-	currentFrame = currentFrame * 1;
+void	DelayEvent::exec(List	**units, int lvl) {
+	this->randomChain(units, lvl);
 	// recharger la weapon du vaisseau joueur
 }
 
 // génère une chaine d'ennemis aleatoire, d'une longueur aleatoire d'ennemis aleatoires.
-void	DelayEvent::randomChain( List **units ) {
+void	DelayEvent::randomChain( List **units, int lvl ) {
 	static int randomWait = 100; // first ennemies pop time
 	static int currentCount = 0;
 
@@ -29,7 +28,7 @@ void	DelayEvent::randomChain( List **units ) {
 	if (currentCount == randomWait) {
 		randomWait = 0;
 		currentCount = 0;
-		int chainLength = (std::rand() % (CHAIN_MAX_LENGTH - CHAIN_MIN_LENGTH)) + CHAIN_MIN_LENGTH;
+		int chainLength = (std::rand() % (CHAIN_MAX_LENGTH - CHAIN_MIN_LENGTH)) + CHAIN_MIN_LENGTH + 3 * (lvl);
 		int chainSpacing = (std::rand() % (CHAIN_MAX_SPACING - CHAIN_MIN_SPACING)) + CHAIN_MIN_SPACING;
 		int chainSpawnY = (std::rand() % (TEMP_WIN_Y - SPAWN_Y_PADDING * 2)) + SPAWN_Y_PADDING;
 		int enemyType = std::rand() % NUMBER_OF_ENEMY_TYPES;

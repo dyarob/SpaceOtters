@@ -26,6 +26,10 @@ static void do_resize(int sig)
 	sigwinchReceived = true;
 }
 
+void	segfault(List *l) {
+	std::cout << l->type;
+}
+
 void	updatePositions(List **units, int currentFrame)
 {
 	List	*head = *units;
@@ -124,7 +128,7 @@ int main() {
 	start_color();
 	while (running)
 	{
-		if (!player->getHp())
+		if (player->getHp() <= 0)
 			break;
 
 		if (player->getCoord().getY() >= W_SCREEN - (W_SCREEN >> 2)) // player won the level

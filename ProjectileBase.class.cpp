@@ -3,7 +3,7 @@
 #include "Vector2D.class.hpp"
 
 ProjectileBase::ProjectileBase(Vector2D &coord, Vector2D &delta_v)
-    : Projectile(1, 1, 1, coord, delta_v) {
+    : Projectile(1, 1, coord, delta_v) {
 }
 
 ProjectileBase::ProjectileBase(ProjectileBase const &src)
@@ -12,7 +12,7 @@ ProjectileBase::ProjectileBase(ProjectileBase const &src)
 }
 
 ProjectileBase      &ProjectileBase::operator=(ProjectileBase const &src) {
-    this->_damage           = src.getDamage();
+    this->_dmg         		= src.getDamage();
     this->_width            = src._width;
     this->_height           = src._height;
     this->_coord            = src._coord;
