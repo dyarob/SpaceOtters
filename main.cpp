@@ -25,6 +25,10 @@ static void do_resize(int sig)
 	sigwinchReceived = true;
 }
 
+void	segfault(List *l) {
+	std::cout << l->type;
+}
+
 void	updatePositions(List **units, int currentFrame)
 {
 	List	*head = *units;
