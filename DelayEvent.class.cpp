@@ -50,8 +50,9 @@ void	DelayEvent::createDelayedEnemy( List **units , int type, int delay, int spa
 		Vector2D * b = new Vector2D(0, -5);
 		newEnnemy = new EnemyBase(*a, *b, pattern);
 	}
-	if (newEnnemy != NULL)
-		*units = (*units)->push(newEnnemy);
+	if (newEnnemy != NULL){
+		*units = (*units)->push(newEnnemy, 'e');
+	}
 }
 	
 std::ostream &		operator<<(std::ostream & o, DelayEvent const & rhs){

@@ -5,6 +5,16 @@
 unsigned int AGameObject::_cur_id = 0;
 Skin*		 AGameObject::skin( new Skin('0', 7, 0));
 
+bool        checkCondition(char a, char b){
+    if (a == b)
+        return false;
+    if (a == 'a' && b == 'e')
+        return false;
+    if (a == 'e' && b == 'a')
+        return false;
+    return true;
+}
+
 //----COLLISION ------
 List*		AGameObject::detect_collision( List **l, List *thiis )
 {
@@ -15,14 +25,16 @@ List*		AGameObject::detect_collision( List **l, List *thiis )
 	while ( *l )
 	{
 		voila = (*l)->u->getCoord();
-		if ( _coord.getX() == voila.getX() && _coord.getY() == voila.getY() && this != (*l)->u )
-		{
-			thiis->u->setHp(0);
-			save = List::delete_one( save, thiis );
-			(*l)->u->setHp(0);
-			*l = List::delete_one( save, *l );
-			return tmp;
-		}
+        if (checkCondition((*l)->type, thiis->type)){
+    		if ( _coord.getX() == voila.getX() && _coord.getY() == voila.getY() && this != (*l)->u )
+    		{
+    			thiis->u->setHp(0);
+    			save = List::delete_one( save, thiis );
+    			(*l)->u->setHp(0);
+    			*l = List::delete_one( save, *l );
+    			return tmp;
+    		}
+        }
 		*l = (*l)->next;
 	}
 	*l = save;

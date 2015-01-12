@@ -35,7 +35,7 @@ void	generateBlocks(List **units)
 	{
 		x = rand() % H_MAP;
 		b = new BlockBase( *(new Vector2D(x, W_SCREEN) ) );
-		*units = (*units)->push( b );
+		*units = (*units)->push( b, 'a' );
 	}
 }
 
@@ -110,6 +110,7 @@ int main() {
 	Vector2D		playerVel(0, 0);
 	Player			*player = new Player(playerPos, playerVel);
 	List			*units = new List(player);
+	units->setType('p');
 
 	signal(SIGWINCH, do_resize);
 
@@ -122,15 +123,15 @@ int main() {
 
 	// TEST BLOCKS
 	BlockBase	*b1 = new BlockBase( *(new Vector2D(23, 15) ) );
-	units = units->push( b1 );
+	units = units->push( b1, 'a' );
 	BlockBase	*b2 = new BlockBase( *(new Vector2D(24, 15) ) );
-	units = units->push( b2 );
+	units = units->push( b2,  'a' );
 	BlockBase	*b3 = new BlockBase( *(new Vector2D(23, 16) ) );
-	units = units->push( b3 );
+	units = units->push( b3, 'a' );
 	BlockBase	*b4 = new BlockBase( *(new Vector2D(4, 15) ) );
-	units = units->push( b4 );
+	units = units->push( b4,  'a' );
 	BlockBase	*b5 = new BlockBase( *(new Vector2D(3, 15) ) );
-	units = units->push( b5 );
+	units = units->push( b5, 'a' );
 
 	start_color();
 	while (running)
@@ -141,8 +142,8 @@ int main() {
 		if (sigwinchReceived)
 		{
 			BoxHead = new WinUI_dialogBox(120, 3, 0, 0);
-			game = new WinUI_screen(120, 30, 1, 0);
-			BoxText = new WinUI_dialogBox(120, 3, 31, 0);
+			game = new WinUI_screen(120, 30, 3, 0);
+			BoxText = new WinUI_dialogBox(120, 3, 33, 0);
 			sigwinchReceived = false;
 		}
 
@@ -152,7 +153,7 @@ int main() {
 		events.exec(&units, currentFrame);
 		ch = game->keyEvent(player);
 		if ( ch == std::string("espace"))
-			units = units->push(player->shoot());
+			units = units->push(player->shoot(), 'p');
 		else if ( ch == std::string("escape"))
 			break;
 

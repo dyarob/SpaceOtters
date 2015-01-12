@@ -64,6 +64,9 @@ void	WinUI_screen::draw ( AGameObject* u )
 			mvwprintw( win, v.getX(), v.getY(), c);
 			wattroff(win, COLOR_PAIR(u->getSkin()->getId()));
 		}
+		else {
+			std::cout << "EROOORRRRRR";
+		}
 	}
 }
 

@@ -2,7 +2,7 @@
 #include "BlockBase.class.hpp"
 #include "Vector2D.class.hpp"
 
-Skin		*BlockBase::skin ( new Skin( '%', 1, 0 ));
+Skin		*BlockBase::skin ( new Skin( '#', 1, 0 ));
 
 BlockBase::BlockBase(Vector2D &coord)
     : Block( 1, 1, coord ) {
