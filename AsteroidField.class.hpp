@@ -2,9 +2,7 @@
 # define                _ASTEROIDFIELD_HPP_
 
 # include				"BlockBase.class.hpp"
-
-# define H_MAP 30
-# define W_SCREEN 120
+# include				"CONST.h"
 
 class                   AsteroidField
 {

@@ -135,6 +135,10 @@ void            AGameObject::move(Vector2D &delta_v, int currentFrame) {
     }
 }
 
+void            AGameObject::setCoord(Vector2D &coord) {
+    this->_coord = coord;
+}
+
 void            AGameObject::setDeltaV(Vector2D &delta_v) {
     this->_delta_v = delta_v;
 }

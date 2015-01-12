@@ -29,6 +29,7 @@ class       List {
 		static List	*delete_one ( List *list, List *to_delete );
         void        setType(char);
 
+		static void	delete_all ( List *l );
 };
 
 #endif      /* _LIST_STRUCT_HPP_ */

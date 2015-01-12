@@ -1,4 +1,6 @@
+# include				"CONST.h"
 #include "Timer.class.hpp"
+#include "Level.class.hpp"
 #include "AsteroidField.class.hpp"
 #include "Player.class.hpp"
 #include "EnemyBase.class.hpp"
@@ -94,14 +96,23 @@ int main() {
 	Vector2D		playerVel(0, 0);
 	Player			*player = new Player(playerPos, playerVel);
 	List			*units = new List(player);
+
 	units->setType('p');
-	AsteroidField	*af = new AsteroidField ( -2 );
+	//Level			*lvl = new Level( "Level 1 - Asteroid field", -2 );
 
 	signal(SIGWINCH, do_resize);
 
 	WinUI_dialogBox	*BoxHead = new WinUI_dialogBox(120, 3, 0, 0);
 	WinUI_screen	*game = new WinUI_screen(120, 30, 3, 0);
 	WinUI_dialogBox	*BoxText = new WinUI_dialogBox(120, 3, 33, 0);
+
+	// level initialization and message
+	//lvl->init(BoxText);
+	int				lvlId = 0;
+	Level			*lvls[NB_LVL];
+	lvls[0] = new Level ("Level 1 - Asteroid field", -2 );
+	lvls[1] = new Level ("Level 2 - Asteroid field", -3 );
+	lvls[2] = new Level ("Level 3 - Asteroid field", -1 );
 
 	// srand
 	std::srand(std::time(NULL));
@@ -111,6 +122,18 @@ int main() {
 	{
 		if (!player->getHp())
 			break;
+
+		if (player->getCoord().getY() >= W_SCREEN - (W_SCREEN >> 2)) // player won the level
+		{
+			lvlId++;
+			if ( lvlId >= NB_LVL )
+				break;
+			endwin();
+			sigwinchReceived = 1;
+			List::delete_all(units);
+			player = new Player( *(new Vector2D(15, 5)), *(new Vector2D(0,0)));//playerPos, playerVel );
+			units = new List( player );
+		}
 
 		if (sigwinchReceived)
 		{
@@ -122,7 +145,7 @@ int main() {
 
 		currentFrame++;
 		timer.start();
-		af->generateBlocks(&units);
+		lvls[lvlId]->af->generateBlocks(&units);
 		events.exec(&units, currentFrame);
 		ch = game->keyEvent(player);
 		if ( ch == std::string("espace"))
@@ -131,14 +154,14 @@ int main() {
 			break;
 
 		for (List *l = units; l; l = l->next) {
-			if (!(rand() % 100) && l->type == 'e')
+			if (!(rand() % 500 / (lvlId * 2 + 1)) && l->type == 'e')
 				units = units->push(((EnemyBase*)l->u)->shoot(), 'm');
 		}
 
 		updatePositions(&units, currentFrame);
 		game->update(units);
-		BoxHead->fixeDialog("Stage 1", 5, 1);
-		BoxText->fixeDialog("Score:", currentFrame / 10, 1);
+		//BoxText->fixeDialog("GrosBoGoss Francky, BoGoss James", currentFrame / 10, 1);
+		BoxText->fixeDialog(lvls[lvlId]->name, currentFrame / 10, 1);
 		timer.stop();
 		timer.wait();
 	}

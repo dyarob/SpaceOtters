@@ -35,6 +35,14 @@ List	*List::delete_one ( List *list, List *to_delete )
 	return ( save );
 }
 
+void	List::delete_all ( List *l )
+{
+	while ( l )
+	{
+		l = delete_one ( l, l );
+	}
+}
+
 List::List(void)
 	: u(NULL), next(NULL)
 {
