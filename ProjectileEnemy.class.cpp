@@ -24,5 +24,6 @@ ProjectileEnemy      &ProjectileEnemy::operator=(ProjectileEnemy const &src) {
 }
 
 ProjectileEnemy::~ProjectileEnemy(void) {
-
+delete &_coord;
+delete &_delta_v;
 }

@@ -9,6 +9,7 @@ SRC         =	AGameObject.class.cpp		\
 				main.cpp					\
 				Block.class.cpp				\
 				BlockBase.class.cpp			\
+				E_Zaz.class.cpp				\
 				Level.class.cpp				\
 				Vector2D.class.cpp			\
 				Weapon.class.cpp			\

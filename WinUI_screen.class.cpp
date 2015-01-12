@@ -60,8 +60,23 @@ void	WinUI_screen::draw ( AGameObject* u )
 		if (u->getSkin()) {
 			init_pair(u->getSkin()->getId(), u->getSkin()->getFg(), u->getSkin()->getBg());
 			wattron(win, COLOR_PAIR(u->getSkin()->getId()));
-			char *c = u->getSkin()->getCAddr();
-			mvwprintw( win, v.getX(), v.getY(), c);
+			int	w = u->getWidth();
+			if ( w == 1 )
+			{
+				char *c = u->getSkin()->getCAddr();
+				mvwprintw( win, v.getX(), v.getY(), c);
+			}
+			else		// Zaz
+			{
+				int h = u->getHeight();
+				//int j;
+				char *c;
+				for (int i = 0; i < h; ++i)
+				{
+					c = ((E_Zaz*)u)->img[i];
+					mvwprintw( win, v.getX() + i, v.getY(), c );
+				}
+			}
 			wattroff(win, COLOR_PAIR(u->getSkin()->getId()));
 		}
 		else {

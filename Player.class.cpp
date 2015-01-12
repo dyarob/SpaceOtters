@@ -31,6 +31,6 @@ Player           &Player::operator=(Player const & src) {
 }
 
 Player::~Player() {
-    delete &this->_weapon;
+   // delete &this->_weapon;
 }
 

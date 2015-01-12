@@ -25,5 +25,4 @@ Projectile      	*Weapon::fire(Vector2D *coord, Vector2D *delta_v) {
 }
 
 Weapon::~Weapon(void) {
-
 }

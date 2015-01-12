@@ -21,5 +21,7 @@ ProjectileBase      &ProjectileBase::operator=(ProjectileBase const &src) {
 }
 
 ProjectileBase::~ProjectileBase(void) {
+	delete &_delta_v;
+	delete &_coord;
 
 }

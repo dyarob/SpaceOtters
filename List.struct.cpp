@@ -1,7 +1,14 @@
+#include	"ProjectileEnemy.class.hpp"
+#include	"E_Zaz.class.hpp"
+#include    "EnemyBase.class.hpp"
+#include    "BlockBase.class.hpp"
+#include    "ProjectileBase.class.hpp"
 #include    "List.struct.hpp"
 
 List	*List::push ( AGameObject *unit, char type)
 {
+	if (!unit)
+		return (this);
 	List	*ret = new List( );
 	ret->setType(type);
 	ret->u = unit;
@@ -60,6 +67,19 @@ List::List(List const & src)
 
 List::~List(void)
 {
+	if (type == 'm')
+		delete (ProjectileEnemy*)u;
+	else if (type == 'e')
+	{
+		if ( u->getWidth() > 1 )
+			delete (E_Zaz *)u;
+		else
+			delete (EnemyBase*)u;
+	}
+	else if (type == 'p')
+		delete (ProjectileBase*)u;
+	else if (type == 'a')
+		delete (BlockBase*)u;
 }
 
 void		List::setType(char type){

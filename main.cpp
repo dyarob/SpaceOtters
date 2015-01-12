@@ -1,4 +1,5 @@
 # include				"CONST.h"
+#include "E_Zaz.class.hpp"
 #include "Timer.class.hpp"
 #include "Level.class.hpp"
 #include "AsteroidField.class.hpp"
@@ -31,8 +32,9 @@ void	updatePositions(List **units, int currentFrame)
 	for (List *l = *units; l;) {
 		/* move element */
 		l->u->move(l->u->getDeltaV(), currentFrame);
-		if (l->u->getCoord().getY() <= 0)
+		if (l->u->getCoord().getY() <= 0) {
 			head = List::delete_one(head, l);
+		}
 		/* change pattern for everyone but Player's shippu */
 		if (l->u->getId() != 0) {
 			// pattern un coup en bas un coup en haut
@@ -96,6 +98,7 @@ int main() {
 	Vector2D		playerVel(0, 0);
 	Player			*player = new Player(playerPos, playerVel);
 	List			*units = new List(player);
+	E_Zaz			*zaz = new E_Zaz( *(new Vector2D(1, 67)), *(new Vector2D(0, 0)), 0);
 
 	units->setType('p');
 	//Level			*lvl = new Level( "Level 1 - Asteroid field", -2 );
@@ -110,8 +113,9 @@ int main() {
 	//lvl->init(BoxText);
 	int				lvlId = 0;
 	Level			*lvls[NB_LVL];
-	lvls[0] = new Level ("Level 1 - Asteroid field", -2 );
-	lvls[1] = new Level ("Level 2 - Asteroid field", -3 );
+	lvls[1] = new Level ("Face Zaz, the final boss!", -1 );
+	lvls[3] = new Level ("Level 1 - Asteroid field", -2 );
+	lvls[0] = new Level ("Level 2 - Asteroid field", -3 );
 	lvls[2] = new Level ("Level 3 - Asteroid field", -1 );
 
 	// srand
@@ -133,6 +137,10 @@ int main() {
 			List::delete_all(units);
 			player = new Player( *(new Vector2D(15, 5)), *(new Vector2D(0,0)));//playerPos, playerVel );
 			units = new List( player );
+			if (lvlId == ZAZ_LVL)
+			{
+				units = units->push(zaz, 'e');
+			}
 		}
 
 		if (sigwinchReceived)
@@ -146,7 +154,10 @@ int main() {
 		currentFrame++;
 		timer.start();
 		lvls[lvlId]->af->generateBlocks(&units);
-		events.exec(&units, currentFrame);
+		if (lvlId != ZAZ_LVL)	// except for boss level
+			events.exec(&units, currentFrame);
+		else
+			units = units->push(zaz, 'e');
 		ch = game->keyEvent(player);
 		if ( ch == std::string("espace"))
 			units = units->push(player->shoot(), 'p');

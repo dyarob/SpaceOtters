@@ -25,7 +25,11 @@ List*		AGameObject::detect_collision( List **l, List *thiis )
 	{
 		voila = (*l)->u->getCoord();
         if (checkCondition((*l)->type, thiis->type)){
-    		if ( _coord.getX() == voila.getX() && _coord.getY() == voila.getY() && this != (*l)->u )
+    		if ( 	(_coord.getX() <= voila.getX()
+    				&& _coord.getX() + (int)_height > voila.getX())
+					&& ( _coord.getY() <= voila.getY()
+					&& _coord.getY() + (int)_width > voila.getY())
+					&& this != (*l)->u )
     		{
     			thiis->u->setHp(0);
     			save = List::delete_one( save, thiis );
