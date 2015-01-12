@@ -6,11 +6,9 @@ unsigned int AGameObject::_cur_id = 0;
 Skin*		 AGameObject::skin( new Skin('0', 7, 0));
 
 bool        checkCondition(char a, char b){
-    if (a == b)
-        return false;
-    if (a == 'a' && b == 'e')
-        return false;
-    if (a == 'e' && b == 'a')
+    if ((a == b) || 
+		(a == 'a' && b == 'e') || (a == 'e' && b == 'a') ||
+		(a == 'm' && b == 'e') || (a == 'e' && b == 'm'))
         return false;
     return true;
 }

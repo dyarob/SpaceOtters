@@ -11,7 +11,7 @@ class                   BlockBase : public Block {
 		static Skin* skin;
 
     public:
-        BlockBase(Vector2D &);
+        BlockBase(Vector2D &, int);
         BlockBase(BlockBase const & src);
         
         BlockBase      &operator=(BlockBase const &src);

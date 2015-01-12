@@ -4,8 +4,8 @@
 
 Skin		*BlockBase::skin ( new Skin( '#', 1, 0 ));
 
-BlockBase::BlockBase(Vector2D &coord)
-    : Block( 1, 1, coord ) {
+BlockBase::BlockBase(Vector2D &coord, int aspeed)
+    : Block( 1, 1, coord, aspeed) {
 	_skin = skin;
 }
 
