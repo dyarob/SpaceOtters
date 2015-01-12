@@ -22,12 +22,13 @@ AUnit::AUnit(AUnit const &src)
 
 AUnit           &AUnit::operator=(AUnit const & src) {
     this->_id               = src._id;
+    this->_dmg              = src._dmg;
     this->_coord            = src._coord;
     this->_delta_v          = src._delta_v;
     this->_height           = src._height;
     this->_width            = src._width;
     this->_hp               = src._hp;
-    this->_hp               = src._hp_max;
+    this->_hp_max            = src._hp_max;
     this->_weapon           = src._weapon;
     return *this;
 }

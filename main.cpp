@@ -96,9 +96,15 @@ int main() {
 	Vector2D		playerVel(0, 0);
 	Player			*player = new Player(playerPos, playerVel);
 	List			*units = new List(player);
+<<<<<<< HEAD
 
 	units->setType('p');
 	//Level			*lvl = new Level( "Level 1 - Asteroid field", -2 );
+=======
+	units->setType('p');
+	
+	AsteroidField	*af = new AsteroidField ( -2 );
+>>>>>>> 0b69862df1860d8b839bb2110fee4fbd00624504
 
 	signal(SIGWINCH, do_resize);
 
@@ -120,7 +126,7 @@ int main() {
 	start_color();
 	while (running)
 	{
-		if (!player->getHp())
+		if (player->getHp() <= 0)
 			break;
 
 		if (player->getCoord().getY() >= W_SCREEN - (W_SCREEN >> 2)) // player won the level

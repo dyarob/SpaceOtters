@@ -16,7 +16,6 @@ WinUI_dialogBox::WinUI_dialogBox(WinUI_dialogBox const & src)
 }
 
 WinUI_dialogBox::~WinUI_dialogBox(void) {
-//	this->destroyWin();
 }
 
 WinUI_dialogBox &		WinUI_dialogBox::operator=(WinUI_dialogBox const & src) {
