@@ -46,6 +46,7 @@ class AGameObject {
 		Skin*			getSkin(void)			const;
 
 		void            setDeltaV(Vector2D &delta_v);
+		void            setCoord(Vector2D &coord);
 		void			setHp(unsigned int hp);
 		void			setSkin(Skin*);
 

@@ -26,7 +26,7 @@ class       List {
         void save_all ( List *list );
 		List	*push ( AGameObject *unit );
 		static List	*delete_one ( List *list, List *to_delete );
-		//void	delete_all ();
+		static void	delete_all ( List *l );
 };
 
 #endif      /* _LIST_STRUCT_HPP_ */

@@ -53,16 +53,13 @@ List	*List::delete_one ( List *list, List *to_delete )
 	return ( save );
 }
 
-/*
-void	List::delete_all ( )
+void	List::delete_all ( List *l )
 {
-	List	*save = this;
-	while ( save->next )
+	while ( l )
 	{
-		save = delete_one ( this, this );
+		l = delete_one ( l, l );
 	}
 }
-*/
 
 List::List(void)
 	: u(NULL), next(NULL)

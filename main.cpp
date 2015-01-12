@@ -1,4 +1,6 @@
+# include				"CONST.h"
 #include "Timer.class.hpp"
+#include "Level.class.hpp"
 #include "AsteroidField.class.hpp"
 #include "Player.class.hpp"
 #include "EnemyBase.class.hpp"
@@ -95,7 +97,7 @@ int main() {
 	Vector2D		playerVel(0, 0);
 	Player			*player = new Player(playerPos, playerVel);
 	List			*units = new List(player);
-	AsteroidField	*af = new AsteroidField ( -2 );
+	Level			*lvl = new Level( -2 );
 
 	signal(SIGWINCH, do_resize);
 
@@ -112,6 +114,15 @@ int main() {
 		if (!player->getHp())
 			break;
 
+		if (player->getCoord().getY() >= W_SCREEN - (W_SCREEN / 4)) // player won the level
+		{
+			endwin();
+			sigwinchReceived = 1;
+			List::delete_all(units);
+			player = new Player( *(new Vector2D(15, 5)), *(new Vector2D(0,0)));//playerPos, playerVel );
+			units = new List( player );
+		}
+
 		if (sigwinchReceived)
 		{
 			game = new WinUI_screen(120, 30, 1, 0);
@@ -121,7 +132,7 @@ int main() {
 
 		currentFrame++;
 		timer.start();
-		af->generateBlocks(&units);
+		lvl->af->generateBlocks(&units);
 		events.exec(&units, currentFrame);
 		ch = game->keyEvent(player);
 		if ( ch == std::string("espace"))
