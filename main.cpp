@@ -1,4 +1,5 @@
 #include "Timer.class.hpp"
+#include "AsteroidField.class.hpp"
 #include "Player.class.hpp"
 #include "EnemyBase.class.hpp"
 #include "BlockBase.class.hpp"
@@ -13,9 +14,6 @@
 #include <signal.h>
 #include "EnemyBase.class.hpp"
 
-#define H_MAP 30
-#define W_SCREEN 120
-
 static int	sigwinchReceived = true;
 
 static void do_resize(int sig)
@@ -25,19 +23,6 @@ static void do_resize(int sig)
 	sigwinchReceived = true;
 }
 
-void	generateBlocks(List **units)
-{
-	int	nb_of_blks = rand() % 2;
-	BlockBase	*b;
-	int x;
-
-	for (int i = 0; i < nb_of_blks; ++i)
-	{
-		x = rand() % H_MAP;
-		b = new BlockBase( *(new Vector2D(x, W_SCREEN) ) );
-		*units = (*units)->push( b );
-	}
-}
 
 void	updatePositions(List **units, int currentFrame)
 {
@@ -110,6 +95,7 @@ int main() {
 	Vector2D		playerVel(0, 0);
 	Player			*player = new Player(playerPos, playerVel);
 	List			*units = new List(player);
+	AsteroidField	*af = new AsteroidField ( -2 );
 
 	signal(SIGWINCH, do_resize);
 
@@ -119,22 +105,6 @@ int main() {
 
 	// srand
 	std::srand(std::time(NULL));
-
-	// TEST COLLISIONS
-	EnemyBase	*truc = new EnemyBase( *(new Vector2D(3, 25)), *(new Vector2D(0, 0)), -1 );
-	units = units->push(truc);
-
-	// TEST BLOCKS
-	BlockBase	*b1 = new BlockBase( *(new Vector2D(23, 15) ) );
-	units = units->push( b1 );
-	BlockBase	*b2 = new BlockBase( *(new Vector2D(24, 15) ) );
-	units = units->push( b2 );
-	BlockBase	*b3 = new BlockBase( *(new Vector2D(23, 16) ) );
-	units = units->push( b3 );
-	BlockBase	*b4 = new BlockBase( *(new Vector2D(4, 15) ) );
-	units = units->push( b4 );
-	BlockBase	*b5 = new BlockBase( *(new Vector2D(3, 15) ) );
-	units = units->push( b5 );
 
 	start_color();
 	while (running)
@@ -151,7 +121,7 @@ int main() {
 
 		currentFrame++;
 		timer.start();
-		generateBlocks(&units);
+		af->generateBlocks(&units);
 		events.exec(&units, currentFrame);
 		ch = game->keyEvent(player);
 		if ( ch == std::string("espace"))

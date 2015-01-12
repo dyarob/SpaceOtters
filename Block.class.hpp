@@ -8,10 +8,11 @@
 class                   Block : public AGameObject {
     protected:
 		static Skin		*skin;
+		int				speed;
         Block(void);
 
     public:
-        Block( unsigned int, unsigned int, Vector2D &);
+        Block( unsigned int, unsigned int, Vector2D &, int);
         Block(Block const & src);
         virtual ~Block();
         

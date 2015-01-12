@@ -9,8 +9,8 @@ void		Block::update( void )
 	_coord += Vector2D(0,1);
 }
 
-Block::Block(unsigned int width, unsigned int height, Vector2D &coord)
-    : AGameObject(width, height, 1, 1, coord, *(new Vector2D(0,B_SPEED)))
+Block::Block(unsigned int width, unsigned int height, Vector2D &coord, int aspeed)
+    : AGameObject(width, height, 1, 1, coord, *(new Vector2D(0,aspeed)))
 {
 	_skin = skin;
 }
