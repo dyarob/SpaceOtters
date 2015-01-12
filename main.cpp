@@ -97,7 +97,7 @@ int main() {
 	Vector2D		playerVel(0, 0);
 	Player			*player = new Player(playerPos, playerVel);
 	List			*units = new List(player);
-	Level			*lvl = new Level( "Level 1 - Asteroid field", -2 );
+	//Level			*lvl = new Level( "Level 1 - Asteroid field", -2 );
 
 	signal(SIGWINCH, do_resize);
 
@@ -107,6 +107,11 @@ int main() {
 
 	// level initialization and message
 	//lvl->init(BoxText);
+	int				lvlId = 0;
+	Level			*lvls[NB_LVL];
+	lvls[0] = new Level ("Level 1 - Asteroid field", -2 );
+	lvls[1] = new Level ("Level 2 - Asteroid field", -3 );
+	lvls[2] = new Level ("Level 3 - Asteroid field", -1 );
 
 	// srand
 	std::srand(std::time(NULL));
@@ -119,6 +124,9 @@ int main() {
 
 		if (player->getCoord().getY() >= W_SCREEN - 3 * (W_SCREEN / 4)) // player won the level
 		{
+			lvlId++;
+			if ( lvlId >= NB_LVL )
+				break;
 			endwin();
 			sigwinchReceived = 1;
 			List::delete_all(units);
@@ -135,7 +143,7 @@ int main() {
 
 		currentFrame++;
 		timer.start();
-		lvl->af->generateBlocks(&units);
+		lvls[lvlId]->af->generateBlocks(&units);
 		events.exec(&units, currentFrame);
 		ch = game->keyEvent(player);
 		if ( ch == std::string("espace"))
@@ -146,7 +154,7 @@ int main() {
 		updatePositions(&units, currentFrame);
 		game->update(units);
 		//BoxText->fixeDialog("GrosBoGoss Francky, BoGoss James", currentFrame / 10, 1);
-		BoxText->fixeDialog(lvl->name, currentFrame / 10, 1);
+		BoxText->fixeDialog(lvls[lvlId]->name, currentFrame / 10, 1);
 		timer.stop();
 		timer.wait();
 	}
