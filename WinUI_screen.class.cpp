@@ -60,8 +60,8 @@ void	WinUI_screen::draw ( AGameObject* u )
 		if (u->getSkin()) {
 			init_pair(u->getSkin()->getId(), u->getSkin()->getFg(), u->getSkin()->getBg());
 			wattron(win, COLOR_PAIR(u->getSkin()->getId()));
-		//	char *c = u->getSkin()->getCAddr();
-			mvwprintw( win, v.getX(), v.getY(), "tyot");
+			char *c = u->getSkin()->getCAddr();
+			mvwprintw( win, v.getX(), v.getY(), c);
 			wattroff(win, COLOR_PAIR(u->getSkin()->getId()));
 		}
 	}

@@ -96,15 +96,9 @@ int main() {
 	Vector2D		playerVel(0, 0);
 	Player			*player = new Player(playerPos, playerVel);
 	List			*units = new List(player);
-<<<<<<< HEAD
 
 	units->setType('p');
 	//Level			*lvl = new Level( "Level 1 - Asteroid field", -2 );
-=======
-	units->setType('p');
-	
-	AsteroidField	*af = new AsteroidField ( -2 );
->>>>>>> 0b69862df1860d8b839bb2110fee4fbd00624504
 
 	signal(SIGWINCH, do_resize);
 

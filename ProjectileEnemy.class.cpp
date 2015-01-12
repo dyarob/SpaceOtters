@@ -5,7 +5,7 @@
 Skin*	ProjectileEnemy::skin(new Skin(':', 3, 0));
 
 ProjectileEnemy::ProjectileEnemy(Vector2D &coord, Vector2D &delta_v)
-    : Projectile(1, 1, 1, coord, delta_v) {
+    : Projectile(1, 1, coord, delta_v) {
 		_skin = skin;
 }
 
@@ -15,7 +15,7 @@ ProjectileEnemy::ProjectileEnemy(ProjectileEnemy const &src)
 }
 
 ProjectileEnemy      &ProjectileEnemy::operator=(ProjectileEnemy const &src) {
-    this->_damage           = src.getDamage();
+    this->_dmg           = src.getDmg();
     this->_width            = src._width;
     this->_height           = src._height;
     this->_coord            = src._coord;

@@ -19,10 +19,12 @@ List*		AGameObject::detect_collision( List **l, List *thiis )
 {
 	Vector2D	voila;
 	List		*save = *l;
+	List		*resave;
 	List		*tmp = thiis->next;
 
 	while ( *l )
 	{
+		resave = NULL;
 		voila = (*l)->u->getCoord();
         if (checkCondition((*l)->type, thiis->type)){
     		if ( _coord.getX() == voila.getX() && _coord.getY() == voila.getY() && this != (*l)->u )
@@ -30,11 +32,20 @@ List*		AGameObject::detect_collision( List **l, List *thiis )
                 thiis->u->setHp(thiis->u->getHp() - (*l)->u->getDmg());
                 if (thiis->u->getHp() <= 0){
                     save = List::delete_one( save, thiis );
+					resave = *l;
+					*l = save;
                 }
-    			(*l)->u->setHp((*l)->u->getHp() - thiis->u->getDmg());
-    			if ((*l)->u->getHp() <= 0){
-                    *l = List::delete_one( save, *l );
-                }
+				if (resave) {
+					resave->u->setHp(resave->u->getHp() - thiis->u->getDmg());
+					if (resave->u->getHp() <= 0){
+						*l = List::delete_one( save, resave );
+					}
+				}else {
+					(*l)->u->setHp((*l)->u->getHp() - thiis->u->getDmg());
+					if ((*l)->u->getHp() <= 0){
+						*l = List::delete_one( save, *l );
+					}
+				}
     			return tmp;
     		}
         }
