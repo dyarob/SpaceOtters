@@ -1,7 +1,14 @@
 #include "Level.class.hpp"
 
-Level::Level(int ab_speed)
-	: af( new AsteroidField( ab_speed ))
+
+void			Level::init( WinUI_dialogBox *db )
+{
+	db->fixeDialog( name, 1, 1 );
+}
+
+Level::Level(std::string nam, int ab_speed)
+	: name(nam),
+		af( new AsteroidField( ab_speed ))
 {
 }
 
@@ -11,6 +18,7 @@ Level::Level(Level const &src)
 }
 
 Level          &Level::operator=(Level const & src) {
+	this->name = src.name;
 	this->af = src.af;
     return *this;
 }

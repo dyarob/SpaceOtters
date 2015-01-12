@@ -1,10 +1,9 @@
 #ifndef                 _LEVEL_HPP_
 # define                _LEVEL_HPP_
 
+# include				"WinUI_dialogBox.class.hpp"
 # include				"AsteroidField.class.hpp"
-
-# define H_MAP 30
-# define W_SCREEN 120
+# include				"CONST.h"
 
 class                   Level
 {
@@ -12,13 +11,15 @@ class                   Level
         Level(void);
 
     public:
-        Level( int ab_speed );
+        Level( std::string nam, int ab_speed );
         Level(Level const & src);
         virtual ~Level();
         
         Level   &operator=(Level const &);
 
+		std::string	name;
 		AsteroidField	*af;
+		void	init( WinUI_dialogBox *db );
         
 };
 

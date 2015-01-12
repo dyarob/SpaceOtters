@@ -97,13 +97,16 @@ int main() {
 	Vector2D		playerVel(0, 0);
 	Player			*player = new Player(playerPos, playerVel);
 	List			*units = new List(player);
-	Level			*lvl = new Level( -2 );
+	Level			*lvl = new Level( "Level 1 - Asteroid field", -2 );
 
 	signal(SIGWINCH, do_resize);
 
 	//WinUI_dialogBox	*BoxHead = new WinUI_dialogBox(120, 3, 1, 0);
 	WinUI_screen	*game = new WinUI_screen(120, 30, 1, 0);
 	WinUI_dialogBox	*BoxText = new WinUI_dialogBox(120, 3, 31, 0);
+
+	// level initialization and message
+	//lvl->init(BoxText);
 
 	// srand
 	std::srand(std::time(NULL));
@@ -114,7 +117,7 @@ int main() {
 		if (!player->getHp())
 			break;
 
-		if (player->getCoord().getY() >= W_SCREEN - (W_SCREEN / 4)) // player won the level
+		if (player->getCoord().getY() >= W_SCREEN - 3 * (W_SCREEN / 4)) // player won the level
 		{
 			endwin();
 			sigwinchReceived = 1;
@@ -142,7 +145,8 @@ int main() {
 
 		updatePositions(&units, currentFrame);
 		game->update(units);
-		BoxText->fixeDialog("GrosBoGoss Francky, BoGoss James", currentFrame / 10, 1);
+		//BoxText->fixeDialog("GrosBoGoss Francky, BoGoss James", currentFrame / 10, 1);
+		BoxText->fixeDialog(lvl->name, currentFrame / 10, 1);
 		timer.stop();
 		timer.wait();
 	}
