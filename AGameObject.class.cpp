@@ -21,6 +21,7 @@ List*		AGameObject::detect_collision( List **l, List *thiis )
 	List		*save = *l;
 	List		*resave;
 	List		*tmp = thiis->next;
+	bool		mod = false;
 
 	while ( *l )
 	{
@@ -34,18 +35,24 @@ List*		AGameObject::detect_collision( List **l, List *thiis )
                     save = List::delete_one( save, thiis );
 					resave = *l;
 					*l = save;
+					mod = true;
                 }
 				if (resave) {
 					resave->u->setHp(resave->u->getHp() - thiis->u->getDmg());
 					if (resave->u->getHp() <= 0){
-						*l = List::delete_one( save, resave );
+						*l = List::delete_one( save, *l );
+						mod = true;
 					}
-				}else {
+				}
+				else {
 					(*l)->u->setHp((*l)->u->getHp() - thiis->u->getDmg());
 					if ((*l)->u->getHp() <= 0){
 						*l = List::delete_one( save, *l );
+						mod = true;
 					}
 				}
+				if (!mod)
+					*l = save;
     			return tmp;
     		}
         }
