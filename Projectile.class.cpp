@@ -8,10 +8,9 @@ void		Projectile::update( void )
 	_coord += Vector2D(0,1);
 }
 
-Projectile::Projectile(unsigned int damage, unsigned int width, unsigned int height, Vector2D &coord, Vector2D &delta_v)
-    : AGameObject(width, height, 1, 1, coord, delta_v), _damage(damage)
-{
-	_skin = skin;
+Projectile::Projectile(unsigned int width, unsigned int height, Vector2D &coord, Vector2D &delta_v)
+    : AGameObject(width, height, 1, 1, coord, delta_v){
+        _skin = skin;
 }
 
 Projectile::Projectile(Projectile const &src)
@@ -20,7 +19,7 @@ Projectile::Projectile(Projectile const &src)
 }
 
 Projectile          &Projectile::operator=(Projectile const & src) {
-    this->_damage           = src._damage;
+    this->_dmg           = src._dmg;
     this->_width            = src._width;
     this->_height           = src._height;
     this->_coord            = src._coord;
@@ -29,7 +28,7 @@ Projectile          &Projectile::operator=(Projectile const & src) {
 }
 
 unsigned int        Projectile::getDamage(void)         const {
-    return this->_damage;
+    return this->_dmg;
 }
 
 Projectile::~Projectile(void) {

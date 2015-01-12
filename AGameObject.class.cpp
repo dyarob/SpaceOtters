@@ -28,10 +28,14 @@ List*		AGameObject::detect_collision( List **l, List *thiis )
         if (checkCondition((*l)->type, thiis->type)){
     		if ( _coord.getX() == voila.getX() && _coord.getY() == voila.getY() && this != (*l)->u )
     		{
-    			thiis->u->setHp(0);
-    			save = List::delete_one( save, thiis );
-    			(*l)->u->setHp(0);
-    			*l = List::delete_one( save, *l );
+                thiis->u->setHp(thiis->u->getHp() - (*l)->u->getDmg());
+                if (thiis->u->getHp() <= 0){
+                    save = List::delete_one( save, thiis );
+                }
+    			(*l)->u->setHp((*l)->u->getHp() - thiis->u->getDmg());
+    			if ((*l)->u->getHp() <= 0){
+                    *l = List::delete_one( save, *l );
+                }
     			return tmp;
     		}
         }
@@ -41,7 +45,7 @@ List*		AGameObject::detect_collision( List **l, List *thiis )
 	return tmp;
 }
 
-void		AGameObject::setHp(unsigned int hp)
+void		AGameObject::setHp(int hp)
 {
 	this->_hp = hp;
 }
@@ -50,7 +54,7 @@ void		AGameObject::setHp(unsigned int hp)
 AGameObject::AGameObject(unsigned int height, unsigned int width, int hp,
     int hp_max, Vector2D &coord, Vector2D &delta_v)
     : _id(AGameObject::_cur_id++), _height(height), _width(width), _hp(hp),
-    _hp_max(hp_max), _coord(coord), _delta_v(delta_v)
+    _hp_max(hp_max), _dmg(1), _coord(coord), _delta_v(delta_v)
 {
 	_skin = skin;
 }
@@ -85,8 +89,12 @@ unsigned int    AGameObject::getWidth(void)   const {
     return this->_width;
 }
 
-unsigned int    AGameObject::getHp(void)      const {
+int    AGameObject::getHp(void)      const {
     return this->_hp;
+}
+
+int    AGameObject::getDmg(void)      const {
+    return this->_dmg;
 }
 
 unsigned int    AGameObject::getHpMax(void)   const {
@@ -107,6 +115,10 @@ Skin*			AGameObject::getSkin(void) const {
 
 void			AGameObject::setSkin(Skin* skin) {
 	_skin = skin;
+}
+
+void            AGameObject::setDmg(int dmg){
+    _dmg = dmg;
 }
 
 void            AGameObject::move(Vector2D &delta_v, int currentFrame) {

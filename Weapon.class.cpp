@@ -21,7 +21,7 @@ unsigned int        Weapon::getFireRate(void)               const{
 }
 
 Projectile      	*Weapon::fire(Vector2D *coord, Vector2D *delta_v) {
-    return ( new Projectile(1, 1, 1, *coord, *delta_v));
+    return ( new Projectile(1, 1, *coord, *delta_v));
 }
 
 Weapon::~Weapon(void) {

@@ -5,6 +5,7 @@ NAME        = ft_retro
 SRCDIR      = ./src/
 
 SRC         =	AGameObject.class.cpp		\
+				AsteroidField.class.cpp		\
 				main.cpp					\
 				Block.class.cpp				\
 				BlockBase.class.cpp			\
