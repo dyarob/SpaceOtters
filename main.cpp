@@ -11,12 +11,19 @@
 #include "WinUI_dialogBox.class.hpp"
 #include <cstdlib>
 #include <iostream>
+#include <sstream>
 #include <thread>
 #include <mutex>
 #include <signal.h>
 #include "EnemyBase.class.hpp"
 
 static int	sigwinchReceived = true;
+
+static std::string		messageHead(int hp, int score){
+	std::ostringstream	str;
+	str << "PV: " <<  hp << "  	Score: " << score;
+	return str.str();
+}
 
 static void do_resize(int sig)
 {
@@ -29,7 +36,7 @@ void	segfault(List *l) {
 	std::cout << l->type;
 }
 
-void	updatePositions(List **units, int currentFrame)
+void	updatePositions(List **units, int currentFrame, int *score)
 {
 	List	*head = *units;
 	for (List *l = *units; l;) {
@@ -84,7 +91,7 @@ void	updatePositions(List **units, int currentFrame)
 				}
 			}
 		}
-		l = l->u->detect_collision( &head, l );
+		l = l->u->detect_collision( &head, l, score);
 	}
 	*units = head;
 }
@@ -100,9 +107,8 @@ int main() {
 	Vector2D		playerVel(0, 0);
 	Player			*player = new Player(playerPos, playerVel);
 	List			*units = new List(player);
-
-	units->setType('p');
-	//Level			*lvl = new Level( "Level 1 - Asteroid field", -2 );
+	int 			score = 0;
+	units->setType('P');
 
 	signal(SIGWINCH, do_resize);
 
@@ -162,9 +168,9 @@ int main() {
 				units = units->push(((EnemyBase*)l->u)->shoot(), 'm');
 		}
 
-		updatePositions(&units, currentFrame);
+		updatePositions(&units, currentFrame, &score);
 		game->update(units);
-		//BoxText->fixeDialog("GrosBoGoss Francky, BoGoss James", currentFrame / 10, 1);
+		BoxHead->fixeDialog(messageHead(player->getHp() ,score), 5, 1);
 		BoxText->fixeDialog(lvls[lvlId]->name, currentFrame / 10, 1);
 		timer.stop();
 		timer.wait();

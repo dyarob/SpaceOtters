@@ -54,7 +54,7 @@ class AGameObject {
 		void			setDmg(int);
 
 		void            move(Vector2D &delta_v, int currentFrame);
-		List*			detect_collision( List **l, List *thiis );
+		List*			detect_collision( List **l, List *thiis, int * );
 };
 
 #endif

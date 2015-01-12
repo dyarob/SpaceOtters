@@ -9,6 +9,7 @@ Skin	*Player::skin(new Skin('>', 7, 0));
 Player::Player(Vector2D &coord, Vector2D &delta_v)
     : AUnit(1, 1, 3, 3, *(new WeaponBase()), coord, delta_v) {
 	_skin = Player::skin;
+    setDmg(10);
 }
 
 Player::Player(Player const &src)

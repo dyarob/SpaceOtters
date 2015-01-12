@@ -15,7 +15,7 @@ bool        checkCondition(char a, char b){
 }
 
 //----COLLISION ------
-List*		AGameObject::detect_collision( List **l, List *thiis )
+List*		AGameObject::detect_collision( List **l, List *thiis, int *score )
 {
 	Vector2D	voila;
 	List		*save = *l;
@@ -32,6 +32,10 @@ List*		AGameObject::detect_collision( List **l, List *thiis )
     		{
                 thiis->u->setHp(thiis->u->getHp() - (*l)->u->getDmg());
                 if (thiis->u->getHp() <= 0){
+                        if (thiis->type == 'e')
+                            *score = *score + 5;
+                        else if (thiis->type == 'a')
+                            *score = *score + 1;
                     save = List::delete_one( save, thiis );
 					resave = *l;
 					*l = save;
@@ -40,6 +44,10 @@ List*		AGameObject::detect_collision( List **l, List *thiis )
 				if (resave) {
 					resave->u->setHp(resave->u->getHp() - thiis->u->getDmg());
 					if (resave->u->getHp() <= 0){
+                        if (resave->type == 'e')
+                            *score = *score + 5;
+                        else if (resave->type == 'a')
+                            *score = *score + 1;
 						*l = List::delete_one( save, *l );
 						mod = true;
 					}
@@ -47,6 +55,10 @@ List*		AGameObject::detect_collision( List **l, List *thiis )
 				else {
 					(*l)->u->setHp((*l)->u->getHp() - thiis->u->getDmg());
 					if ((*l)->u->getHp() <= 0){
+                        if ((*l)->type == 'e')
+                            *score = *score + 5;
+                        else if ((*l)->type == 'a')
+                            *score = *score + 1;
 						*l = List::delete_one( save, *l );
 						mod = true;
 					}
