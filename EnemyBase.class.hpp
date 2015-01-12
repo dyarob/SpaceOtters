@@ -4,7 +4,7 @@
 # include   <iostream>
 # include   "AUnit.class.hpp"
 # include   "Vector2D.class.hpp"
-# include   "WeaponBase.class.hpp"
+# include   "WeaponEnemy.class.hpp"
 
 class       EnemyBase : public AUnit {
 
@@ -18,7 +18,7 @@ public:
 
     EnemyBase           &operator=(EnemyBase const &);
 
-    WeaponBase          &getWeapon(void);
+    WeaponEnemy          &getWeapon(void);
 
     Projectile    *shoot(void)   const;
     ~EnemyBase();

@@ -131,7 +131,7 @@ int main() {
 			break;
 
 		for (List *l = units; l; l = l->next) {
-			if (!(rand() % 500) && l->type == 'e')
+			if (!(rand() % 100) && l->type == 'e')
 				units = units->push(((EnemyBase*)l->u)->shoot(), 'm');
 		}
 

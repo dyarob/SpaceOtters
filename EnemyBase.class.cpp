@@ -6,7 +6,7 @@
 Skin*	EnemyBase::skin(new Skin('<', 5, 0));
 
 EnemyBase::EnemyBase(Vector2D &coord, Vector2D &delta_v, int pattern)
-    : AUnit(1, 1, 3, 3, *(new WeaponBase()), coord, delta_v) {
+    : AUnit(1, 1, 3, 3, *(new WeaponEnemy()), coord, delta_v) {
         this->_pattern = pattern;
 		_skin = skin;
 }

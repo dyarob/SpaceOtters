@@ -8,7 +8,8 @@ Skin*		 AGameObject::skin( new Skin('0', 7, 0));
 bool        checkCondition(char a, char b){
     if ((a == b) || 
 		(a == 'a' && b == 'e') || (a == 'e' && b == 'a') ||
-		(a == 'm' && b == 'e') || (a == 'e' && b == 'm'))
+		(a == 'm' && b == 'e') || (a == 'e' && b == 'm') ||
+		(a == 'm' && b == 'a') || (a == 'a' && b == 'm'))
         return false;
     return true;
 }

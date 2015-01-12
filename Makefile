@@ -12,8 +12,10 @@ SRC         =	AGameObject.class.cpp		\
 				Vector2D.class.cpp			\
 				Weapon.class.cpp			\
 				WeaponBase.class.cpp		\
+				WeaponEnemy.class.cpp		\
 				Projectile.class.cpp		\
 				ProjectileBase.class.cpp	\
+				ProjectileEnemy.class.cpp	\
 				Skin.class.cpp				\
 				Player.class.cpp			\
 				EnemyBase.class.cpp			\
