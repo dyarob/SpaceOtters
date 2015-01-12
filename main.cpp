@@ -146,7 +146,7 @@ int main() {
 		currentFrame++;
 		timer.start();
 		lvls[lvlId]->af->generateBlocks(&units);
-		events.exec(&units, currentFrame);
+		events.exec(&units, lvlId);
 		ch = game->keyEvent(player);
 		if ( ch == std::string("espace"))
 			units = units->push(player->shoot(), 'p');
