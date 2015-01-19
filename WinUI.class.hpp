@@ -18,7 +18,7 @@ class       WinUI {
 
     public:
         WinUI(void);
-        WinUI(unsigned int, unsigned int, unsigned int, unsigned int);
+        WinUI(unsigned int w, unsigned int h, unsigned int x, unsigned int y);
         WinUI(WinUI const &src);
         ~WinUI(void);
         std::string  keyEvent(void);

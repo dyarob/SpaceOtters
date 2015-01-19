@@ -2,8 +2,8 @@
 
 WinUI::WinUI(void)
 : _width(120), _height(30), _startX(0), _startY(0), _heightMap(60){
-	initscr();
 	curs_set(0);
+	initscr();
 	noecho();
 	this->win = this->createWin();
 }
