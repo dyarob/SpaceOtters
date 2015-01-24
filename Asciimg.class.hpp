@@ -15,7 +15,8 @@ class		Asciimg
 		Asciimg			&operator=( Asciimg const &ai );
 
 		std::string		s;
-		short			*c;
+		char			*fgc;	//foreground colors
+		char			*bgc;	//background colors
 		unsigned int	h;
 		unsigned int	w;
 

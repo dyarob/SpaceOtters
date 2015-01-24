@@ -12,7 +12,7 @@ Asciimg::Asciimg( Asciimg const &ai )
 
 Asciimg::~Asciimg( void )
 {
-	delete [] c;
+	//delete [] c;
 }
 
 Asciimg		&Asciimg::operator=( Asciimg const &ai )
@@ -32,34 +32,34 @@ void		Asciimg::load( std::string fname )
 	s = buf.str();
 	f.close();
 	// colors
-	char	fg, bg;
-	int		i, l;
-	l = s.length();
-	c = (short*)malloc(l);
-	f.open( (fname + "_colors").c_str(), std::ios::in | std::ios::binary );
-	for (i=0; i < l; ++i)
-	{
-		f.read( &fg, 1 );
-		f.read( &bg, 1 );
-		c[i] = (short)((fg * 255) + bg);	// color index in the general table of all colors
-	}
+	std::streamsize	l = s.length();
+	fgc = (char*)malloc(l);
+	bgc = (char*)malloc(l);
+	f.open( (fname + "_fcolors").c_str(), std::ios::in | std::ios::binary );
+	f.read( fgc, l );
+	f.close();
+	f.open( (fname + "_bcolors").c_str(), std::ios::in | std::ios::binary );
+	f.read( bgc, l );
 	f.close();
 }
 
-void		Asciimg::draw( WINDOW *win, int x, int y ) const
+void		Asciimg::draw( WINDOW *win, int y, int x ) const
 {
-	//int		i(0), l(h*w);
-	//mvwprintw( win,1, 1, s.c_str() );
-	/*
-	std::ofstream	f( "coucou" );
-		*/
-	int		i=900;
-	int		l=2000;//h*w;
-	for(; i < l; ++i)
+	unsigned int		ih(0), iw(0), i(1);
+	wmove( win, y, x );
+	for (; ih < h;)
 	{
-	//	f << c[i] << std::endl;
-		wattron( win, COLOR_PAIR(i));//c[i]) );
-		mvwprintw( win, x, y+i, s.c_str() );
-		wattroff( win, COLOR_PAIR(i));//c[i]) );
+		init_pair(i, fgc[i], bgc[i]);
+		wattron( win, COLOR_PAIR(i));
+		waddch( win, s.c_str()[i-1] );
+		wattroff( win, COLOR_PAIR(i));
+		++iw;
+		if ( iw >= w )
+		{
+			iw = 0;
+			++ih;
+			wmove( win, y + ih, x );
+		}
+		++i;
 	}
 }
