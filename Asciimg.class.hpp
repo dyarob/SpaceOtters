@@ -6,13 +6,14 @@
 # include <string>
 # include <ncurses.h>
 
+# define IMG_MAX_H 30
+# define IMG_MAX_W 120
+
 class		Asciimg
 {
 	public:
-		Asciimg( void );
-		Asciimg( Asciimg const &ai );
+		Asciimg( int height, int width );
 		~Asciimg( void );
-		Asciimg			&operator=( Asciimg const &ai );
 
 		std::string		s;
 		char			*fgc;	//foreground colors
@@ -22,6 +23,11 @@ class		Asciimg
 
 		void	load( std::string fname );
 		void	draw( WINDOW *win, int x, int y ) const;
+
+	private:
+		Asciimg( void );
+		Asciimg( Asciimg const &ai );
+		Asciimg			&operator=( Asciimg const &ai );
 };
 
 #endif /* !ASCIIMG_CLASS_HPP */

@@ -5,6 +5,22 @@
 Asciimg::Asciimg( void )
 {}
 
+Asciimg::Asciimg( int height, int width )
+{
+	if ( height < 0 && height > IMG_MAX_H )
+	{
+		std::cout << "Height is too low or too high." << std::endl;
+		throw std::exception();
+	}
+	if ( width < 0 && width > IMG_MAX_W )
+	{
+		std::cout << "Width is too low or too high." << std::endl;
+		throw std::exception();
+	}
+	h = height;
+	w = width;
+}
+
 Asciimg::Asciimg( Asciimg const &ai )
 {
 	*this = ai;
