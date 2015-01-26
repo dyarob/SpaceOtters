@@ -44,8 +44,11 @@ int			main( int ac, char **av )
 				timeout(-1);
 				insert = false;
 			}
-			else if ( std::isprint(ch) )
+			else if ( std::isprint(ch) && !(y == ymax && x > xmax) )
 				waddch( winimg, ch );
+			if ( x > xmax )
+				if ( y < ymax )
+					wmove( winimg, y + 1, 1 );
 		}
 
 		else
