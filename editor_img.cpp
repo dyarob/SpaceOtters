@@ -24,10 +24,10 @@ int			main( int ac, char **av )
 	noecho();
 	start_color();
 	refresh();
-	xmax = atoi( av[2] ) + 1;
-	ymax = atoi( av[1] ) + 1;
-	Asciimg		img( ymax - 1, xmax - 1 );
-	WINDOW		*winimg = newwin( ymax + 1, xmax + 1, 1, 1);
+	xmax = atoi( av[2] );
+	ymax = atoi( av[1] );
+	Asciimg		img( ymax, xmax );
+	WINDOW		*winimg = newwin( ymax + 2, xmax + 2, 1, 1);
 	box( winimg, 0, 0 );
 	wmove( winimg, 1, 1 );
 
@@ -47,6 +47,7 @@ int			main( int ac, char **av )
 			else if ( std::isprint(ch) )
 				waddch( winimg, ch );
 		}
+
 		else
 		{
 			switch( ch )
@@ -59,16 +60,24 @@ int			main( int ac, char **av )
 					insert = true;
 					break;
 				case 'h':
-					wmove( winimg, y, x-1 );
+					if ( x <= 1 && y > 1 )
+						wmove( winimg, y - 1, xmax );
+					else if ( x > 1 )
+						wmove( winimg, y, x - 1 );
 					break;
 				case 'j':
-					wmove( winimg, y+1, x );
+					if ( y != ymax )
+						wmove( winimg, y + 1, x );
 					break;
 				case 'k':
-					wmove( winimg, y-1, x );
+					if ( y != 1 )
+						wmove( winimg, y - 1, x );
 					break;
 				case 'l':
-					wmove( winimg, y, x+1 );
+					if ( x == xmax && y < ymax )
+						wmove( winimg, y + 1, 1 );
+					else if ( x < xmax )
+						wmove( winimg, y, x + 1 );
 					break;
 				default:
 					break;
