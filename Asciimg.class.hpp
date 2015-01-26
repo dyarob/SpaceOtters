@@ -15,6 +15,7 @@ class		Asciimg
 		Asciimg( int height, int width );
 		~Asciimg( void );
 
+		std::string		name;
 		std::string		s;
 		char			*fgc;	//foreground colors
 		char			*bgc;	//background colors
@@ -22,6 +23,7 @@ class		Asciimg
 		unsigned int	w;
 
 		void	load( std::string fname );
+		void	save( WINDOW *win );
 		void	draw( WINDOW *win, int x, int y ) const;
 
 	private:

@@ -14,11 +14,13 @@ int			main( int ac, char **av )
 	bool	stop(false), insert(false);
 	if ( ac != 3 )
 	{
+	/*
 		if ( ac == 2 && !std::string(av[1]).compare("-h") )
 			std::cout << "Commands memo:\nq\t| quit\nhjkl\t| move cursor around" << std::endl;
 		else
 			std::cout << "Usage: editor height width" << std::endl;
 		return (0);
+	*/
 	}
 	initscr();
 	noecho();
@@ -27,9 +29,11 @@ int			main( int ac, char **av )
 	xmax = atoi( av[2] );
 	ymax = atoi( av[1] );
 	Asciimg		img( ymax, xmax );
+	img.load( "bonjour" );
 	WINDOW		*winimg = newwin( ymax + 2, xmax + 2, 1, 1);
 	box( winimg, 0, 0 );
 	wmove( winimg, 1, 1 );
+	img.draw( winimg, 1, 1 );
 
 	while (!stop)
 	{
@@ -87,6 +91,8 @@ int			main( int ac, char **av )
 			}
 		}
 	}
+
+	img.save( winimg );
 	endwin();
 	return (0);
 }
