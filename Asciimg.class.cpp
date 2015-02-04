@@ -48,7 +48,7 @@ Asciimg		&Asciimg::operator=( Asciimg const &ai )
 void		Asciimg::load( std::string fname )
 {
 	char	c;
-	int		fg, bg;
+	short	fg, bg;
 
 	name = fname;
 	std::ifstream		f( fname.c_str(), std::ios::in | std::ios::binary );
@@ -64,15 +64,18 @@ void		Asciimg::load( std::string fname )
 
 void		Asciimg::save( WINDOW *win )
 {
-	unsigned int		ih(1), iw(1), i(0);
+	unsigned int		ih(1), iw(0), i(0);
 	std::ofstream		f( name.c_str(), std::ios::out | std::ios::binary );
 
-	wmove( win, ih, iw );
-	for (; ih < h; ++i)
+	wmove( win, ih, iw+1 );
+	for (; ih <= h; ++i)
 	{
 		f << skins[i]->_c;
+		f << ' ';
 		f << skins[i]->_fg;
+		f << ' ';
 		f << skins[i]->_bg;
+		f << ' ';
 		++iw;
 		if ( iw >= w )
 		{

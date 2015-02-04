@@ -1,6 +1,6 @@
 #include "Skin.class.hpp"
 
-int	Skin::_cId(0);
+int	Skin::_cId(1);
 
 Skin::Skin(char c, int fg, int bg) 
 : _id(Skin::_cId++), _fg(fg), _bg(bg), _c(c) {
