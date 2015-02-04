@@ -9,16 +9,16 @@ class Skin {
 
 		static int _cId;
 
-		int		_id;
-		int		_fg;
-		int		_bg;
-		char	_c;
-
 		Skin& operator=(Skin const&);
 		Skin();
 		Skin(Skin const&);
 
 	public :
+
+		int		_id;
+		int		_fg;
+		int		_bg;
+		char	_c;
 
 		Skin(char, int, int);
 		~Skin();

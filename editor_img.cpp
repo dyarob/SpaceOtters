@@ -1,5 +1,6 @@
 #include	"Asciimg.class.hpp"
 #include	"WinUI_dialogBox.class.hpp"
+
 #include	<fstream>
 #include	<iostream>
 #include	<cstdlib> //atoi
@@ -12,6 +13,8 @@ int			main( int ac, char **av )
 	char	ch;
 	int		x(1), y(1), xmax, ymax;
 	bool	stop(false), insert(false);
+
+	// ==== options & arguments check ====
 	if ( ac != 3 )
 	{
 	/*
@@ -22,15 +25,18 @@ int			main( int ac, char **av )
 		return (0);
 	*/
 	}
+
+	// ==== ncurses init ====
 	initscr();
 	noecho();
 	start_color();
 	refresh();
+
 	xmax = atoi( av[2] );
 	ymax = atoi( av[1] );
 	Asciimg		img( ymax, xmax );
 	img.load( "bonjour" );
-	WINDOW		*winimg = newwin( ymax + 2, xmax + 2, 1, 1);
+	WINDOW		*winimg = newwin( ymax + 2, xmax + 2, 1, 5);
 	box( winimg, 0, 0 );
 	wmove( winimg, 1, 1 );
 	img.draw( winimg, 1, 1 );
@@ -40,21 +46,33 @@ int			main( int ac, char **av )
 		wrefresh( winimg );
 		getyx( winimg, y, x );
 		ch = getch();
+		
+		// == insert mode ==
 		if ( insert )
 		{
-			if ( ch == 27	// escape keys
-			   && getch() == ERR )	// escape
+			if ( ch == 27 )	// escape keys
 			{
-				timeout(-1);
-				insert = false;
+				switch ( ch = getch() )
+				{
+					case ERR:
+						timeout(-1);
+						insert = false;
+						break;
+					default:
+						break;
+				}
 			}
 			else if ( std::isprint(ch) && !(y == ymax && x > xmax) )
+			{
+				img.skins[(y-1) * img.w + (x-1)]->_c = ch;
 				waddch( winimg, ch );
+			}
 			if ( x > xmax )
 				if ( y < ymax )
 					wmove( winimg, y + 1, 1 );
 		}
 
+		// == normal mode ==
 		else
 		{
 			switch( ch )

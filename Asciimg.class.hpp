@@ -4,7 +4,10 @@
 # include <fstream>
 # include <sstream>
 # include <string>
+# include <vector>
 # include <ncurses.h>
+
+# include "Skin.class.hpp"
 
 # define IMG_MAX_H 30
 # define IMG_MAX_W 120
@@ -15,12 +18,11 @@ class		Asciimg
 		Asciimg( int height, int width );
 		~Asciimg( void );
 
-		std::string		name;
-		std::string		s;
-		char			*fgc;	//foreground colors
-		char			*bgc;	//background colors
-		unsigned int	h;
-		unsigned int	w;
+		std::string			name;
+		std::vector<Skin*>	&skins;
+		unsigned int		h;
+		unsigned int		w;
+		unsigned int		size;
 
 		void	load( std::string fname );
 		void	save( WINDOW *win );

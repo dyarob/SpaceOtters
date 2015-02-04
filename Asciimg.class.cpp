@@ -3,9 +3,12 @@
 #include <iostream> // debug
 
 Asciimg::Asciimg( void )
-{}
+	:skins(*(new std::vector<Skin*>()))
+{
+}
 
 Asciimg::Asciimg( int height, int width )
+	:skins(*(new std::vector<Skin*>()))
 {
 	if ( height < 0 && height > IMG_MAX_H )
 	{
@@ -19,56 +22,57 @@ Asciimg::Asciimg( int height, int width )
 	}
 	h = height;
 	w = width;
+	size = h * w;
 }
 
 Asciimg::Asciimg( Asciimg const &ai )
+	:skins(ai.skins)
 {
 	*this = ai;
 }
 
 Asciimg::~Asciimg( void )
 {
-	//delete [] c;
 }
 
 Asciimg		&Asciimg::operator=( Asciimg const &ai )
 {
-	s = ai.s;
+	//skins = ai.skins;
 	h = ai.h;
 	w = ai.w;
+	size = ai.size;
+	name = ai.name;
 	return *this;
 }
 
 void		Asciimg::load( std::string fname )
 {
-	size_t	l = h * w;
-	char	*sbuf((char*)malloc(l));
+	char	c;
+	int		fg, bg;
 
-	fgc = (char*)malloc(l);
-	bgc = (char*)malloc(l);
 	name = fname;
 	std::ifstream		f( fname.c_str(), std::ios::in | std::ios::binary );
-	f.read( sbuf, l );
-	s.append( sbuf );
-	f.read( fgc, l );
-	f.read( bgc, l );
+	for (unsigned int i(0); i<size; ++i)
+	{
+		f >> c;
+		f >> fg;
+		f >> bg;
+		skins.push_back( new Skin( c, fg, bg ) );
+	}
 	f.close();
 }
 
 void		Asciimg::save( WINDOW *win )
 {
+	unsigned int		ih(1), iw(1), i(0);
 	std::ofstream		f( name.c_str(), std::ios::out | std::ios::binary );
-	std::string			ss, sf, sb;
-	unsigned int		ih(0), iw(0), i(1);
-	chtype				chbuf;
 
-	wmove( win, 1, 1 );
-	for (; ih < h;)
+	wmove( win, ih, iw );
+	for (; ih < h; ++i)
 	{
-		chbuf = mvwinch( win, 1 + ih, 1 + iw );
-		ss.push_back( chbuf & A_CHARTEXT );
-		sf.push_back( chbuf & A_COLOR >> 8 );
-		sb.push_back( chbuf & A_COLOR << 8 );
+		f << skins[i]->_c;
+		f << skins[i]->_fg;
+		f << skins[i]->_bg;
 		++iw;
 		if ( iw >= w )
 		{
@@ -76,22 +80,20 @@ void		Asciimg::save( WINDOW *win )
 			++ih;
 			wmove( win, 1 + ih, 1 );
 		}
-		++i;
 	}
-	f << ss << sf << sb;
 	f.close();
 }
 
 void		Asciimg::draw( WINDOW *win, int y, int x ) const
 {
-	unsigned int		ih(0), iw(0), i(1);
+	unsigned int		ih(0), iw(0), i(0);
+
 	wmove( win, y, x );
-	for (; ih < h;)
+	for (; ih < h; ++i)
 	{
-		init_pair(i, fgc[i], bgc[i]);
-		wattron( win, COLOR_PAIR(i));
-		waddch( win, s.c_str()[i-1] );
-		wattroff( win, COLOR_PAIR(i));
+		wattron( win, COLOR_PAIR(skins[i]->_id));
+		waddch( win, skins[i]->_c );
+		wattroff( win, COLOR_PAIR(skins[i]->_id));
 		++iw;
 		if ( iw >= w )
 		{
@@ -99,6 +101,5 @@ void		Asciimg::draw( WINDOW *win, int y, int x ) const
 			++ih;
 			wmove( win, y + ih, x );
 		}
-		++i;
 	}
 }
