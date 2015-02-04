@@ -34,6 +34,7 @@ int			main( int ac, char **av )
 	Skin::init_reserved_cp();
 	Skin::print_cc();
 	WinColor::init_wincolors();
+	//
 	refresh();
 	WinColor::refresh();
 

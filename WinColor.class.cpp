@@ -19,20 +19,22 @@ WinColor::WinColor( int id_ ) {
 
 void		WinColor::draw( void )
 {
-	/*
-	short	i(0), x, y;
+	unsigned int		ih(0), iw(0), i(16);
+
 	wmove( win, 1, 1 );
-	for (; i<16; ++i)
+	for (; i<=51; ++i)
 	{
-		getyx( win, y, x );
-		init_pair( i, 7, i );
-		wattron( win, COLOR_PAIR(ccount) );
-		waddch( win, '.' );
-		wattroff( win, COLOR_PAIR(ccount) );
-		wmove( win, y+1, x );
-		++ccount;
+		wattron( win, COLOR_PAIR(i));
+		waddch( win, ' ' );
+		wattroff( win, COLOR_PAIR(i));
+		++iw;
+		if ( iw >= WC_DEFAULT_W )
+		{
+			iw = 0;
+			++ih;
+			wmove( win, 1 + ih, 1 );
+		}
 	}
-	*/
 }
 
 
