@@ -1,10 +1,11 @@
 #include	"Asciimg.class.hpp"
 #include	"WinUI_dialogBox.class.hpp"
+#include	"WinColor.class.hpp"
 
+#include	<ncurses.h>
 #include	<fstream>
 #include	<iostream>
 #include	<cstdlib> //atoi
-#include	<ncurses.h>
 #include	<string>
 #include	<cctype> //isprint
 
@@ -32,7 +33,9 @@ int			main( int ac, char **av )
 	start_color();
 	Skin::init_reserved_cp();
 	Skin::print_cc();
+	WinColor::init_wincolors();
 	refresh();
+	WinColor::refresh();
 
 	xmax = atoi( av[2] );
 	ymax = atoi( av[1] );
