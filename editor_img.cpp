@@ -30,6 +30,8 @@ int			main( int ac, char **av )
 	initscr();
 	noecho();
 	start_color();
+	Skin::init_reserved_cp();
+	Skin::print_cc();
 	refresh();
 
 	xmax = atoi( av[2] );

@@ -6,4 +6,7 @@
 # define NB_LVL 4
 # define ZAZ_LVL 1
 
+# define CURR_CP_INDIC_POS_X 1
+# define CURR_CP_INDIC_POS_Y 1
+
 #endif
