@@ -64,8 +64,15 @@ re:         fclean all
 			$(CC) $(CFLAGS) -c $< -o $@
 			@echo "\033[0m" | tr -d '\n'
 
-.PHONY:     all clean re fclean
+EDITOR_SRC   =	\
+				Asciimg.class.cpp			\
+				editor_img.cpp				\
+				Skin.class.cpp				\
+				WinUI_dialogBox.class.cpp	\
+				WinUI.class.cpp				\
+				WinColor.class.cpp			\
 
-				# $(SRCDIR)main.cpp			\
-				# DelayEvent.class.cpp		\
-				# Event.class.cpp
+editor:
+	g++ -Wall -Wextra -Werror -g $(EDITOR_SRC) -lncurses -o editor
+
+.PHONY:     all clean re fclean
