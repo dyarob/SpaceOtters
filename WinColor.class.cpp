@@ -30,9 +30,10 @@ void		WinColor::draw( void )
 			waddch( win, '+' );
 		else
 			waddch( win, ' ' );
+		waddch( win, ' ' );
 		wattroff( win, COLOR_PAIR(i));
 		++iw;
-		if ( iw >= WC_DEFAULT_W )
+		if ( iw >= WC_DEFAULT_W/2 )
 		{
 			iw = 0;
 			++ih;

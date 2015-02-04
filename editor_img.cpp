@@ -77,8 +77,8 @@ int			main( int ac, char **av )
 			else if ( std::isprint(ch) && !(y == ymax && x > xmax) )
 			{
 				img.skins[(y-1) * img.w + (x-1)]->_c = ch;
-				img.skins[(y-1) * img.w + (x-1)]->_fg = Skin::cfg;
-				img.skins[(y-1) * img.w + (x-1)]->_bg = Skin::cbg;
+				img.skins[(y-1) * img.w + (x-1)]->redefine_fg(Skin::cfg);
+				img.skins[(y-1) * img.w + (x-1)]->redefine_bg(Skin::cbg);
 				img.draw( winimg, 1, 1 );
 			}
 			if ( x > xmax )

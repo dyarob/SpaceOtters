@@ -1,16 +1,39 @@
 #include "Skin.class.hpp"
 
+// *structors
 Skin::Skin(char c, int fg, int bg) 
-: _id(Skin::_cId++), _fg(fg), _bg(bg), _c(c) {
+	: _fg(fg), _bg(bg), _id(Skin::_cId++), _c(c) {
 	init_pair(_id, _fg, _bg);
 }
 
-Skin::~Skin() {}
+Skin::~Skin() {
+}
 
-int		Skin::getId() { return _id; }
-int		Skin::getFg() { return _fg; }
-int		Skin::getBg() { return _bg; }
-char	*Skin::getCAddr() { return &_c; }
+// operators
+std::ofstream	&Skin::printTo( std::ofstream &o ) const {
+	o << _c;
+	o << ' ';
+	o << _fg;
+	o << ' ';
+	o << _bg;
+	o << ' ';
+	return o;
+}
+std::ofstream	&operator<<( std::ofstream &o, Skin const &sk ) {
+	return sk.printTo( o );
+}
+
+
+// functions
+void	Skin::redefine_fg( short fg ) {
+	_fg = fg;
+	init_pair(_id, _fg, _bg);
+}
+
+void	Skin::redefine_bg( short bg ) {
+	_bg = bg;
+	init_pair(_id, _fg, _bg);
+}
 
 
 // === STATICS! ===

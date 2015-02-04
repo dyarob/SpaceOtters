@@ -3,37 +3,40 @@
 
 # include <vector>
 # include <ncurses.h>
+# include <fstream>
 
 # include "CONST.h"
 
 class Skin {
 
 	private :
+		// not declared in .cpp
+		//Skin( void );
+		//Skin( Skin const& );
+		//Skin&	operator=( Skin const& );
+
+		int		_fg;
+		int		_bg;
 
 		static int _cId;
 		static std::vector<Skin*> reserved_cp;
-		static short cfg, cbg;
-
-		Skin& operator=(Skin const&);
-		Skin();
-		Skin(Skin const&);
 
 	public :
+		~Skin( void );
+		Skin( char, int, int );
 
 		int		_id;
-		int		_fg;
-		int		_bg;
 		char	_c;
 
-		Skin(char, int, int);
-		~Skin();
-		int		getId();
-		int		getFg();
-		int		getBg();
-		char	*getCAddr();
+		std::ofstream	&printTo( std::ofstream &o ) const;
+		void	redefine_fg( short fg );
+		void	redefine_bg( short bg );
 
-		static void init_reserved_cp();
-		static void print_cc();
+		static short	cfg, cbg;
+		static void		init_reserved_cp();
+		static void		print_cc();
 };
+
+std::ofstream	&operator<<( std::ofstream &o, Skin const &sk );
 
 #endif

@@ -70,12 +70,7 @@ void		Asciimg::save( WINDOW *win )
 	wmove( win, ih, iw+1 );
 	for (; ih <= h; ++i)
 	{
-		f << skins[i]->_c;
-		f << ' ';
-		f << skins[i]->_fg;
-		f << ' ';
-		f << skins[i]->_bg;
-		f << ' ';
+		f << *(skins[i]);
 		++iw;
 		if ( iw >= w )
 		{
