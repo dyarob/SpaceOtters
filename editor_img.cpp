@@ -1,6 +1,9 @@
 #include	"Asciimg.class.hpp"
 #include	"WinUI_dialogBox.class.hpp"
 #include	"WinColor.class.hpp"
+#include	"Skin.class.hpp"
+
+#include	"debug.hpp"
 
 #include	<ncurses.h>
 #include	<fstream>
@@ -20,6 +23,10 @@ int			main( int ac, char **av )
 	// i = insert
 	// f = change foreground
 	// b = change background
+	
+	// poubelle
+	short	tmp1, tmp2;
+
 
 	// ==== options & arguments check ====
 	if ( ac != 3 )
@@ -76,10 +83,21 @@ int			main( int ac, char **av )
 			}
 			else if ( std::isprint(ch) && !(y == ymax && x > xmax) )
 			{
+				/*
+				log << "previous skin : " << *(img.skins[(y-1) * img.w + (x-1)]) << std::endl;
+				pair_content(COLOR_PAIR(img.skins[(y-1) * img.w + (x-1)]->_id), &tmp1, &tmp2);
+				log << "color pair : " << tmp1 << " - " << tmp2 << std::endl;
+				*/
 				img.skins[(y-1) * img.w + (x-1)]->_c = ch;
+				//log << "cfg = " << Skin::cfg << std::endl;
 				img.skins[(y-1) * img.w + (x-1)]->redefine_fg(Skin::cfg);
+				//log << "cbg = " << Skin::cbg << std::endl;
 				img.skins[(y-1) * img.w + (x-1)]->redefine_bg(Skin::cbg);
+				log << "new skin : " << *(img.skins[(y-1) * img.w + (x-1)]) << std::endl;
+				pair_content(img.skins[(y-1) * img.w + (x-1)]->_id, &tmp1, &tmp2);
+				log << "color pair : " << tmp1 << " - " << tmp2 << std::endl;
 				img.draw( winimg, 1, 1 );
+				wrefresh( winimg );
 			}
 			if ( x > xmax )
 				if ( y < ymax )

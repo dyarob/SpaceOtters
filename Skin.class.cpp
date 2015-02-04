@@ -22,6 +22,13 @@ std::ofstream	&Skin::printTo( std::ofstream &o ) const {
 std::ofstream	&operator<<( std::ofstream &o, Skin const &sk ) {
 	return sk.printTo( o );
 }
+std::ostream	&Skin::printTo( std::ostream &o ) const {
+	o << _c << ' ' << _fg << ' ' << _bg << ' ';
+	return o;
+}
+std::ostream	&operator<<( std::ostream &o, Skin const &sk ) {
+	return sk.printTo( o );
+}
 
 
 // functions

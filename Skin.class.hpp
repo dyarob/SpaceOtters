@@ -15,8 +15,8 @@ class Skin {
 		//Skin( Skin const& );
 		//Skin&	operator=( Skin const& );
 
-		int		_fg;
-		int		_bg;
+		short	_fg;
+		short	_bg;
 
 		static int _cId;
 		static std::vector<Skin*> reserved_cp;
@@ -29,6 +29,7 @@ class Skin {
 		char	_c;
 
 		std::ofstream	&printTo( std::ofstream &o ) const;
+		std::ostream	&printTo( std::ostream &o ) const;
 		void	redefine_fg( short fg );
 		void	redefine_bg( short bg );
 
@@ -38,5 +39,6 @@ class Skin {
 };
 
 std::ofstream	&operator<<( std::ofstream &o, Skin const &sk );
+std::ostream	&operator<<( std::ostream &o, Skin const &sk );
 
 #endif

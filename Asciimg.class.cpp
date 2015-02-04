@@ -1,6 +1,8 @@
 #include "Asciimg.class.hpp"
 #include <stdlib.h>
-#include <iostream> // debug
+#include <iostream>
+
+#include "debug.hpp"
 
 Asciimg::Asciimg( void )
 	:skins(*(new std::vector<Skin*>()))
@@ -49,6 +51,9 @@ void		Asciimg::load( std::string fname )
 {
 	char	c;
 	short	fg, bg;
+	//short	tmp1, tmp2; //debug
+	log << "LOAD =" << std::endl;
+	Skin	*faitchier;
 
 	name = fname;
 	std::ifstream		f( fname.c_str(), std::ios::in | std::ios::binary );
@@ -57,9 +62,19 @@ void		Asciimg::load( std::string fname )
 		f >> c;
 		f >> fg;
 		f >> bg;
-		skins.push_back( new Skin( c, fg, bg ) );
+		//log << "fg = " << fg << ", bg = " << bg << std::endl;
+		faitchier =  new Skin( c, fg, bg );
+		skins.push_back( faitchier );//new Skin( c, fg, bg ) );
+		/*
+				log << "new skin : " << *(skins[i]) << std::endl;
+				log << "new skin : " << *faitchier << std::endl;
+				log << "skin id : " << skins[i]->_id << std::endl;
+				pair_content(skins[i]->_id, &tmp1, &tmp2);
+				log << "color pair : " << tmp1 << " - " << tmp2 << std::endl;
+		*/
 	}
 	f.close();
+	log << "! =" << std::endl;
 }
 
 void		Asciimg::save( WINDOW *win )
@@ -84,8 +99,10 @@ void		Asciimg::save( WINDOW *win )
 
 void		Asciimg::draw( WINDOW *win, int y, int x ) const
 {
-	unsigned int		ih(0), iw(0), i(0);
+	unsigned int	ih(0), iw(0), i(0);
+	unsigned int	x_sav(1), y_sav(1);
 
+	getyx( win, y_sav, x_sav );
 	wmove( win, y, x );
 	for (; ih < h; ++i)
 	{
@@ -100,4 +117,8 @@ void		Asciimg::draw( WINDOW *win, int y, int x ) const
 			wmove( win, y + ih, x );
 		}
 	}
+	if ( x_sav+1 >= w )
+		if ( y_sav <= h )
+			wmove( win, y_sav, 1 );
+	wmove( win, y_sav, x_sav+1 );
 }
