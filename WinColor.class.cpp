@@ -9,8 +9,9 @@ WinColor::~WinColor( void )
 	endwin();
 }
 
-WinColor::WinColor( int id_ ) {
-	id = id_;
+WinColor::WinColor( int id_ )
+	: id(id_), curs_x(0), curs_y(0)
+{
 	win = newwin( WC_DEFAULT_H + 2, WC_DEFAULT_W + 2,
 			WC_DEFAULT_POS_Y, WC_DEFAULT_POS_X);
 	box( win, 0, 0 );
@@ -25,7 +26,10 @@ void		WinColor::draw( void )
 	for (; i<=51; ++i)
 	{
 		wattron( win, COLOR_PAIR(i));
-		waddch( win, ' ' );
+		if ( ih == curs_y && iw == curs_x )
+			waddch( win, '+' );
+		else
+			waddch( win, ' ' );
 		wattroff( win, COLOR_PAIR(i));
 		++iw;
 		if ( iw >= WC_DEFAULT_W )

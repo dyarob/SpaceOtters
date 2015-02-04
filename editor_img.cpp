@@ -13,7 +13,13 @@ int			main( int ac, char **av )
 {
 	char	ch;
 	int		x(1), y(1), xmax, ymax;
-	bool	stop(false), insert(false);
+	bool	stop(false);
+	// MODES
+	char	mode('n');
+	// n = normal
+	// i = insert
+	// f = change foreground
+	// b = change background
 
 	// ==== options & arguments check ====
 	if ( ac != 3 )
@@ -54,7 +60,7 @@ int			main( int ac, char **av )
 		ch = getch();
 		
 		// == insert mode ==
-		if ( insert )
+		if ( mode == 'i' )
 		{
 			if ( ch == 27 )	// escape keys
 			{
@@ -62,7 +68,7 @@ int			main( int ac, char **av )
 				{
 					case ERR:
 						timeout(-1);
-						insert = false;
+						mode = 'n';
 						break;
 					default:
 						break;
@@ -71,11 +77,43 @@ int			main( int ac, char **av )
 			else if ( std::isprint(ch) && !(y == ymax && x > xmax) )
 			{
 				img.skins[(y-1) * img.w + (x-1)]->_c = ch;
-				waddch( winimg, ch );
+				img.skins[(y-1) * img.w + (x-1)]->_fg = Skin::cfg;
+				img.skins[(y-1) * img.w + (x-1)]->_bg = Skin::cbg;
+				img.draw( winimg, 1, 1 );
 			}
 			if ( x > xmax )
 				if ( y < ymax )
 					wmove( winimg, y + 1, 1 );
+		}
+
+		// == color pick mode ==
+		else if ( mode == 'f' || mode == 'b' )
+		{
+			switch( ch )
+			{
+				case 27:	// escape keys
+					switch ( ch = getch() )
+					{
+						case ERR:
+							timeout(-1);
+							mode = 'n';
+							break;
+						default:
+							break;
+					}
+					break;
+				case ' ':	//validate pick
+					if ( mode == 'f' )
+						Skin::cfg = 42;
+					else
+						Skin::cbg = 42;
+					Skin::print_cc();
+					refresh();
+					mode = 'n';
+					break;
+				default:
+					break;
+			}
 		}
 
 		// == normal mode ==
@@ -88,7 +126,13 @@ int			main( int ac, char **av )
 					break;
 				case 'i':
 					timeout(0);
-					insert = true;
+					mode = 'i';
+					break;
+				case 'f':	//change foreground color
+					mode = 'f';
+					break;
+				case 'b':	//change background color
+					mode = 'b';
 					break;
 				case 'h':
 					if ( x <= 1 && y > 1 )

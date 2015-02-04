@@ -19,6 +19,8 @@ class		WinColor
 
 		WINDOW	*win;
 		int		id;
+		unsigned int curs_x;
+		unsigned int curs_y;
 
 		void		draw( void );
 
