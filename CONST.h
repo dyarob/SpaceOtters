@@ -16,6 +16,6 @@
 # define WC_DEFAULT_W 12
 # define WC_DEFAULT_POS_X 10
 # define WC_DEFAULT_POS_Y 2
-# define WC_NUMBER 1
+# define WC_NUMBER 6
 
 #endif

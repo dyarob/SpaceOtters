@@ -18,8 +18,10 @@ class Skin {
 		short	_fg;
 		short	_bg;
 
+
 		static int _cId;
 		static std::vector<Skin*> reserved_cp;
+
 
 	public :
 		~Skin( void );
@@ -33,7 +35,10 @@ class Skin {
 		void	redefine_fg( short fg );
 		void	redefine_bg( short bg );
 
+
 		static short	cfg, cbg;
+		static Skin		*curr_sk;
+
 		static void		init_reserved_cp();
 		static void		print_cc();
 };

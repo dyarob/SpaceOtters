@@ -23,9 +23,6 @@ int			main( int ac, char **av )
 	// i = insert
 	// f = change foreground
 	// b = change background
-	
-	// poubelle
-	short	tmp1, tmp2;
 
 
 	// ==== options & arguments check ====
@@ -83,19 +80,9 @@ int			main( int ac, char **av )
 			}
 			else if ( std::isprint(ch) && !(y == ymax && x > xmax) )
 			{
-				/*
-				log << "previous skin : " << *(img.skins[(y-1) * img.w + (x-1)]) << std::endl;
-				pair_content(COLOR_PAIR(img.skins[(y-1) * img.w + (x-1)]->_id), &tmp1, &tmp2);
-				log << "color pair : " << tmp1 << " - " << tmp2 << std::endl;
-				*/
 				img.skins[(y-1) * img.w + (x-1)]->_c = ch;
-				//log << "cfg = " << Skin::cfg << std::endl;
 				img.skins[(y-1) * img.w + (x-1)]->redefine_fg(Skin::cfg);
-				//log << "cbg = " << Skin::cbg << std::endl;
 				img.skins[(y-1) * img.w + (x-1)]->redefine_bg(Skin::cbg);
-				log << "new skin : " << *(img.skins[(y-1) * img.w + (x-1)]) << std::endl;
-				pair_content(img.skins[(y-1) * img.w + (x-1)]->_id, &tmp1, &tmp2);
-				log << "color pair : " << tmp1 << " - " << tmp2 << std::endl;
 				img.draw( winimg, 1, 1 );
 				wrefresh( winimg );
 			}
@@ -105,13 +92,10 @@ int			main( int ac, char **av )
 		}
 
 		// == color pick mode ==
-		else if ( mode == 'f' || mode == 'b' )
-		{
-			switch( ch )
-			{
+		else if ( mode == 'f' || mode == 'b' ) {
+			switch( ch ) {
 				case 27:	// escape keys
-					switch ( ch = getch() )
-					{
+					switch ( ch = getch() ) {
 						case ERR:
 							timeout(-1);
 							mode = 'n';
@@ -121,13 +105,22 @@ int			main( int ac, char **av )
 					}
 					break;
 				case ' ':	//validate pick
-					if ( mode == 'f' )
-						Skin::cfg = 42;
-					else
-						Skin::cbg = 42;
+					if ( mode == 'f' ) {
+						Skin::cfg = WinColor::getCursColor();
+						Skin::curr_sk->redefine_fg( WinColor::getCursColor() );
+					} else {
+						Skin::cbg = WinColor::getCursColor();
+						Skin::curr_sk->redefine_bg( WinColor::getCursColor() );
+					}
 					Skin::print_cc();
 					refresh();
 					mode = 'n';
+					break;
+				case ',':	//previous wincolor
+					WinColor::prev();
+					break;
+				case '.':	//next wincolor
+					WinColor::next();
 					break;
 				default:
 					break;

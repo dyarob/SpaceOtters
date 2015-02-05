@@ -11,12 +11,7 @@ Skin::~Skin() {
 
 // operators
 std::ofstream	&Skin::printTo( std::ofstream &o ) const {
-	o << _c;
-	o << ' ';
-	o << _fg;
-	o << ' ';
-	o << _bg;
-	o << ' ';
+	o << _c << ' ' << _fg << ' ' << _bg << ' ';
 	return o;
 }
 std::ofstream	&operator<<( std::ofstream &o, Skin const &sk ) {
@@ -48,20 +43,19 @@ void	Skin::redefine_bg( short bg ) {
 int					Skin::_cId(1);
 std::vector<Skin*>	Skin::reserved_cp(*(new std::vector<Skin*>()));
 short				Skin::cfg(7), Skin::cbg(0);
+Skin				*Skin::curr_sk;
 
 // functions
 void	Skin::init_reserved_cp() {
-	for (unsigned int i(1); i<=256; ++i) {
-		reserved_cp.push_back(new Skin('.', 15, i));
+	for (unsigned int i(1); i<=36; ++i) {
+		reserved_cp.push_back(new Skin('+', 15, 5));
 	}
+	curr_sk = new Skin( 'o', cfg, cbg );
 }
 
 void	Skin::print_cc() {
-	attron( COLOR_PAIR(cfg) );
+	attron( COLOR_PAIR(curr_sk->_id) );
 	mvprintw( CURR_CP_INDIC_POS_Y, CURR_CP_INDIC_POS_X, "fg" );
-	attroff( COLOR_PAIR(cfg) );
-	attron( COLOR_PAIR(cbg) );
-	mvprintw( CURR_CP_INDIC_POS_Y, CURR_CP_INDIC_POS_X+2, "bg" );
-	attroff( COLOR_PAIR(cbg) );
+	attroff( COLOR_PAIR(curr_sk->_id) );
 }
 // === !STATICS ===
