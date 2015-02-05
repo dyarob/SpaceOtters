@@ -76,6 +76,33 @@ void	WinColor::next( void ) {
 short	WinColor::getCursColor( void ) {
 	return ( 16 + curr_id*36 + curs_y*6 + curs_x );
 }
+
+void	WinColor::up( void ) {
+	if ( curs_y != 0 )
+		--curs_y;
+	refresh();
+}
+void	WinColor::down( void ) {
+	if ( curs_y < WC_DEFAULT_H-1 )
+		++curs_y;
+	refresh();
+}
+void	WinColor::left( void ) {
+	if ( curs_x <= 0 && curs_y > 0 ) {
+		--curs_y;
+		curs_x = WC_DEFAULT_W/2-1;
+	} else if ( curs_x > 0 )
+		curs_x -= 1;
+	refresh();
+}
+void	WinColor::right( void ) {
+	if ( curs_x == WC_DEFAULT_W/2-1 && curs_y < WC_DEFAULT_H-1 ) {
+		++curs_y;
+		curs_x = 0;
+	} else if ( curs_x < WC_DEFAULT_W/2-1 )
+		curs_x += 1;
+	refresh();
+}
 // === !STATICS ===
 
 

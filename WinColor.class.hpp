@@ -37,6 +37,10 @@ class		WinColor
 		static void		prev();
 		static void		next();
 		static short	getCursColor();
+		static void		up();
+		static void		down();
+		static void		left();
+		static void		right();
 };
 
 #endif /* !WINCOLOR_CLASS_HPP */

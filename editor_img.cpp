@@ -122,6 +122,18 @@ int			main( int ac, char **av )
 				case '.':	//next wincolor
 					WinColor::next();
 					break;
+				case 'h':
+					WinColor::left();
+					break;
+				case 'j':
+					WinColor::up();
+					break;
+				case 'k':
+					WinColor::down();
+					break;
+				case 'l':
+					WinColor::right();
+					break;
 				default:
 					break;
 			}
