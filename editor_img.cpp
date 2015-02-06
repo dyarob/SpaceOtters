@@ -10,31 +10,71 @@
 #include	<iostream>
 #include	<cstdlib> //atoi
 #include	<string>
+#include	<string.h> //strcmp
 #include	<cctype> //isprint
 
-int			main( int ac, char **av )
-{
+void	displayDefaultHelp( void ) {
+	std::cout << "Usage:" << std::endl;
+	std::cout << "- To open existing file:\teditor file_name" << std::endl;
+	std::cout << "- To create new file:\t\teditor name height width" << std::endl;
+	std::cout << "- Open cheat sheet:\t\teditor -h" << std::endl;
+}
+
+void	displayModes( void ) {
+	std::cout << "Modes:" << std::endl;
+	std::cout << "n\tnormal" << std::endl;
+	std::cout << "i\tinsert" << std::endl;
+	std::cout << "f\tchange foreground color" << std::endl;
+	std::cout << "b\tchange background color" << std::endl;
+}
+
+void	displayMemo( void ) {
+	displayModes();
+	std::cout << "Commands:" << std::endl;
+	std::cout << "esc\treturn to normal mode" << std::endl;
+	std::cout << "Normal mode:" << std::endl;
+	std::cout << "q\tquit" << std::endl;
+	std::cout << "hjkl\tmove cursor around" << std::endl;
+}
+
+int		main( int ac, char **av ) {
 	char	ch;
 	int		x(1), y(1), xmax, ymax;
 	bool	stop(false);
-	// MODES
 	char	mode('n');
-	// n = normal
-	// i = insert
-	// f = change foreground
-	// b = change background
-
+	WINDOW	*winimg;
+	Asciimg	*img;
 
 	// ==== options & arguments check ====
-	if ( ac != 3 )
-	{
-	/*
-		if ( ac == 2 && !std::string(av[1]).compare("-h") )
-			std::cout << "Commands memo:\nq\t| quit\nhjkl\t| move cursor around" << std::endl;
-		else
-			std::cout << "Usage: editor height width" << std::endl;
-		return (0);
-	*/
+	switch( ac ) {
+		case 2:
+			if ( !strcmp( av[1], "-h" ) ) {
+				displayDefaultHelp();
+				displayMemo();
+				return (0);
+			} else {
+	xmax = atoi( av[2] );
+	ymax = atoi( av[1] );
+	Asciimg		img( ymax, xmax );
+	img.load( "bonjour" );
+	winimg = newwin( ymax + 2, xmax + 2, 1, 5);
+	box( winimg, 0, 0 );
+	wmove( winimg, 1, 1 );
+	img.draw( winimg, 1, 1 );
+			}
+		case 4:
+	xmax = atoi( av[2] );
+	ymax = atoi( av[1] );
+	Asciimg		img( ymax, xmax );
+	img.load( "bonjour" );
+	winimg = newwin( ymax + 2, xmax + 2, 1, 5);
+	box( winimg, 0, 0 );
+	wmove( winimg, 1, 1 );
+	img.draw( winimg, 1, 1 );
+			break;
+		default:
+			displayDefaultHelp();
+			return (0);
 	}
 
 	// ==== ncurses init ====
@@ -48,28 +88,16 @@ int			main( int ac, char **av )
 	refresh();
 	WinColor::refresh();
 
-	xmax = atoi( av[2] );
-	ymax = atoi( av[1] );
-	Asciimg		img( ymax, xmax );
-	img.load( "bonjour" );
-	WINDOW		*winimg = newwin( ymax + 2, xmax + 2, 1, 5);
-	box( winimg, 0, 0 );
-	wmove( winimg, 1, 1 );
-	img.draw( winimg, 1, 1 );
 
-	while (!stop)
-	{
+	while (!stop) {
 		wrefresh( winimg );
 		getyx( winimg, y, x );
 		ch = getch();
-		
+
 		// == insert mode ==
-		if ( mode == 'i' )
-		{
-			if ( ch == 27 )	// escape keys
-			{
-				switch ( ch = getch() )
-				{
+		if ( mode == 'i' ) {
+			if ( ch == 27 ) {	// escape keys
+				switch ( ch = getch() ) {
 					case ERR:
 						timeout(-1);
 						mode = 'n';
@@ -77,18 +105,15 @@ int			main( int ac, char **av )
 					default:
 						break;
 				}
-			}
-			else if ( std::isprint(ch) && !(y == ymax && x > xmax) )
-			{
+			} else if ( std::isprint(ch) && !(y == ymax && x > xmax) ) {
 				img.skins[(y-1) * img.w + (x-1)]->_c = ch;
 				img.skins[(y-1) * img.w + (x-1)]->redefine_fg(Skin::cfg);
 				img.skins[(y-1) * img.w + (x-1)]->redefine_bg(Skin::cbg);
 				img.draw( winimg, 1, 1 );
 				wrefresh( winimg );
 			}
-			if ( x > xmax )
-				if ( y < ymax )
-					wmove( winimg, y + 1, 1 );
+			if ( x > xmax && y < ymax )
+				wmove( winimg, y + 1, 1 );
 		}
 
 		// == color pick mode ==
@@ -104,6 +129,7 @@ int			main( int ac, char **av )
 							break;
 					}
 					break;
+
 				case ' ':	//validate pick
 					if ( mode == 'f' ) {
 						Skin::cfg = WinColor::getCursColor();
@@ -116,34 +142,24 @@ int			main( int ac, char **av )
 					refresh();
 					mode = 'n';
 					break;
+
 				case ',':	//previous wincolor
 					WinColor::prev();
 					break;
 				case '.':	//next wincolor
 					WinColor::next();
 					break;
-				case 'h':
-					WinColor::left();
-					break;
-				case 'j':
-					WinColor::up();
-					break;
-				case 'k':
-					WinColor::down();
-					break;
-				case 'l':
-					WinColor::right();
-					break;
-				default:
-					break;
+				case 'h': WinColor::left(); break;
+				case 'j': WinColor::down(); break;
+				case 'k': WinColor::up(); break;
+				case 'l': WinColor::right(); break;
+				default: break;
 			}
 		}
 
 		// == normal mode ==
-		else
-		{
-			switch( ch )
-			{
+		else {
+			switch( ch ) {
 				case 'q':
 					stop = true;
 					break;
@@ -177,8 +193,7 @@ int			main( int ac, char **av )
 					else if ( x < xmax )
 						wmove( winimg, y, x + 1 );
 					break;
-				default:
-					break;
+				default: break;
 			}
 		}
 	}
