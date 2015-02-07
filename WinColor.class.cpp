@@ -73,6 +73,10 @@ void	WinColor::next( void ) {
 	WinColor::refresh();
 }
 
+void	WinColor::validate_pick( void ) {
+	Skin::color_pick( getCursColor() );
+}
+
 short	WinColor::getCursColor( void ) {
 	return ( 16 + curr_id*36 + curs_y*6 + curs_x );
 }

@@ -72,8 +72,8 @@ EDITOR_SRC   =	\
 				WinUI.class.cpp				\
 				WinColor.class.cpp			\
 
-editor:
-	rm -f ascii_editor
-	g++ -Wall -Wextra -Werror -g $(EDITOR_SRC) -lncurses -o ascii_editor
+e:
+	rm -f editor
+	g++ -Wall -Wextra -Werror -g $(EDITOR_SRC) -lncurses -o editor
 
 .PHONY:     all clean re fclean

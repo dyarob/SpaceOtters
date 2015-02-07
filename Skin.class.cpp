@@ -44,6 +44,7 @@ int					Skin::_cId(1);
 std::vector<Skin*>	Skin::reserved_cp(*(new std::vector<Skin*>()));
 short				Skin::cfg(7), Skin::cbg(0);
 Skin				*Skin::curr_sk;
+char				Skin::color_mode('b');
 
 // functions
 void	Skin::init_reserved_cp() {
@@ -53,9 +54,21 @@ void	Skin::init_reserved_cp() {
 	curr_sk = new Skin( 'o', cfg, cbg );
 }
 
+void	Skin::color_pick( short c ) {
+	if ( color_mode == 'f' ) {
+		cfg = c;
+		curr_sk->redefine_fg( c );
+	} else if ( color_mode == 'b' ) {
+		cbg = c;
+		curr_sk->redefine_bg( c );
+	}
+}
+
 void	Skin::print_cc() {
 	attron( COLOR_PAIR(curr_sk->_id) );
-	mvprintw( CURR_CP_INDIC_POS_Y, CURR_CP_INDIC_POS_X, "fg" );
+	mvprintw( CURR_CP_INDIC_POS_Y, CURR_CP_INDIC_POS_X, "current skin" );
 	attroff( COLOR_PAIR(curr_sk->_id) );
+	printw( " | color mode: " );
+	addch( color_mode );
 }
 // === !STATICS ===

@@ -24,8 +24,7 @@ void	displayModes( void ) {
 	std::cout << "Modes:" << std::endl;
 	std::cout << "n\tnormal" << std::endl;
 	std::cout << "i\tinsert" << std::endl;
-	std::cout << "f\tchange foreground color" << std::endl;
-	std::cout << "b\tchange background color" << std::endl;
+	std::cout << "c\tchange f or b color, depending on selected color mode" << std::endl;
 }
 
 void	displayMemo( void ) {
@@ -39,7 +38,7 @@ void	displayMemo( void ) {
 
 int		main( int ac, char **av ) {
 	char	ch;
-	int		x(1), y(1), xmax, ymax;
+	int	x(1), y(1), xmax, ymax;
 	bool	stop(false);
 	char	mode('n');
 	WINDOW	*winimg;
@@ -52,41 +51,33 @@ int		main( int ac, char **av ) {
 				displayDefaultHelp();
 				displayMemo();
 				return (0);
-			} else {
-	xmax = atoi( av[2] );
-	ymax = atoi( av[1] );
-	Asciimg		img( ymax, xmax );
-	img.load( "bonjour" );
-	winimg = newwin( ymax + 2, xmax + 2, 1, 5);
-	box( winimg, 0, 0 );
-	wmove( winimg, 1, 1 );
-	img.draw( winimg, 1, 1 );
 			}
 		case 4:
-	xmax = atoi( av[2] );
-	ymax = atoi( av[1] );
-	Asciimg		img( ymax, xmax );
-	img.load( "bonjour" );
-	winimg = newwin( ymax + 2, xmax + 2, 1, 5);
-	box( winimg, 0, 0 );
-	wmove( winimg, 1, 1 );
-	img.draw( winimg, 1, 1 );
+			// ==== ncurses init ====
+			initscr();
+			noecho();
+			start_color();
+			Skin::init_reserved_cp();
+			Skin::print_cc();
+			WinColor::init_wincolors();
+			//
+			refresh();
+			WinColor::refresh();
+
+			xmax = atoi( av[3] );
+			ymax = atoi( av[2] );
+			img = new Asciimg( ymax, xmax );
+			img->load( av[1] );
+			winimg = newwin( ymax + 2, xmax + 2,
+					IMG_DEFAULT_POS_Y, IMG_DEFAULT_POS_X );
+			box( winimg, 0, 0 );
+			wmove( winimg, 1, 1 );
+			img->draw( winimg, 1, 1 );
 			break;
 		default:
-			displayDefaultHelp();
-			return (0);
+		displayDefaultHelp();
+		return (0);
 	}
-
-	// ==== ncurses init ====
-	initscr();
-	noecho();
-	start_color();
-	Skin::init_reserved_cp();
-	Skin::print_cc();
-	WinColor::init_wincolors();
-	//
-	refresh();
-	WinColor::refresh();
 
 
 	while (!stop) {
@@ -106,10 +97,10 @@ int		main( int ac, char **av ) {
 						break;
 				}
 			} else if ( std::isprint(ch) && !(y == ymax && x > xmax) ) {
-				img.skins[(y-1) * img.w + (x-1)]->_c = ch;
-				img.skins[(y-1) * img.w + (x-1)]->redefine_fg(Skin::cfg);
-				img.skins[(y-1) * img.w + (x-1)]->redefine_bg(Skin::cbg);
-				img.draw( winimg, 1, 1 );
+				img->skins[(y-1) * img->w + (x-1)]->_c = ch;
+				img->skins[(y-1) * img->w + (x-1)]->redefine_fg(Skin::cfg);
+				img->skins[(y-1) * img->w + (x-1)]->redefine_bg(Skin::cbg);
+				img->draw( winimg, 1, 1 );
 				wrefresh( winimg );
 			}
 			if ( x > xmax && y < ymax )
@@ -117,7 +108,7 @@ int		main( int ac, char **av ) {
 		}
 
 		// == color pick mode ==
-		else if ( mode == 'f' || mode == 'b' ) {
+		else if ( mode == 'c') {
 			switch( ch ) {
 				case 27:	// escape keys
 					switch ( ch = getch() ) {
@@ -131,13 +122,7 @@ int		main( int ac, char **av ) {
 					break;
 
 				case ' ':	//validate pick
-					if ( mode == 'f' ) {
-						Skin::cfg = WinColor::getCursColor();
-						Skin::curr_sk->redefine_fg( WinColor::getCursColor() );
-					} else {
-						Skin::cbg = WinColor::getCursColor();
-						Skin::curr_sk->redefine_bg( WinColor::getCursColor() );
-					}
+					WinColor::validate_pick();
 					Skin::print_cc();
 					refresh();
 					mode = 'n';
@@ -167,11 +152,13 @@ int		main( int ac, char **av ) {
 					timeout(0);
 					mode = 'i';
 					break;
-				case 'f':	//change foreground color
-					mode = 'f';
+				case 'f':	//change color mode
+				case 'b':	//change color mode
+					Skin::color_mode = ch;
 					break;
-				case 'b':	//change background color
-					mode = 'b';
+				case ' ':	//change color (enter palette)
+					timeout(0);
+					mode = 'c';
 					break;
 				case 'h':
 					if ( x <= 1 && y > 1 )
@@ -198,7 +185,8 @@ int		main( int ac, char **av ) {
 		}
 	}
 
-	img.save( winimg );
+	img->save( winimg );
 	endwin();
+	delete img;
 	return (0);
 }

@@ -38,8 +38,10 @@ class Skin {
 
 		static short	cfg, cbg;
 		static Skin		*curr_sk;
+		static char		color_mode;
 
 		static void		init_reserved_cp();
+		static void		color_pick( short c );
 		static void		print_cc();
 };
 

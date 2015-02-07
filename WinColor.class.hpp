@@ -4,6 +4,7 @@
 # include <vector>
 # include <ncurses.h>
 # include "CONST.h"
+# include "Skin.class.hpp"
 
 
 class		WinColor
@@ -36,6 +37,7 @@ class		WinColor
 		static void		refresh();
 		static void		prev();
 		static void		next();
+		static void		validate_pick();
 		static short	getCursColor();
 		static void		up();
 		static void		down();
