@@ -3,6 +3,7 @@
 
 # include				"BlockBase.class.hpp"
 # include				"CONST.h"
+# include				<stdlib.h> //rand
 
 class                   AsteroidField
 {

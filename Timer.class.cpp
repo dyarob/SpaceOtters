@@ -64,7 +64,7 @@ void	Timer::wait()
 	sec = _endAt.tv_sec - _startAt.tv_sec;
 	usec = _endAt.tv_usec - _startAt.tv_usec;
 	mtime = sec * 1000000 + usec;
-	if (mtime < CLOCKS_PER_SEC / _framerate)
+	if ((unsigned long)mtime < CLOCKS_PER_SEC / _framerate)
 		usleep(CLOCKS_PER_SEC / _framerate - mtime);
 }
 

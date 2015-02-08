@@ -77,7 +77,7 @@ AGameObject::AGameObject(unsigned int height, unsigned int width, int hp,
     : _id(AGameObject::_cur_id++), _height(height), _width(width), _hp(hp),
     _hp_max(hp_max), _dmg(1), _coord(coord), _delta_v(delta_v)
 {
-	_skin = skin;
+	_skin = skin;//new Skin('F', 7, 0);
 }
 
 AGameObject::AGameObject(AGameObject const &src)

@@ -27,6 +27,10 @@ std::ostream	&operator<<( std::ostream &o, Skin const &sk ) {
 
 
 // functions
+void	Skin::init_cp( void ) {
+	init_pair(_id, _fg, _bg);
+}
+
 void	Skin::redefine_fg( short fg ) {
 	_fg = fg;
 	init_pair(_id, _fg, _bg);

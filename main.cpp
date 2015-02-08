@@ -100,6 +100,13 @@ int main() {
 	DelayEvent		events;
 	Vector2D		playerPos(15, 5);
 	Vector2D		playerVel(0, 0);
+
+	initscr();
+	start_color();
+	WinUI_dialogBox	*BoxHead = new WinUI_dialogBox(120, 3, 0, 0);
+	WinUI_screen	*game = new WinUI_screen(120, 30, 3, 0);
+	WinUI_dialogBox	*BoxText = new WinUI_dialogBox(120, 3, 33, 0);
+
 	Player			*player = new Player(playerPos, playerVel);
 	List			*units = new List(player);
 	E_Zaz			*zaz = new E_Zaz( *(new Vector2D(1, 67)), *(new Vector2D(0, 0)), 0);
@@ -108,10 +115,6 @@ int main() {
 	//Level			*lvl = new Level( "Level 1 - Asteroid field", -2 );
 
 	signal(SIGWINCH, do_resize);
-
-	WinUI_dialogBox	*BoxHead = new WinUI_dialogBox(120, 3, 0, 0);
-	WinUI_screen	*game = new WinUI_screen(120, 30, 3, 0);
-	WinUI_dialogBox	*BoxText = new WinUI_dialogBox(120, 3, 33, 0);
 
 	// level initialization and message
 	//lvl->init(BoxText);

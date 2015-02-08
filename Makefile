@@ -36,7 +36,8 @@ HDFLAGS     = -I./includes/
 
 LDFLAGS     = -lncurses
 
-CFLAGS      = $(HDFLAGS) -Wall -Werror -Wextra -ansi -pedantic -g
+CFLAGS      = $(HDFLAGS) -Wall -Werror -Wextra -ansi -pedantic -g \
+							-std=c++11	# for <thread> in main.cpp on arch-linux
 
 RM          = rm -rf
 

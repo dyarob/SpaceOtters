@@ -30,6 +30,7 @@ class Skin {
 		int		_id;
 		char	_c;
 
+		void	init_cp();
 		std::ofstream	&printTo( std::ofstream &o ) const;
 		std::ostream	&printTo( std::ostream &o ) const;
 		void	redefine_fg( short fg );

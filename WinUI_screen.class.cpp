@@ -1,9 +1,5 @@
 #include    "WinUI_screen.class.hpp"
 
-
-
-// ----- Adelie modif ----
-
 std::string		WinUI_screen::keyEvent(Player *player){
 	timeout(0);
 	int  ch  = getch();
@@ -33,7 +29,7 @@ std::string		WinUI_screen::keyEvent(Player *player){
 			return "segfault";
 		default:
 			return "je met ce que je veux!";
-}
+	}
 }
 
 void	WinUI_screen::update ( List* l )
@@ -55,16 +51,16 @@ void	WinUI_screen::draw_all ( List* l )
 
 void	WinUI_screen::draw ( AGameObject* u )
 {
-	Vector2D v = u->getCoord( );
+	Vector2D v = u->getCoord();
 	if (has_colors()) {
 		if (u->getSkin()) {
-			init_pair(u->getSkin()->getId(), u->getSkin()->getFg(), u->getSkin()->getBg());
-			wattron(win, COLOR_PAIR(u->getSkin()->getId()));
+			u->getSkin()->init_cp();
+			wattron(win, COLOR_PAIR(u->getSkin()->_id));
 			int	w = u->getWidth();
 			if ( w == 1 )
 			{
-				char *c = u->getSkin()->getCAddr();
-				mvwprintw( win, v.getX(), v.getY(), c);
+				char c = u->getSkin()->_c;
+				mvwaddch( win, v.getX(), v.getY(), c);
 			}
 			else		// Zaz
 			{
@@ -74,10 +70,10 @@ void	WinUI_screen::draw ( AGameObject* u )
 				for (int i = 0; i < h; ++i)
 				{
 					c = ((E_Zaz*)u)->img[i];
-					mvwprintw( win, v.getX() + i, v.getY(), c );
+					mvwaddch( win, v.getX() + i, v.getY(), *c );
 				}
 			}
-			wattroff(win, COLOR_PAIR(u->getSkin()->getId()));
+			wattroff(win, COLOR_PAIR(u->getSkin()->_id));
 		}
 	}
 }
