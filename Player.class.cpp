@@ -33,4 +33,3 @@ Player           &Player::operator=(Player const & src) {
 Player::~Player() {
    // delete &this->_weapon;
 }
-

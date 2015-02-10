@@ -2,8 +2,35 @@
 #include    "Weapon.class.hpp"
 #include    "AGameObject.class.hpp"
 
-unsigned int AGameObject::_cur_id = 0;
-Skin*		 AGameObject::skin( new Skin('0', 7, 0));
+//=== STATICS ===
+unsigned int	AGameObject::_cur_id = 0;
+Skin*			AGameObject::skin( new Skin('0', 7, 0));
+
+std::ostream	&operator<<(std::ostream &o, std::list<AGameObject*> lgo) {
+	std::list<AGameObject*>::iterator	it(lgo.begin());
+	std::list<AGameObject*>::iterator	end(lgo.end());
+	for(; it!=end; ++it) {
+		(*it)->print(o);
+	}
+	return o;
+}
+std::ostream	&operator<<(std::ostream &o, AGameObject const &go) {
+	return go.print(o);
+}
+std::ostream	&AGameObject::print(std::ostream &o) const {
+	o << "GameObject no " << _id << std::endl;
+	o << "height: " << _height << '\t';
+	o << "width: " << _width << std::endl;
+	o << "hp: " << _hp << '\t';
+	o << "hp_max: " << _hp_max << std::endl;
+	o << "dmg: " << _dmg << std::endl;
+	o << "pattern: " << _pattern << std::endl;
+	o << "skin: " << *_skin << std::endl;
+	// vector2d coord
+	// vector2d delta_v
+	return o;
+}
+//== !STATICS! ==
 
 bool        checkCondition(char a, char b){
     if ((a == b) || 
@@ -14,6 +41,7 @@ bool        checkCondition(char a, char b){
     return true;
 }
 
+/*
 //----COLLISION ------
 List*		AGameObject::detect_collision( List **l, List *thiis )
 {
@@ -65,6 +93,7 @@ List*		AGameObject::detect_collision( List **l, List *thiis )
 	*l = save;
 	return tmp;
 }
+*/
 
 void		AGameObject::setHp(int hp)
 {

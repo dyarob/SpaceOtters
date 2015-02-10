@@ -22,19 +22,18 @@ public:
 	DelayEvent( void );
 	~DelayEvent( void );
 
-	// fonction principale qui est appellée à chaque tick 
-	void exec( List	**units, int); 
-
+	// fonction principale qui est appellee a chaque tick 
+	void	exec( List **units, int); 
 	void	randomChain( List **units, int );
 
 private:
 	DelayEvent( DelayEvent const & cp );
 	void		createDelayedEnemy( List **, int, int, int, int );
-	DelayEvent &	operator=(DelayEvent const &);
+	DelayEvent	&operator=(DelayEvent const &);
 	static const int	framesToFillMainShipWeapon = 30;
 
 };
 
-std::ostream & 		operator<<(std::ostream &, DelayEvent const &);
+std::ostream	&operator<<(std::ostream &, DelayEvent const &);
 
 #endif /* DELAYEVENT_HPP */

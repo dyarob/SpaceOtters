@@ -5,11 +5,11 @@ DelayEvent::DelayEvent(void) {
 	return;
 }
 
-DelayEvent::~DelayEvent(void){
+DelayEvent::~DelayEvent(void) {
 	return;
 }
 
-void	DelayEvent::exec(List	**units, int lvl) {
+void	DelayEvent::exec(List **units, int lvl) {
 	this->randomChain(units, lvl);
 	// recharger la weapon du vaisseau joueur
 }

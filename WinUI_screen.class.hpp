@@ -5,8 +5,8 @@
 # include	"WinUI.class.hpp"
 # include	"AGameObject.class.hpp"
 # include	"Player.class.hpp"
-# include	"List.struct.hpp"
-# include    "Vector2D.class.hpp"
+# include   "Vector2D.class.hpp"
+# include	<list>
 
 class       WinUI_screen : public WinUI
 {
@@ -14,9 +14,9 @@ class       WinUI_screen : public WinUI
     protected:
 
     public:
-		void	draw ( AGameObject* u );
-		void	draw_all ( List* l );
-		void	update ( List* l );
+		void	draw ( AGameObject* const &u ) const;
+		void	draw_all ( std::list<AGameObject*> const &l ) const;
+		void	update ( std::list<AGameObject*> &l );
 
         WinUI_screen(void);
         WinUI_screen(unsigned int, unsigned int, unsigned int, unsigned int);
@@ -24,8 +24,6 @@ class       WinUI_screen : public WinUI
         ~WinUI_screen(void);
 
         WinUI_screen          &operator=(WinUI_screen const &);
-        
-        std::string  keyEvent(Player *player);
 };
 
 #endif      /* _WINUI_SCREEN_HPP_ */

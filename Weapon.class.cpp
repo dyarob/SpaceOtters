@@ -4,7 +4,6 @@
 
 Weapon::Weapon(unsigned int fire_rate)
     : _fire_rate(fire_rate) {
-
 }
 
 Weapon::Weapon(Weapon const &src) {

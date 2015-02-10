@@ -1,19 +1,22 @@
 #ifndef GAME_OBJECT_HPP
-#define GAME_OBJECT_HPP
+# define GAME_OBJECT_HPP
 
 # include   <fstream>
-#include "Vector2D.class.hpp"
-#include "Skin.class.hpp"
-#include "List.struct.hpp"
+# include	<iostream>
+# include	<list>
 
+# include	"Vector2D.class.hpp"
+# include	"Skin.class.hpp"
+# include	"List.struct.hpp"
 
-class List;
+//class List;
 
 class AGameObject {
 
-	protected :
-
+	protected:
 		static Skin* skin;
+
+
 		unsigned int _id;
 		unsigned int _height;
 		unsigned int _width;
@@ -26,11 +29,14 @@ class AGameObject {
 		Vector2D	 &_coord;
 		Vector2D	 &_delta_v;
 
-	public	:
-
+	public:
 		static unsigned int	_cur_id;
-		AGameObject(unsigned int height, unsigned int width, int hp, int hp_max,
-				Vector2D &coord, Vector2D &delta_v);
+		
+		static void		print(int, std::list<AGameObject*>);
+
+
+		AGameObject(unsigned int height, unsigned int width, int hp,
+				int hp_max, Vector2D &coord, Vector2D &delta_v);
 		AGameObject();
 		AGameObject(AGameObject const& copy);
 		AGameObject& operator=(AGameObject const& rhs);
@@ -53,8 +59,12 @@ class AGameObject {
 		void			setSkin(Skin*);
 		void			setDmg(int);
 
+		std::ostream	&print(std::ostream &o) const;
 		void            move(Vector2D &delta_v, int currentFrame);
-		List*			detect_collision( List **l, List *thiis );
+		//List*			detect_collision( List **l, List *thiis );
 };
 
-#endif
+std::ostream	&operator<<(std::ostream &o, std::list<AGameObject*> lgo);
+std::ostream	&operator<<(std::ostream &o, AGameObject const &go);
+
+#endif // !AGameObject.class.hpp
