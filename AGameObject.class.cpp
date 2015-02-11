@@ -1,8 +1,6 @@
-#include    "Vector2D.class.hpp"
-#include    "Weapon.class.hpp"
 #include    "AGameObject.class.hpp"
 
-//=== STATICS ===
+//statics
 unsigned int	AGameObject::_cur_id = 0;
 Skin*			AGameObject::skin( new Skin('0', 7, 0));
 
@@ -18,21 +16,94 @@ std::ostream	&operator<<(std::ostream &o, AGameObject const &go) {
 	return go.print(o);
 }
 std::ostream	&AGameObject::print(std::ostream &o) const {
-	o << "GameObject no " << _id << std::endl;
-	o << "height: " << _height << '\t';
-	o << "width: " << _width << std::endl;
-	o << "hp: " << _hp << '\t';
-	o << "hp_max: " << _hp_max << std::endl;
-	o << "dmg: " << _dmg << std::endl;
-	o << "pattern: " << _pattern << std::endl;
-	o << "skin: " << *_skin << std::endl;
+	o << "GameObject no " << id << std::endl;
+	o << "height: " << h << '\t';
+	o << "width: " << w << std::endl;
+	o << "hp: " << hp << '\t';
+	o << "hp_max: " << hp_max << std::endl;
+	o << "dmg: " << dmg << std::endl;
+	o << "pattern: " << pat << std::endl;
+	o << "skin: " << *sk << std::endl;
 	// vector2d coord
 	// vector2d delta_v
 	return o;
 }
-//== !STATICS! ==
+//!statics
 
-bool        checkCondition(char a, char b){
+//----COLLISION ------
+void		AGameObject::detect_collision(std::list<AGameObject*> const &l)
+{
+	std::list<AGameObject*>::const_iterator	it(l.begin());
+	std::list<AGameObject*>::const_iterator	end(l.end());
+
+	for(; it!=end; ++it) {
+		if ((*it)->pos == pos
+				&& isCollisionPossible((*it)->t, t)) {
+			hp -= (*it)->dmg;
+		}
+	}
+}
+//--!COLLISION----
+
+// *structors
+AGameObject::~AGameObject() {
+}
+
+AGameObject::AGameObject(unsigned int height, unsigned int width, int hp_,
+    int hp_max_, vector2 position, vector2 acceleration, char type)
+    : id(AGameObject::_cur_id++), h(height), w(width), hp(hp_),
+    hp_max(hp_max_), dmg(1), pos(position), acc(acceleration), t(type) {
+	sk = skin;
+}
+
+/*
+AGameObject::AGameObject(AGameObject const &src) {
+    *this = src;
+    _id++;
+}
+
+AGameObject           &AGameObject::operator=(AGameObject const & src) {
+    id               = src.id;
+    coord            = src.position;
+    delta_v          = src.acceleration;
+    height           = src.h;
+    width            = src.w;
+    hp               = src.hp;
+    hp_max           = src.hp_max;
+    return *this;
+}
+*/
+// !*structors
+
+// functions
+void            AGameObject::move(int const currentFrame) {
+    int abs_X;
+    int abs_Y;
+    int signe_X = 1;
+    int signe_Y = 1;
+
+    if (acc.x < 0) {
+        abs_X = acc.x * -1 ;
+        signe_X = -1;
+    } else {
+        abs_X = acc.x;
+    }
+    if (abs_X != 0 && currentFrame % abs_X == 0) {
+        pos.x += signe_X;
+    }
+
+    if (acc.y < 0) {
+        abs_Y = acc.y * -1 ;
+        signe_Y = -1;
+    } else {
+        abs_Y = acc.y;
+    }
+    if (abs_Y != 0 && currentFrame % abs_Y == 0) {
+		pos.y += signe_Y;
+    }
+}
+
+bool        isCollisionPossible(char a, char b) {
     if ((a == b) || 
 		(a == 'a' && b == 'e') || (a == 'e' && b == 'a') ||
 		(a == 'm' && b == 'e') || (a == 'e' && b == 'm') ||
@@ -40,176 +111,4 @@ bool        checkCondition(char a, char b){
         return false;
     return true;
 }
-
-/*
-//----COLLISION ------
-List*		AGameObject::detect_collision( List **l, List *thiis )
-{
-	Vector2D	voila;
-	List		*save = *l;
-	List		*resave;
-	List		*tmp = thiis->next;
-	bool		mod = false;
-
-	while ( *l )
-	{
-		resave = NULL;
-		voila = (*l)->u->getCoord();
-        if (checkCondition((*l)->type, thiis->type)){
-    		if ( 	(_coord.getX() <= voila.getX()
-    				&& _coord.getX() + (int)_height > voila.getX())
-					&& ( _coord.getY() <= voila.getY()
-					&& _coord.getY() + (int)_width > voila.getY())
-					&& this != (*l)->u )
-    		{
-                thiis->u->setHp(thiis->u->getHp() - (*l)->u->getDmg());
-                if (thiis->u->getHp() <= 0){
-                    save = List::delete_one( save, thiis );
-					resave = *l;
-					*l = save;
-					mod = true;
-                }
-				if (resave) {
-					resave->u->setHp(resave->u->getHp() - thiis->u->getDmg());
-					if (resave->u->getHp() <= 0){
-						*l = List::delete_one( save, *l );
-						mod = true;
-					}
-				}
-				else {
-					(*l)->u->setHp((*l)->u->getHp() - thiis->u->getDmg());
-					if ((*l)->u->getHp() <= 0){
-						*l = List::delete_one( save, *l );
-						mod = true;
-					}
-				}
-				if (!mod)
-					*l = save;
-    			return tmp;
-    		}
-        }
-		*l = (*l)->next;
-	}
-	*l = save;
-	return tmp;
-}
-*/
-
-void		AGameObject::setHp(int hp)
-{
-	this->_hp = hp;
-}
-//----------------
-
-AGameObject::AGameObject(unsigned int height, unsigned int width, int hp,
-    int hp_max, Vector2D &coord, Vector2D &delta_v)
-    : _id(AGameObject::_cur_id++), _height(height), _width(width), _hp(hp),
-    _hp_max(hp_max), _dmg(1), _coord(coord), _delta_v(delta_v)
-{
-	_skin = skin;//new Skin('F', 7, 0);
-}
-
-AGameObject::AGameObject(AGameObject const &src)
-    : _coord(src._coord), _delta_v(src._delta_v) {
-    *this           = src;
-    this->_id++;
-}
-
-AGameObject           &AGameObject::operator=(AGameObject const & src) {
-    this->_id               = src._id;
-    this->_coord            = src._coord;
-    this->_delta_v          = src._delta_v;
-    this->_height           = src._height;
-    this->_width            = src._width;
-    this->_hp               = src._hp;
-    this->_hp               = src._hp_max;
-
-    return *this;
-}
-
-unsigned int    AGameObject::getId(void)      const {
-    return this->_id;
-}
-
-unsigned int    AGameObject::getHeight(void)  const {
-    return this->_height;
-}
-
-unsigned int    AGameObject::getWidth(void)   const {
-    return this->_width;
-}
-
-int    AGameObject::getHp(void)      const {
-    return this->_hp;
-}
-
-int    AGameObject::getDmg(void)      const {
-    return this->_dmg;
-}
-
-unsigned int    AGameObject::getHpMax(void)   const {
-    return this->_hp_max;
-}
-
-Vector2D		&AGameObject::getCoord(void)  const {
-    return this->_coord;
-}
-
-Vector2D		&AGameObject::getDeltaV(void) const {
-    return this->_delta_v;
-}
-
-Skin*			AGameObject::getSkin(void) const {
-	return _skin;
-}
-
-void			AGameObject::setSkin(Skin* skin) {
-	_skin = skin;
-}
-
-void            AGameObject::setDmg(int dmg){
-    _dmg = dmg;
-}
-
-void            AGameObject::move(Vector2D &delta_v, int currentFrame) {
-    int abs_X;
-    int abs_Y;
-    int signe_X = 1;
-    int signe_Y = 1;
-
-    if (delta_v.getX() < 0) {
-        abs_X = delta_v.getX() * -1 ;
-        signe_X = -1;
-    } else {
-        abs_X = delta_v.getX();
-    }
-    if (abs_X != 0 && currentFrame % abs_X == 0) {
-        this->_coord.setX(this->_coord.getX() + (1 * signe_X));
-    }
-
-    if (delta_v.getY() < 0) {
-        abs_Y = delta_v.getY() * -1 ;
-        signe_Y = -1;
-    } else {
-        abs_Y = delta_v.getY();
-    }
-    if (abs_Y != 0 && currentFrame % abs_Y == 0) {
-        this->_coord.setY(this->_coord.getY() + (1 * signe_Y));
-    }
-}
-
-void            AGameObject::setCoord(Vector2D &coord) {
-    this->_coord = coord;
-}
-
-void            AGameObject::setDeltaV(Vector2D &delta_v) {
-    this->_delta_v = delta_v;
-}
-
-int             AGameObject::getPattern(void) const  {
-    return (this->_pattern);
-}
-
-AGameObject::~AGameObject() {
-
-}
+// !functions

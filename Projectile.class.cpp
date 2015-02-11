@@ -1,14 +1,13 @@
 #include "Projectile.class.hpp"
-#include "Vector2D.class.hpp"
 
 Skin*	Projectile::skin(new Skin('-', 4, 0));
 
 void		Projectile::update( void )
 {
-	_coord += Vector2D(0,1);
+	_coord += vector2(0,1);
 }
 
-Projectile::Projectile(unsigned int width, unsigned int height, Vector2D &coord, Vector2D &delta_v)
+Projectile::Projectile(unsigned int width, unsigned int height, vector2 &coord, vector2 &delta_v)
     : AGameObject(width, height, 1, 1, coord, delta_v){
         _skin = skin;
 }

@@ -1,22 +1,22 @@
-#include	"CONST.h"
-#include "E_Zaz.class.hpp"
-#include "Timer.class.hpp"
-#include "Level.class.hpp"
-#include "AsteroidField.class.hpp"
+#include "CONST.h"
 #include "Player.class.hpp"
 #include "EnemyBase.class.hpp"
-#include "BlockBase.class.hpp"
+#include "E_Zaz.class.hpp"
 #include "DelayEvent.hpp"
-//#include "List.struct.hpp"
-#include <list>
+#include "BlockBase.class.hpp"
+#include "AsteroidField.class.hpp"
+#include "Level.class.hpp"
+
+#include "Timer.class.hpp"
 #include "WinUI_screen.class.hpp"
 #include "WinUI_dialogBox.class.hpp"
+
+#include <list>
 #include <cstdlib>
 #include <iostream>
 #include <thread>
 #include <mutex>
 #include <signal.h>
-#include "EnemyBase.class.hpp"
 
 static int	sigwinchReceived = true;
 
@@ -27,39 +27,41 @@ static void do_resize(int sig)
 	sigwinchReceived = true;
 }
 
+/*
 void	segfault(List *l) {
 	std::cout << l->type;
 }
+*/
 
-std::string		keyEvent(Player *player, std::list<AGameObject*> &l){
+void	keyEvent(Player *player, std::list<AGameObject*> &l){
 	timeout(0);
 	int  ch  = getch();
 	switch (ch){
 		case 'w':
-			if (player->getCoord().getX() > 1)
-				player->getCoord() += *(new Vector2D(-1,0));
-			return "haut";
+			if (player.pos.y > 1)
+				--player.pos.y;
+			return ;
 		case 'a':
-			if (player->getCoord().getY() > 1)
-				player->getCoord() += *(new Vector2D(0,-1));
-			return "gauche";
+			if (player.pos.x > 1)
+				--player.pos.x;
+			return ;
 		case ' ':
 			l.push_back(player->shoot());
-			return "espace";
+			return ;
 		case 'd':
-			if (player->getCoord().getY() < W_SCREEN - 2)
-				player->getCoord() += *(new Vector2D(0,1));
-			return "droite";
+			if (player.pos.x < W_SCREEN - 2)
+				++player.pos.x;
+			return ;
 		case 's':
-			if (player->getCoord().getX() < H_MAP - 2)
-				player->getCoord() += *(new Vector2D(1,0));
-			return "bas";
+			if (player.pos.y < H_MAP - 2)
+				++player.pos.y;
+			return ;
 		case 27:	// escape
 			if (getch() == -1)
-				return "escape";
-			return "segfault";
+				return ;
+			return ;
 		default:
-			return "je met ce que je veux!";
+			return ;
 	}
 }
 
@@ -67,24 +69,21 @@ void	updatePositions(std::list<AGameObject*> &units, int const curr_frame)
 {
 	std::list<AGameObject*>::iterator	it(units.begin());
 	std::list<AGameObject*>::iterator	end(units.end());
+
 	for (; it!=end; ++it) {
-		/* move element */
-		(*it)->move((*it)->getDeltaV(), curr_frame);
+		(*it)->move(curr_frame);
 		if ((*it)->getCoord().getY() <= 0) {
 			units.erase(it);
 		}
-		/* change pattern for everyone but Player's shippu */
-		if ((*it)->getId() != 0) {
-			// pattern un coup en bas un coup en haut
-			if ((*it)->getPattern() == 1) {
+		/*
+		if ((*it)->getId() != 0) { // change pattern for everyone but Player's shippu
+			if ((*it)->getPattern() == 1) {// pattern un coup en bas un coup en haut
 				if (curr_frame % 100 == 1) {
 					if ((*it)->getDeltaV().getX() == 0 || (*it)->getDeltaV().getX() == -100) {
-						// on ne sort pas de la map
-						if ((*it)->getCoord().getX() > 2)
+						if ((*it)->getCoord().getX() > 2)// on ne sort pas de la map
 							(*it)->getDeltaV().setX(100);
 					} else {
-						// on ne sort pas de la map
-						if ((*it)->getCoord().getX() < 28)
+						if ((*it)->getCoord().getX() < 28)// on ne sort pas de la map
 							(*it)->getDeltaV().setX(-100);
 					}
 				}
@@ -120,7 +119,17 @@ void	updatePositions(std::list<AGameObject*> &units, int const curr_frame)
 				}
 			}
 		}
-		//l = (*it)->detect_collision( &head, l );
+		*/
+
+		detect_collision(units);
+	}
+	for (it=it.begin(); it!=end; ++it) {
+		if ((*it)->hp <= 0) {
+			delete (*it);
+			l.erase(it);
+			--it;
+			--end;
+		}
 	}
 }
 
@@ -140,13 +149,13 @@ int main() {
 	WinUI_screen	*game = new WinUI_screen(W_SCREEN, H_MAP, 3, 0);
 	WinUI_dialogBox	*BoxText = new WinUI_dialogBox(W_SCREEN, 3, H_MAP+3, 0);
 
-	Vector2D	playerPos(15, 5);
-	Vector2D	playerVel(0, 0);
+	vector2	playerPos(15, 5);
+	vector2	playerVel(0, 0);
 	Player		*player = new Player(playerPos, playerVel);
 	std::list<AGameObject*>	units;
 	units.push_back(player);
 	//units->setType('p');
-	//E_Zaz		*zaz = new E_Zaz( *(new Vector2D(1, 67)), *(new Vector2D(0, 0)), 0);
+	//E_Zaz		*zaz = new E_Zaz( *(new vector2(1, 67)), *(new vector2(0, 0)), 0);
 
 	signal(SIGWINCH, do_resize);
 
@@ -168,10 +177,8 @@ int main() {
 				break;
 			endwin();
 			sigwinchReceived = 1;
-			//List::delete_all(units);
 			units.clear();
-			player = new Player( *(new Vector2D(15, 5)), *(new Vector2D(0,0)));//playerPos, playerVel );
-			//units = new List( player );
+			player = new Player( *(new vector2(15, 5)), *(new vector2(0,0)));//playerPos, playerVel );
 			units.push_back(player);
 			/*
 			if (lvlId == ZAZ_LVL) {
@@ -198,9 +205,7 @@ int main() {
 			units = units->push(zaz, 'e');
 		*/
 
-		ch = keyEvent(player, units);
-		if ( ch == std::string("escape"))
-			break;
+		keyEvent(player, units);
 
 		/*
 		for (List *l = units; l; l = l->next) {
@@ -209,7 +214,7 @@ int main() {
 		}
 		*/
 			//PRIORITAIRE
-		//updatePositions(&units, currentFrame);
+		updatePositions(units, currentFrame);
 		game->update(units);
 
 		//BoxText->fixeDialog("GrosBoGoss Francky, BoGoss James", currentFrame / 10, 1);

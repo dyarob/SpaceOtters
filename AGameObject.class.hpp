@@ -5,29 +5,25 @@
 # include	<iostream>
 # include	<list>
 
-# include	"Vector2D.class.hpp"
+# include	"vector2.class.hpp"
 # include	"Skin.class.hpp"
-# include	"List.struct.hpp"
-
-//class List;
 
 class AGameObject {
 
 	protected:
 		static Skin* skin;
 
+		static bool	isCollisionPossible(char a, char b);
 
-		unsigned int _id;
-		unsigned int _height;
-		unsigned int _width;
-		int 		 _hp;
-		unsigned int _hp_max;
-		int 		 _dmg;
-    	unsigned int _pattern;
 
-		Skin*		 _skin;
-		Vector2D	 &_coord;
-		Vector2D	 &_delta_v;
+		unsigned int id;
+		unsigned int h;
+		unsigned int w;
+		int 		 hp;
+		unsigned int hp_max;
+		int 		 dmg;
+    	unsigned int pat;
+
 
 	public:
 		static unsigned int	_cur_id;
@@ -35,33 +31,27 @@ class AGameObject {
 		static void		print(int, std::list<AGameObject*>);
 
 
+		Skin*		sk;
+		vector2		pos;
+		vector2		acc;
+		char const	t;
+
 		AGameObject(unsigned int height, unsigned int width, int hp,
-				int hp_max, Vector2D &coord, Vector2D &delta_v);
+				int hp_max, vector2 position, vector2 acceleration, char type);
+		~AGameObject();
+
+		std::ostream	&print(std::ostream &o) const;
+
+		void            move(int const currentFrame);
+		void			detect_collision(std::list<AGameObject*> const &l);
+
+
+	private:
+		/* Bad to no implementation
 		AGameObject();
 		AGameObject(AGameObject const& copy);
 		AGameObject& operator=(AGameObject const& rhs);
-		~AGameObject();
-
-		unsigned int    getId(void)             const;
-		unsigned int    getHeight(void)         const;
-		unsigned int    getWidth(void)          const;
-		int    			getHp(void)             const;
-		int				getDmg(void)			const;
-		unsigned int    getHpMax(void)          const;
-		Vector2D 		&getCoord(void)         const;
-		Vector2D 		&getDeltaV(void)        const;
-   		int		        getPattern(void)        const;
-		Skin*			getSkin(void)			const;
-
-		void            setDeltaV(Vector2D &delta_v);
-		void            setCoord(Vector2D &coord);
-		void			setHp(int hp);
-		void			setSkin(Skin*);
-		void			setDmg(int);
-
-		std::ostream	&print(std::ostream &o) const;
-		void            move(Vector2D &delta_v, int currentFrame);
-		//List*			detect_collision( List **l, List *thiis );
+		*/
 };
 
 std::ostream	&operator<<(std::ostream &o, std::list<AGameObject*> lgo);
