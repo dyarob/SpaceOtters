@@ -9,7 +9,7 @@ Game::Game(void)// :
 	topBox = new WinUI_dialogBox(W_SCREEN, 3, 0, 0);
 	bottBox = new WinUI_dialogBox(W_SCREEN, 3, H_MAP+3, 0);
 	gameScreen = new WinUI_screen(W_SCREEN, H_MAP, 3, 0);
-	player = new Player(vector2(15, 5), vector2(0,0));
+	player = new Player(vector2(5, 15), vector2(0,0));
 	objects.push_back(player);
 	lvlInit();
 	//DelayEvent		events;
@@ -76,7 +76,6 @@ void	Game::updatePositions(std::list<AGameObject*> &objects, int const curr_fram
 	std::list<AGameObject*>::iterator	end(objects.end());
 
 	for (; it!=end; ++it) {
-		std::cerr<<**it;
 		(*it)->move(curr_frame);
 		if ((*it)->pos.x <= 0) {
 			(*it)->hp = 0;
@@ -131,7 +130,6 @@ void	Game::updatePositions(std::list<AGameObject*> &objects, int const curr_fram
 	}
 	for (it=objects.begin(); it!=end;) {
 		if ((*it)->hp <= 0) {
-			std::cerr<<"on supprime un truc la.\n";
 			delete (*it);
 			it = objects.erase(it);
 		} else
@@ -141,7 +139,6 @@ void	Game::updatePositions(std::list<AGameObject*> &objects, int const curr_fram
 
 void	Game::update(int const currFrame) {
 	//signal(SIGWINCH, do_resize);
-	/*
 	if (player->hp <= 0)
 		exitGame();
 	if (player->pos.x >= W_SCREEN - (W_SCREEN >> 2)) { // player->won the level
@@ -152,9 +149,10 @@ void	Game::update(int const currFrame) {
 		//sigwinchReceived = 1;
 		objects.clear();//on supprimme rien la?!
 		delete player;
-		player = new Player(vector2(15, 5), vector2(0,0));
+		player = new Player(vector2(5, 15), vector2(0,0));
 		objects.push_back(player);
 	}
+	/*
 	if (sigwinchReceived) {
 		topBox = new WinUI_dialogBox(120, 3, 0, 0);
 		gameScreen = new WinUI_screen(120, 30, 3, 0);
@@ -162,12 +160,9 @@ void	Game::update(int const currFrame) {
 		sigwinchReceived = false;
 	}
 	*/
-	//lvls[lvlId]->af->generateBlocks(&objects);
+	lvls[lvlId]->af->generateBlocks(objects);
 	//events.exec(&objects, currFrame);
 
-	std::cerr<<"\npositionplayer:"<<player->pos;
-	std::cerr<<"\naccelerationplayer:"<<player->acc;
-	std::cerr<<"keyEvent call\n";
 	keyEvent(player, objects);
 
 	/*
@@ -177,9 +172,7 @@ void	Game::update(int const currFrame) {
 	}
 	*/
 
-	std::cerr<<"updatePositions call\n";
 	updatePositions(objects, currFrame);
-	std::cerr<<"updateScreen call\n";
 	gameScreen->update(objects);
 
 	//bottBox->fixeDialog("GrosBoGoss Francky, BoGoss James", currFrame / 10, 1);

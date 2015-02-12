@@ -13,7 +13,7 @@ class                   Block : public AGameObject {
         Block(void);
 
     public:
-        Block( unsigned int, unsigned int, vector2 &, int);
+        Block( unsigned int, unsigned int, vector2, int);
         //Block(Block const & src);
         //Block      &operator=(Block const &);
         virtual ~Block();

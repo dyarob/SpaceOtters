@@ -2,7 +2,7 @@
 
 Skin		*BlockBase::skin ( new Skin( '#', 1, 0 ));
 
-BlockBase::BlockBase(vector2 &coord, int aspeed)
+BlockBase::BlockBase(vector2 coord, int aspeed)
     : Block( 1, 1, coord, aspeed) {
 	sk = skin;
 }

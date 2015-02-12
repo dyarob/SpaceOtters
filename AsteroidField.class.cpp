@@ -1,18 +1,16 @@
 #include "AsteroidField.class.hpp"
 
-/*
-void	AsteroidField::generateBlocks(List **units) {
+void	AsteroidField::generateBlocks(std::list<AGameObject*> &units) {
 	int	nb_of_blks = rand() % 10;
 	BlockBase	*b;
 	int x;
 
 	if (!nb_of_blks) {
 		x = rand() % H_MAP;
-		b = new BlockBase( *(new vector2(x, W_SCREEN)), b_speed );
-		*units = (*units)->push( b, 'a' );
+		b = new BlockBase( vector2(W_SCREEN, x), b_speed );
+		units.push_back(b);
 	}
 }
-*/
 
 AsteroidField::AsteroidField(int ab_speed)
 	: b_speed(ab_speed)

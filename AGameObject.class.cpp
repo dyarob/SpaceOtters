@@ -108,10 +108,11 @@ void            AGameObject::move(int const currentFrame) {
 }
 
 bool        AGameObject::isCollisionPossible(char a, char b) {
-    if ((a == b) || 
-		(a == 'a' && b == 'e') || (a == 'e' && b == 'a') ||
-		(a == 'm' && b == 'e') || (a == 'e' && b == 'm') ||
-		(a == 'm' && b == 'a') || (a == 'a' && b == 'm'))
+    if ((a == b)
+		|| (a == 'a' && b == 'e') || (a == 'e' && b == 'a')
+		//|| (a == 'm' && b == 'e') || (a == 'e' && b == 'm')
+		//|| (a == 'm' && b == 'a') || (a == 'a' && b == 'm')
+		)
         return false;
     return true;
 }

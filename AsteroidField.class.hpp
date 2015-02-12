@@ -19,7 +19,7 @@ class                   AsteroidField
         
         AsteroidField   &operator=(AsteroidField const &);
 
-		//virtual void	generateBlocks( List **units );
+		void	generateBlocks(std::list<AGameObject*> &units);
         
 };
 

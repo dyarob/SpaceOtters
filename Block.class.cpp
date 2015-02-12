@@ -7,8 +7,8 @@ void		Block::update(void) {
 	++pos.y;
 }
 
-Block::Block(unsigned int width, unsigned int height, vector2 &coord, int aspeed)
-    : AGameObject(width, height, 4, 4, coord, *(new vector2(0,aspeed)), 'b')
+Block::Block(unsigned int width, unsigned int height, vector2 coord, int aspeed)
+    : AGameObject(width, height, 4, 4, coord, vector2(aspeed, 0), 'a')
 {
 	sk = skin;
 }
