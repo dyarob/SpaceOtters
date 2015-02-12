@@ -3,7 +3,7 @@
 Skin	*Player::skin(new Skin('>', 7, 0));
 
 
-Player::Player(vector2 &coord, vector2 &delta_v)
+Player::Player(vector2 coord, vector2 delta_v)
     : AUnit(1, 1, 3, 3, *(new WeaponBase()), coord, delta_v, 'p') {
 	sk = Player::skin;
 }

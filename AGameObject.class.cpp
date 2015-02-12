@@ -24,8 +24,8 @@ std::ostream	&AGameObject::print(std::ostream &o) const {
 	o << "dmg: " << dmg << std::endl;
 	o << "pattern: " << pat << std::endl;
 	o << "skin: " << *sk << std::endl;
-	// vector2d coord
-	// vector2d delta_v
+	o << "pos: " << pos << '\t';
+	o << "acc: " << acc << std::endl;
 	return o;
 }
 //!statics
@@ -38,6 +38,7 @@ void		AGameObject::detect_collision(std::list<AGameObject*> const &l)
 
 	for(; it!=end; ++it) {
 		if ((*it)->pos == pos
+				&& *it != this
 				&& isCollisionPossible((*it)->t, t)) {
 			hp -= (*it)->dmg;
 		}
@@ -52,8 +53,12 @@ AGameObject::~AGameObject() {
 AGameObject::AGameObject(unsigned int height, unsigned int width, int hp_,
     int hp_max_, vector2 position, vector2 acceleration, char type)
     : id(AGameObject::_cur_id++), h(height), w(width), hp(hp_),
-    hp_max(hp_max_), dmg(1), pos(position), acc(acceleration), t(type) {
+    hp_max(hp_max_), dmg(1), t(type) {
 	sk = skin;
+	pos.x = position.x;
+	pos.y = position.y;
+	acc.x = acceleration.x;
+	acc.y = acceleration.y;
 }
 
 /*
@@ -61,7 +66,6 @@ AGameObject::AGameObject(AGameObject const &src) {
     *this = src;
     _id++;
 }
-
 AGameObject           &AGameObject::operator=(AGameObject const & src) {
     id               = src.id;
     coord            = src.position;

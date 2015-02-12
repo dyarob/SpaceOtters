@@ -1,13 +1,15 @@
 #include    "AUnit.class.hpp"
 
-Projectile    *AUnit::shoot(void)   const
+Projectile	*AUnit::shoot(void)   const
 {
-	//return (_weapon.fire(new vector2(pos), new vector2(0, 1)));
-	return (new Projectile(1, 1, *(new vector2(pos)), *(new vector2(0, 1))));
+	vector2	projPos(pos);
+	vector2	projAcc(acc);
+	++projPos.x; // a modifier en fonction de l'orientation
+	return (_weapon.fire(projPos, projAcc));
 }
 
 AUnit::AUnit(unsigned int height, unsigned int width, int hp,
-    int hp_max, Weapon &weapon, vector2 &coord, vector2 &delta_v, char type)
+    int hp_max, Weapon &weapon, vector2 coord, vector2 delta_v, char type)
     : AGameObject(height, width, hp, hp_max, coord, delta_v, type),
 	_weapon(weapon)
 {}
@@ -36,5 +38,4 @@ Weapon const    &AUnit::getWeapon(void) const {
 }
 
 AUnit::~AUnit() {
-
 }

@@ -15,7 +15,7 @@ protected:
 
 public:
     AUnit(unsigned int height, unsigned int width, int hp, int hp_max,
-        Weapon &weapon, vector2 &coord, vector2 &delta_v, char type);
+        Weapon &weapon, vector2 coord, vector2 delta_v, char type);
     //AUnit(AUnit const & src);
     //AUnit           &operator=(AUnit const &);
 

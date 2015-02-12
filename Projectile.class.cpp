@@ -2,8 +2,7 @@
 
 Skin*	Projectile::skin(new Skin('-', 4, 0));
 
-void	Projectile::update( void )
-{
+void	Projectile::update( void ) {
 	++pos.y;
 }
 

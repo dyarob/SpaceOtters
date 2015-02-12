@@ -9,9 +9,7 @@ Game::Game(void)// :
 	topBox = new WinUI_dialogBox(W_SCREEN, 3, 0, 0);
 	bottBox = new WinUI_dialogBox(W_SCREEN, 3, H_MAP+3, 0);
 	gameScreen = new WinUI_screen(W_SCREEN, H_MAP, 3, 0);
-	vector2	playerPos(15, 5);
-	vector2	playerVel(0, 0);
-	player = new Player(playerPos, playerVel);
+	player = new Player(vector2(15, 5), vector2(0,0));
 	objects.push_back(player);
 	lvlInit();
 	//DelayEvent		events;
@@ -35,7 +33,6 @@ void do_resize(int sig)
 	sigwinchReceived = true;
 }
 */
-
 /*
 void	segfault(List *l) {
 	std::cout << l->type;
@@ -56,7 +53,6 @@ void	Game::keyEvent(Player *player, std::list<AGameObject*> &l){
 			return ;
 		case ' ':
 			l.push_back(player->shoot());
-	std::cerr << "jusque la tout va bien";
 			return ;
 		case 'd':
 			if (player->pos.x < W_SCREEN - 2)
@@ -80,14 +76,13 @@ void	Game::updatePositions(std::list<AGameObject*> &objects, int const curr_fram
 	std::list<AGameObject*>::iterator	end(objects.end());
 
 	for (; it!=end; ++it) {
-		std::cerr<<**it; //!
-		std::cerr<<"premove";
+		std::cerr<<**it;
 		(*it)->move(curr_frame);
-		std::cerr<<"postmove\npreerase";
-		if ((*it)->pos.y <= 0) {
-			objects.erase(it);
+		/*
+		if ((*it)->pos.x <= 0) {
+			(*it)->hp = 0;
 		}
-		std::cerr<<"posterase";
+		*/
 		/*
 		if ((*it)->getId() != 0) { // change pattern for everyone but Player's shippu
 			if ((*it)->getPattern() == 1) {// pattern un coup en bas un coup en haut
@@ -134,29 +129,23 @@ void	Game::updatePositions(std::list<AGameObject*> &objects, int const curr_fram
 		}
 		*/
 
-		std::cerr<<"\npre detect_collision";
 		(*it)->detect_collision(objects);
-		std::cerr<<"post detect_collision\n";
 	}
 	for (it=objects.begin(); it!=end;) {
-		std::cerr<<"on examine:"<<**it;
 		if ((*it)->hp <= 0) {
-			std::cerr<<"\non le delete!\n";
+			std::cerr<<"on supprime un truc la.\n";
 			delete (*it);
-			std::cerr<<"\non l'erase!\n";
 			it = objects.erase(it);
-			std::cerr<<"et voila!";
 		} else
 			++it;
 	}
-	std::cerr<< "\nen fait tout s'est bien passe.";
 }
 
 void	Game::update(int const currFrame) {
 	//signal(SIGWINCH, do_resize);
+	/*
 	if (player->hp <= 0)
 		exitGame();
-
 	if (player->pos.x >= W_SCREEN - (W_SCREEN >> 2)) { // player->won the level
 		lvlId++;
 		if ( lvlId >= NB_LVL )
@@ -165,11 +154,9 @@ void	Game::update(int const currFrame) {
 		//sigwinchReceived = 1;
 		objects.clear();//on supprimme rien la?!
 		delete player;
-		player = new Player( *(new vector2(15, 5)), *(new vector2(0,0)));//player->os, player->el );
+		player = new Player(vector2(15, 5), vector2(0,0));
 		objects.push_back(player);
 	}
-
-	/*
 	if (sigwinchReceived) {
 		topBox = new WinUI_dialogBox(120, 3, 0, 0);
 		gameScreen = new WinUI_screen(120, 30, 3, 0);
@@ -177,10 +164,12 @@ void	Game::update(int const currFrame) {
 		sigwinchReceived = false;
 	}
 	*/
-
 	//lvls[lvlId]->af->generateBlocks(&objects);
 	//events.exec(&objects, currFrame);
 
+	std::cerr<<"\npositionplayer:"<<player->pos;
+	std::cerr<<"\naccelerationplayer:"<<player->acc;
+	std::cerr<<"keyEvent call\n";
 	keyEvent(player, objects);
 
 	/*
@@ -190,9 +179,9 @@ void	Game::update(int const currFrame) {
 	}
 	*/
 
-	std::cerr << "avant";
+	std::cerr<<"updatePositions call\n";
 	updatePositions(objects, currFrame);
-	std::cerr << "apres";
+	std::cerr<<"updateScreen call\n";
 	gameScreen->update(objects);
 
 	//bottBox->fixeDialog("GrosBoGoss Francky, BoGoss James", currFrame / 10, 1);

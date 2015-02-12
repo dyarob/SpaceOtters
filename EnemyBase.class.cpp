@@ -2,7 +2,7 @@
 
 Skin*	EnemyBase::skin(new Skin('<', 5, 0));
 
-EnemyBase::EnemyBase(vector2 &coord, vector2 &delta_v, int pattern)
+EnemyBase::EnemyBase(vector2 coord, vector2 delta_v, int pattern)
     : AUnit(1, 1, 3, 3, *(new WeaponEnemy()), coord, delta_v, 'e') {
         pat = pattern;
 		sk = skin;
@@ -35,6 +35,5 @@ EnemyBase::~EnemyBase() {
 
 Projectile	*EnemyBase::shoot( ) const
 {
-	vector2	*r = new vector2(pos.x-1, pos.y);
-	return ( _weapon.fire( r, new vector2(0, -1)));
+	return ( _weapon.fire( vector2(pos.x-1, pos.y), vector2(0, -1)));
 }

@@ -12,3 +12,8 @@ vector2::vector2(int a, int b) :
 
 vector2::~vector2() {
 }
+
+std::ostream	&operator<<(std::ostream &o, vector2 const &v) {
+	o << v.x << " - " << v.y;
+	return o;
+}

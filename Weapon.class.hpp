@@ -20,7 +20,7 @@ public:
     
     unsigned int        getFireRate(void)       const;
 
-    virtual Projectile  *fire(vector2 *coord, vector2 *delta_v);
+    virtual Projectile  *fire(vector2 coord, vector2 delta_v);
     virtual             ~Weapon(void);
 };
 

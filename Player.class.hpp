@@ -16,7 +16,7 @@ private:
 
 public:
     ~Player();
-    Player(vector2 &coord, vector2 &delta_v);
+    Player(vector2 coord, vector2 delta_v);
 
     WeaponBase		&getWeapon(void);
 };

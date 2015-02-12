@@ -13,7 +13,7 @@ private:
 	static Skin* skin;
 
 public:
-    EnemyBase(vector2 &coord, vector2 &delta_v, int pattern);
+    EnemyBase(vector2 coord, vector2 delta_v, int pattern);
     //EnemyBase(EnemyBase const & src);
     //EnemyBase           &operator=(EnemyBase const &);
 
