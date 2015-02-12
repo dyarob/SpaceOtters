@@ -64,7 +64,7 @@ void	Game::keyEvent(Player *player, std::list<AGameObject*> &l){
 			return ;
 		case 27:	// escape
 			if (getch() == -1)
-				return ;
+				exitGame();
 			return ;
 		default:
 			return ;
@@ -78,11 +78,9 @@ void	Game::updatePositions(std::list<AGameObject*> &objects, int const curr_fram
 	for (; it!=end; ++it) {
 		std::cerr<<**it;
 		(*it)->move(curr_frame);
-		/*
 		if ((*it)->pos.x <= 0) {
 			(*it)->hp = 0;
 		}
-		*/
 		/*
 		if ((*it)->getId() != 0) { // change pattern for everyone but Player's shippu
 			if ((*it)->getPattern() == 1) {// pattern un coup en bas un coup en haut

@@ -4,7 +4,6 @@
 # include <iostream>
 # include <ncurses.h>
 # include <string>
-# include "E_Zaz.class.hpp"
 
 class       WinUI {
 

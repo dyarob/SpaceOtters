@@ -2,9 +2,8 @@
 
 Projectile	*AUnit::shoot(void)   const
 {
-	vector2	projPos(pos);
-	vector2	projAcc(acc);
-	++projPos.x; // a modifier en fonction de l'orientation
+	vector2	projPos(pos.x+1, pos.y);
+	vector2	projAcc(1, 0);
 	return (_weapon.fire(projPos, projAcc));
 }
 

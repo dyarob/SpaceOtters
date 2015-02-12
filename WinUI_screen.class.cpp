@@ -27,7 +27,7 @@ void	WinUI_screen::draw ( AGameObject* const &u ) const
 			int	w = u->w;
 			if ( w == 1 ) {
 				char c = u->sk->_c;
-				mvwaddch( win, v.x, v.y, c);
+				mvwaddch( win, v.y, v.x, c);
 			}
 			/*
 			else {		// Zaz
