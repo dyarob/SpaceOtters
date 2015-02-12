@@ -3,7 +3,7 @@
 
 # include               <iostream>
 # include               "Block.class.hpp"
-# include               "Vector2D.class.hpp"
+# include               "vector2.class.hpp"
 
 class                   BlockBase : public Block {
     private:
@@ -11,10 +11,9 @@ class                   BlockBase : public Block {
 		static Skin* skin;
 
     public:
-        BlockBase(Vector2D &, int);
-        BlockBase(BlockBase const & src);
-        
-        BlockBase      &operator=(BlockBase const &src);
+        BlockBase(vector2 &, int);
+        //BlockBase(BlockBase const & src);
+        //BlockBase      &operator=(BlockBase const &src);
         
         virtual ~BlockBase(void);
 };

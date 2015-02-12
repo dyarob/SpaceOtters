@@ -6,29 +6,27 @@ SRCDIR      = ./src/
 
 SRC         =	AGameObject.class.cpp		\
 				AsteroidField.class.cpp		\
-				main.cpp					\
+				AUnit.class.cpp				\
 				Block.class.cpp				\
 				BlockBase.class.cpp			\
-				E_Zaz.class.cpp				\
+				EnemyBase.class.cpp			\
+				Game.class.cpp				\
 				Level.class.cpp				\
-				Vector2D.class.cpp			\
-				Weapon.class.cpp			\
-				WeaponBase.class.cpp		\
-				WeaponEnemy.class.cpp		\
+				main.cpp					\
+				Player.class.cpp			\
 				Projectile.class.cpp		\
 				ProjectileBase.class.cpp	\
 				ProjectileEnemy.class.cpp	\
 				Skin.class.cpp				\
-				Player.class.cpp			\
-				EnemyBase.class.cpp			\
-				DelayEvent.class.cpp		\
-				AUnit.class.cpp				\
+				Timer.class.cpp				\
+				vector2.class.cpp			\
+				Weapon.class.cpp			\
+				WeaponBase.class.cpp		\
+				WeaponEnemy.class.cpp		\
 				WinUI_dialogBox.class.cpp	\
 				WinUI_screen.class.cpp		\
 				WinUI.class.cpp				\
-				List.struct.cpp				\
-				Timer.class.cpp				\
-				DelayEvent.class.cpp		
+
 
 OBJ         = $(SRC:.cpp=.o)
 

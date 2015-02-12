@@ -103,7 +103,7 @@ void            AGameObject::move(int const currentFrame) {
     }
 }
 
-bool        isCollisionPossible(char a, char b) {
+bool        AGameObject::isCollisionPossible(char a, char b) {
     if ((a == b) || 
 		(a == 'a' && b == 'e') || (a == 'e' && b == 'a') ||
 		(a == 'm' && b == 'e') || (a == 'e' && b == 'm') ||

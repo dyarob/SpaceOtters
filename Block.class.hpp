@@ -1,9 +1,10 @@
 #ifndef                 _BLOCK_HPP_
 # define                _BLOCK_HPP_
 
+# include				"CONST.h"
 # include               <iostream>
-# include                "AGameObject.class.hpp"
-# define				B_SPEED -2
+# include				"vector2.class.hpp"
+# include               "AGameObject.class.hpp"
 
 class                   Block : public AGameObject {
     protected:
@@ -12,11 +13,11 @@ class                   Block : public AGameObject {
         Block(void);
 
     public:
-        Block( unsigned int, unsigned int, Vector2D &, int);
-        Block(Block const & src);
+        Block( unsigned int, unsigned int, vector2 &, int);
+        //Block(Block const & src);
+        //Block      &operator=(Block const &);
         virtual ~Block();
         
-        Block      &operator=(Block const &);
         
 		void			update( void );
 };

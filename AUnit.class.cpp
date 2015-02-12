@@ -1,25 +1,22 @@
-#include    "Vector2D.class.hpp"
-#include    "Weapon.class.hpp"
 #include    "AUnit.class.hpp"
 
 Projectile    *AUnit::shoot(void)   const
 {
-	Vector2D	*pos = new Vector2D(_coord);
-	Vector2D	*vel = new Vector2D(0, 1);
-	return (_weapon.fire(pos, vel));
+	//return (_weapon.fire(new vector2(pos), new vector2(0, 1)));
+	return (new Projectile(1, 1, *(new vector2(pos)), *(new vector2(0, 1))));
 }
 
 AUnit::AUnit(unsigned int height, unsigned int width, int hp,
-    int hp_max, Weapon &weapon, Vector2D &coord, Vector2D &delta_v)
-    : AGameObject(height, width, hp, hp_max, coord, delta_v),
+    int hp_max, Weapon &weapon, vector2 &coord, vector2 &delta_v, char type)
+    : AGameObject(height, width, hp, hp_max, coord, delta_v, type),
 	_weapon(weapon)
 {}
 
+/*
 AUnit::AUnit(AUnit const &src)
     : AGameObject(src), _weapon(src._weapon) {
     *this           = src;
 }
-
 AUnit           &AUnit::operator=(AUnit const & src) {
     this->_id               = src._id;
     this->_dmg              = src._dmg;
@@ -32,6 +29,7 @@ AUnit           &AUnit::operator=(AUnit const & src) {
     this->_weapon           = src._weapon;
     return *this;
 }
+*/
 
 Weapon const    &AUnit::getWeapon(void) const {
     return this->_weapon;

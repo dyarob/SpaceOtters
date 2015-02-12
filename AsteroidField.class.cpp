@@ -1,27 +1,25 @@
 #include "AsteroidField.class.hpp"
-#include "Vector2D.class.hpp"
 
-
-void	AsteroidField::generateBlocks(List **units)
-{
+/*
+void	AsteroidField::generateBlocks(List **units) {
 	int	nb_of_blks = rand() % 10;
 	BlockBase	*b;
 	int x;
 
 	if (!nb_of_blks) {
 		x = rand() % H_MAP;
-		b = new BlockBase( *(new Vector2D(x, W_SCREEN)), b_speed );
+		b = new BlockBase( *(new vector2(x, W_SCREEN)), b_speed );
 		*units = (*units)->push( b, 'a' );
 	}
 }
+*/
 
 AsteroidField::AsteroidField(int ab_speed)
 	: b_speed(ab_speed)
 {
 }
 
-AsteroidField::AsteroidField(AsteroidField const &src)
-{
+AsteroidField::AsteroidField(AsteroidField const &src) {
     *this = src;
 }
 

@@ -15,10 +15,9 @@ protected:
 
 public:
     AUnit(unsigned int height, unsigned int width, int hp, int hp_max,
-        Weapon &weapon, Vector2D &coord, Vector2D &delta_v);
-    AUnit(AUnit const & src);
-
-    AUnit           &operator=(AUnit const &);
+        Weapon &weapon, vector2 &coord, vector2 &delta_v, char type);
+    //AUnit(AUnit const & src);
+    //AUnit           &operator=(AUnit const &);
 
     Weapon  const   &getWeapon(void)        const;
     virtual Projectile    *shoot(void)   const;

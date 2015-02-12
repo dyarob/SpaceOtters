@@ -1,8 +1,9 @@
 #ifndef                 _ASTEROIDFIELD_HPP_
 # define                _ASTEROIDFIELD_HPP_
 
-# include				"BlockBase.class.hpp"
 # include				"CONST.h"
+# include				"BlockBase.class.hpp"
+# include				"vector2.class.hpp"
 # include				<stdlib.h> //rand
 
 class                   AsteroidField
@@ -18,7 +19,7 @@ class                   AsteroidField
         
         AsteroidField   &operator=(AsteroidField const &);
 
-		virtual void	generateBlocks( List **units );
+		//virtual void	generateBlocks( List **units );
         
 };
 

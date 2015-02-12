@@ -1,19 +1,17 @@
-#include "Projectile.class.hpp"
 #include "ProjectileEnemy.class.hpp"
-#include "Vector2D.class.hpp"
 
 Skin*	ProjectileEnemy::skin(new Skin(':', 3, 0));
 
-ProjectileEnemy::ProjectileEnemy(Vector2D &coord, Vector2D &delta_v)
+ProjectileEnemy::ProjectileEnemy(vector2 &coord, vector2 &delta_v)
     : Projectile(1, 1, coord, delta_v) {
-		_skin = skin;
+		sk = skin;
 }
 
+/*
 ProjectileEnemy::ProjectileEnemy(ProjectileEnemy const &src)
     : Projectile(src) {
     *this = src;
 }
-
 ProjectileEnemy      &ProjectileEnemy::operator=(ProjectileEnemy const &src) {
     this->_dmg           = src.getDmg();
     this->_width            = src._width;
@@ -22,8 +20,9 @@ ProjectileEnemy      &ProjectileEnemy::operator=(ProjectileEnemy const &src) {
     this->_delta_v          = src._delta_v;
     return *this;
 }
+*/
 
 ProjectileEnemy::~ProjectileEnemy(void) {
-delete &_coord;
-delete &_delta_v;
+//delete &_coord;
+//delete &_delta_v;
 }

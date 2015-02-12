@@ -1,22 +1,19 @@
-#include    "AUnit.class.hpp"
-#include    "Vector2D.class.hpp"
-#include    "Weapon.class.hpp"
 #include    "EnemyBase.class.hpp"
 
 Skin*	EnemyBase::skin(new Skin('<', 5, 0));
 
-EnemyBase::EnemyBase(Vector2D &coord, Vector2D &delta_v, int pattern)
-    : AUnit(1, 1, 3, 3, *(new WeaponEnemy()), coord, delta_v) {
-        this->_pattern = pattern;
-		_skin = skin;
+EnemyBase::EnemyBase(vector2 &coord, vector2 &delta_v, int pattern)
+    : AUnit(1, 1, 3, 3, *(new WeaponEnemy()), coord, delta_v, 'e') {
+        pat = pattern;
+		sk = skin;
 }
 
+/*
 EnemyBase::EnemyBase(EnemyBase const &src)
     : AUnit(src) {
     *this           = src;
     this->_id++;
 }
-
 EnemyBase           &EnemyBase::operator=(EnemyBase const & src) {
     this->_id               = src._id;
     this->_coord            = src._coord;
@@ -30,6 +27,7 @@ EnemyBase           &EnemyBase::operator=(EnemyBase const & src) {
 
     return *this;
 }
+*/
 
 EnemyBase::~EnemyBase() {
     delete &this->_weapon;
@@ -37,6 +35,6 @@ EnemyBase::~EnemyBase() {
 
 Projectile	*EnemyBase::shoot( ) const
 {
-	Vector2D	r = _coord + Vector2D(0, -1);
-	return ( _weapon.fire( new Vector2D(r), new Vector2D(0, -1)));
+	vector2	*r = new vector2(pos.x-1, pos.y);
+	return ( _weapon.fire( r, new vector2(0, -1)));
 }

@@ -3,7 +3,7 @@
 
 # include   <iostream>
 # include   "AUnit.class.hpp"
-# include   "Vector2D.class.hpp"
+# include   "vector2.class.hpp"
 # include   "WeaponEnemy.class.hpp"
 
 class       EnemyBase : public AUnit {
@@ -13,10 +13,9 @@ private:
 	static Skin* skin;
 
 public:
-    EnemyBase(Vector2D &coord, Vector2D &delta_v, int pattern);
-    EnemyBase(EnemyBase const & src);
-
-    EnemyBase           &operator=(EnemyBase const &);
+    EnemyBase(vector2 &coord, vector2 &delta_v, int pattern);
+    //EnemyBase(EnemyBase const & src);
+    //EnemyBase           &operator=(EnemyBase const &);
 
     WeaponEnemy          &getWeapon(void);
 

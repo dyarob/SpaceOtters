@@ -2,6 +2,7 @@
 # define    _WEAPON_BASE_HPP_
 
 # include   <iostream>
+# include	"Weapon.class.hpp"
 # include   "WeaponBase.class.hpp"
 # include   "ProjectileBase.class.hpp"
 
@@ -12,11 +13,10 @@ protected:
 
 public:
     WeaponBase(void);
-    WeaponBase(WeaponBase const &src);
-
-    WeaponBase              &operator=(WeaponBase const &);
+    //WeaponBase(WeaponBase const &src);
+    //WeaponBase              &operator=(WeaponBase const &);
     
-    virtual ProjectileBase  *fire(Vector2D *coord, Vector2D *delta_v);
+    virtual ProjectileBase  *fire(vector2 *coord, vector2 *delta_v);
     virtual                 ~WeaponBase(void);
 };
 

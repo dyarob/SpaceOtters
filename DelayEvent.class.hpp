@@ -2,7 +2,6 @@
 # define DELAYEVENT_HPP
 
 # include <iostream>
-# include "List.struct.hpp"
 
 # define FRAME_MIN_TO_POP_CHAIN 150
 # define FRAME_MAX_TO_POP_CHAIN 225

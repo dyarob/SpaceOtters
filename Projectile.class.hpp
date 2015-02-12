@@ -11,7 +11,7 @@ class                   Projectile : public AGameObject {
 		static Skin*	skin;
 
     public:
-        Projectile(unsigned int, unsigned int, vector2 &, vector2 &);
+        Projectile(unsigned int, unsigned int, vector2, vector2);
         Projectile(Projectile const & src);
         virtual ~Projectile();
         

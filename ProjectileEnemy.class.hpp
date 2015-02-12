@@ -3,7 +3,7 @@
 
 # include               <iostream>
 # include               "Projectile.class.hpp"
-# include               "Vector2D.class.hpp"
+# include               "vector2.class.hpp"
 
 class                   ProjectileEnemy : public Projectile {
     private:
@@ -11,10 +11,9 @@ class                   ProjectileEnemy : public Projectile {
 		static Skin* skin;
 
     public:
-        ProjectileEnemy(Vector2D &, Vector2D &);
-        ProjectileEnemy(ProjectileEnemy const & src);
-        
-        ProjectileEnemy      &operator=(ProjectileEnemy const &src);
+        ProjectileEnemy(vector2 &, vector2 &);
+        //ProjectileEnemy(ProjectileEnemy const & src);
+        //ProjectileEnemy      &operator=(ProjectileEnemy const &src);
         
         virtual ~ProjectileEnemy(void);
 };

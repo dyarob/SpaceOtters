@@ -16,6 +16,12 @@ class AGameObject {
 		static bool	isCollisionPossible(char a, char b);
 
 
+	public:
+		static unsigned int	_cur_id;
+		
+		static void		print(int, std::list<AGameObject*>);
+
+
 		unsigned int id;
 		unsigned int h;
 		unsigned int w;
@@ -25,12 +31,6 @@ class AGameObject {
     	unsigned int pat;
 
 
-	public:
-		static unsigned int	_cur_id;
-		
-		static void		print(int, std::list<AGameObject*>);
-
-
 		Skin*		sk;
 		vector2		pos;
 		vector2		acc;
@@ -38,7 +38,7 @@ class AGameObject {
 
 		AGameObject(unsigned int height, unsigned int width, int hp,
 				int hp_max, vector2 position, vector2 acceleration, char type);
-		~AGameObject();
+		virtual ~AGameObject();
 
 		std::ostream	&print(std::ostream &o) const;
 

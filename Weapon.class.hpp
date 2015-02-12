@@ -3,7 +3,7 @@
 
 # include   <iostream>
 # include   "Projectile.class.hpp"
-# include   "Vector2D.class.hpp"
+# include   "vector2.class.hpp"
 
 class       Weapon {
 
@@ -15,13 +15,12 @@ protected:
 
 public:
     Weapon(unsigned int);
-    Weapon(Weapon const &src);
-
-    Weapon              &operator=(Weapon const &);
+    //Weapon(Weapon const &src);
+    //Weapon              &operator=(Weapon const &);
     
     unsigned int        getFireRate(void)       const;
 
-    virtual Projectile  *fire(Vector2D *coord, Vector2D *delta_v);
+    virtual Projectile  *fire(vector2 *coord, vector2 *delta_v);
     virtual             ~Weapon(void);
 };
 

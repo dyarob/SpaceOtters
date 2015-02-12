@@ -19,26 +19,28 @@ void	WinUI_screen::draw_all ( std::list<AGameObject*> const &l ) const
 
 void	WinUI_screen::draw ( AGameObject* const &u ) const
 {
-	Vector2D v = u->getCoord();
+	vector2 v = u->pos;
 	if (has_colors()) {
-		if (u->getSkin()) {
-			u->getSkin()->init_cp();
-			wattron(win, COLOR_PAIR(u->getSkin()->_id));
-			int	w = u->getWidth();
+		if (u->sk) {
+			u->sk->init_cp();
+			wattron(win, COLOR_PAIR(u->sk->_id));
+			int	w = u->w;
 			if ( w == 1 ) {
-				char c = u->getSkin()->_c;
-				mvwaddch( win, v.getX(), v.getY(), c);
+				char c = u->sk->_c;
+				mvwaddch( win, v.x, v.y, c);
 			}
+			/*
 			else {		// Zaz
-				int h = u->getHeight();
+				int h = u->h;
 				//int j;
 				char *c;
 				for (int i = 0; i < h; ++i) {
 					c = ((E_Zaz*)u)->img[i];
-					mvwaddch( win, v.getX() + i, v.getY(), *c );
+					mvwaddch( win, v.x + i, v.y, *c );
 				}
 			}
-			wattroff(win, COLOR_PAIR(u->getSkin()->_id));
+			*/
+			wattroff(win, COLOR_PAIR(u->sk->_id));
 		}
 	}
 }
@@ -55,20 +57,21 @@ WinUI_screen::WinUI_screen(unsigned int width, unsigned int height, unsigned int
 {
 }
 
-WinUI_screen::WinUI_screen(WinUI_screen const & src)
-: WinUI(src)
-{
-}
-
 WinUI_screen::~WinUI_screen(void)
 {
 }
 
+/*
+WinUI_screen::WinUI_screen(WinUI_screen const & src)
+: WinUI(src)
+{
+}
 WinUI_screen &	WinUI_screen::operator=(WinUI_screen const & src) {
-	this->_height = src.getHeight();
-	this->_width = src.getHeight();
-	this->_heightMap = src.getHeight() * 3;
+	this->_height = src.h;
+	this->_width = src.h;
+	this->_heightMap = src.h * 3;
 	this->_startX = src.getStartX();
 	this->_startY = src.getStartY();
     return *this;
 }
+*/

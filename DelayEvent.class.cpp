@@ -1,5 +1,4 @@
-#include "DelayEvent.hpp"
-#include "EnemyBase.class.hpp"
+#include "DelayEvent.class.hpp"
 
 DelayEvent::DelayEvent(void) {
 	return;
@@ -45,8 +44,8 @@ void	DelayEvent::createDelayedEnemy( List **units , int type, int delay, int spa
 	EnemyBase *newEnnemy = NULL;
 
 	if (type == ENEMYBASE) {
-		Vector2D * a = new Vector2D(spawn_y, TEMP_WIN_X + delay);
-		Vector2D * b = new Vector2D(0, -5);
+		vector2 * a = new vector2(spawn_y, TEMP_WIN_X + delay);
+		vector2 * b = new vector2(0, -5);
 		newEnnemy = new EnemyBase(*a, *b, pattern);
 	}
 	if (newEnnemy != NULL){
