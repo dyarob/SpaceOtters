@@ -4,14 +4,6 @@
 unsigned int	AGameObject::_cur_id = 0;
 Skin*			AGameObject::skin( new Skin('0', 7, 0));
 
-std::ostream	&operator<<(std::ostream &o, std::list<AGameObject*> lgo) {
-	std::list<AGameObject*>::iterator	it(lgo.begin());
-	std::list<AGameObject*>::iterator	end(lgo.end());
-	for(; it!=end; ++it) {
-		(*it)->print(o);
-	}
-	return o;
-}
 std::ostream	&operator<<(std::ostream &o, AGameObject const &go) {
 	return go.print(o);
 }

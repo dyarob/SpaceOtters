@@ -54,7 +54,6 @@ class AGameObject {
 		*/
 };
 
-std::ostream	&operator<<(std::ostream &o, std::list<AGameObject*> lgo);
 std::ostream	&operator<<(std::ostream &o, AGameObject const &go);
 
 #endif // !AGameObject.class.hpp
