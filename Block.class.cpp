@@ -18,7 +18,6 @@ Block::Block(Block const &src)
     : AGameObject(src) {
     *this = src;
 }
-
 Block          &Block::operator=(Block const & src) {
     this->_width            = src._width;
     this->_height           = src._height;

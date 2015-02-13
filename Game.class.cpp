@@ -139,6 +139,7 @@ void	Game::updatePositions(std::list<AGameObject*> &objects, int const curr_fram
 
 void	Game::update(int const currFrame) {
 	//signal(SIGWINCH, do_resize);
+	std::cerr<<*player;
 	if (player->hp <= 0)
 		exitGame();
 	if (player->pos.x >= W_SCREEN - (W_SCREEN >> 2)) { // player->won the level
@@ -183,7 +184,6 @@ void	Game::exitGame(void) {
 	delete topBox;
 	delete bottBox;
 	delete gameScreen;
-	delete player;
 	objects.clear();//on supprime rien la?!
 	exit(0);
 }
