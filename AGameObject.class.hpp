@@ -5,8 +5,11 @@
 # include	<iostream>
 # include	<list>
 
+# include	"objlist.class.hpp"
 # include	"vector2.class.hpp"
 # include	"Skin.class.hpp"
+
+class objlist;
 
 class AGameObject {
 
@@ -43,7 +46,7 @@ class AGameObject {
 		std::ostream	&print(std::ostream &o) const;
 
 		void            move(int const currentFrame);
-		void			detect_collision(std::list<AGameObject*> const &l);
+		void			detect_collision(objlist const &l);
 
 
 	private:

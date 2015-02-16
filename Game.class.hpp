@@ -14,6 +14,7 @@
 #include "WinUI_dialogBox.class.hpp"
 
 #include <list>
+#include "objlist.class.hpp"
 #include <cstdlib>
 #include <iostream>
 #include <thread>
@@ -24,10 +25,10 @@
 class	Game {
 	private:
 		//bool	sigwinchReceived;
-		int		lvlId;
-		std::vector<Level*>		lvls;
-		std::list<AGameObject*>	objects;
-		Player	*player;
+		int				lvlId;
+		std::vector<Level*>	lvls;
+		objlist			objects;
+		Player			*player;
 
 		WinUI_dialogBox	*topBox;
 		WinUI_dialogBox	*bottBox;
@@ -36,7 +37,7 @@ class	Game {
 		void	lvlInit();
 
 		void	keyEvent(Player *player, std::list<AGameObject*> &l);
-		void	updatePositions(std::list<AGameObject*> &units, int const currFrame);
+		void	updatePositions(objlist &units, int const currFrame);
 		void	exitGame(void);
 
 	public:

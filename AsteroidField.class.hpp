@@ -5,6 +5,7 @@
 # include				"BlockBase.class.hpp"
 # include				"vector2.class.hpp"
 # include				<stdlib.h> //rand
+# include				"objlist.class.hpp"
 
 class                   AsteroidField
 {
@@ -19,7 +20,7 @@ class                   AsteroidField
         
         AsteroidField   &operator=(AsteroidField const &);
 
-		void	generateBlocks(std::list<AGameObject*> &units);
+		void	generateBlocks(objlist &units);
         
 };
 

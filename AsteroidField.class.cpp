@@ -1,14 +1,13 @@
 #include "AsteroidField.class.hpp"
 
-void	AsteroidField::generateBlocks(std::list<AGameObject*> &units) {
+void	AsteroidField::generateBlocks(objlist &units) {
 	int	nb_of_blks = rand() % 10;
-	BlockBase	*b;
 	int x;
 
 	if (!nb_of_blks) {
 		x = rand() % H_MAP;
-		b = new BlockBase( vector2(W_SCREEN, x), b_speed );
-		units.push_back(b);
+		if (!units.isOccupied(W_SCREEN, x))
+			units.push_back(new BlockBase(vector2(W_SCREEN, x), b_speed));
 	}
 }
 

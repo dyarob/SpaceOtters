@@ -8,7 +8,8 @@ std::ostream	&operator<<(std::ostream &o, AGameObject const &go) {
 	return go.print(o);
 }
 std::ostream	&AGameObject::print(std::ostream &o) const {
-	o << "GameObject no " << id << std::endl;
+	o << "GameObject no " << id << '\t';
+	o << "type: " << t << std::endl;
 	o << "height: " << h << '\t';
 	o << "width: " << w << std::endl;
 	o << "hp: " << hp << '\t';
@@ -23,16 +24,19 @@ std::ostream	&AGameObject::print(std::ostream &o) const {
 //!statics
 
 //----COLLISION ------
-void		AGameObject::detect_collision(std::list<AGameObject*> const &l)
+void		AGameObject::detect_collision(objlist const &l)
 {
-	std::list<AGameObject*>::const_iterator	it(l.begin());
-	std::list<AGameObject*>::const_iterator	end(l.end());
+	objlist::const_iterator	it(l.begin());
+	objlist::const_iterator	end(l.end());
 
 	for(; it!=end; ++it) {
 		if ((*it)->pos == pos
-				&& *it != this
-				&& isCollisionPossible((*it)->t, t)) {
+				&& isCollisionPossible((*it)->t, t)
+				) {
 			hp -= (*it)->dmg;
+			if ((*it)->t == 'p') {
+				hp = 0;
+			}
 		}
 	}
 }

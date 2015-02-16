@@ -71,16 +71,7 @@ void	Game::keyEvent(Player *player, std::list<AGameObject*> &l){
 	}
 }
 
-void	Game::updatePositions(std::list<AGameObject*> &objects, int const curr_frame) {
-	std::list<AGameObject*>::iterator	it(objects.begin());
-	std::list<AGameObject*>::iterator	end(objects.end());
-
-	for (; it!=end; ++it) {
-		(*it)->move(curr_frame);
-		if ((*it)->pos.x <= 0) {
-			(*it)->hp = 0;
-		}
-		/*
+		/* enemies' pattern...
 		if ((*it)->getId() != 0) { // change pattern for everyone but Player's shippu
 			if ((*it)->getPattern() == 1) {// pattern un coup en bas un coup en haut
 				if (curr_frame % 100 == 1) {
@@ -126,30 +117,15 @@ void	Game::updatePositions(std::list<AGameObject*> &objects, int const curr_fram
 		}
 		*/
 
-		(*it)->detect_collision(objects);
-	}
-	for (it=objects.begin(); it!=end;) {
-		if ((*it)->hp <= 0) {
-			delete (*it);
-			it = objects.erase(it);
-		} else
-			++it;
-	}
-}
-
 void	Game::update(int const currFrame) {
 	//signal(SIGWINCH, do_resize);
-	std::cerr<<*player;
-	if (player->hp <= 0)
-		exitGame();
 	if (player->pos.x >= W_SCREEN - (W_SCREEN >> 2)) { // player->won the level
 		lvlId++;
 		if ( lvlId >= NB_LVL )
 			exitGame();
 		endwin();
 		//sigwinchReceived = 1;
-		objects.clear();//on supprimme rien la?!
-		delete player;
+		objects.clear();
 		player = new Player(vector2(5, 15), vector2(0,0));
 		objects.push_back(player);
 	}
@@ -166,14 +142,19 @@ void	Game::update(int const currFrame) {
 
 	keyEvent(player, objects);
 
-	/*
+	/* enemies shoot
 	for (List *l = objects; l; l = l->next) {
 		if (!(rand() % 500 / (lvlId * 2 + 1)) && l->type == 'e')
 			objects = objects->push(((EnemyBase*)l->u)->shoot(), 'm');
 	}
 	*/
 
-	updatePositions(objects, currFrame);
+	objects.moveAll(currFrame);
+	objects.collisions();
+	if (player->hp <= 0)
+		exitGame();
+	objects.clean();
+
 	gameScreen->update(objects);
 
 	//bottBox->fixeDialog("GrosBoGoss Francky, BoGoss James", currFrame / 10, 1);
@@ -184,6 +165,6 @@ void	Game::exitGame(void) {
 	delete topBox;
 	delete bottBox;
 	delete gameScreen;
-	objects.clear();//on supprime rien la?!
+	objects.clear();
 	exit(0);
 }
