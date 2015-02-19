@@ -4,11 +4,10 @@
 #include "CONST.h"
 #include "Player.class.hpp"
 #include "EnemyBase.class.hpp"
-//#include "E_Zaz.class.hpp"
-//#include "DelayEvent.hpp"
 #include "BlockBase.class.hpp"
 #include "AsteroidField.class.hpp"
 #include "Level.class.hpp"
+#include "Spawner.class.hpp"
 
 #include "WinUI_screen.class.hpp"
 #include "WinUI_dialogBox.class.hpp"
@@ -29,6 +28,7 @@ class	Game {
 		std::vector<Level*>	lvls;
 		objlist			objects;
 		Player			*player;
+		Spawner			spawner;
 
 		WinUI_dialogBox	*topBox;
 		WinUI_dialogBox	*bottBox;

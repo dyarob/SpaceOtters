@@ -12,7 +12,7 @@ Game::Game(void)// :
 	player = new Player(vector2(5, 15), vector2(0,0));
 	objects.push_back(player);
 	lvlInit();
-	//DelayEvent		events;
+	spawner.spawn(objects, vector2(50, 15));
 }
 
 void	Game::lvlInit(void) {
@@ -137,11 +137,13 @@ void	Game::update(int const currFrame) {
 		sigwinchReceived = false;
 	}
 	*/
-	lvls[lvlId]->af->generateBlocks(objects);
-	//events.exec(&objects, currFrame);
 
 	keyEvent(player, objects);
 
+
+	//new blocs and ennemies generation
+	lvls[lvlId]->af->generateBlocks(objects);
+	//events.exec(&objects, currFrame);
 	/* enemies shoot
 	for (List *l = objects; l; l = l->next) {
 		if (!(rand() % 500 / (lvlId * 2 + 1)) && l->type == 'e')
@@ -149,15 +151,15 @@ void	Game::update(int const currFrame) {
 	}
 	*/
 
+	//logical update
 	objects.moveAll(currFrame);
 	objects.collisions();
 	if (player->hp <= 0)
 		exitGame();
 	objects.clean();
 
+	//graphical update
 	gameScreen->update(objects);
-
-	//bottBox->fixeDialog("GrosBoGoss Francky, BoGoss James", currFrame / 10, 1);
 	bottBox->fixeDialog(lvls[lvlId]->name, currFrame / 10, 1);
 }
 

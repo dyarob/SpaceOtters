@@ -19,6 +19,7 @@ SRC         =	AGameObject.class.cpp		\
 				ProjectileBase.class.cpp	\
 				ProjectileEnemy.class.cpp	\
 				Skin.class.cpp				\
+				Spawner.class.cpp			\
 				Timer.class.cpp				\
 				vector2.class.cpp			\
 				Weapon.class.cpp			\
