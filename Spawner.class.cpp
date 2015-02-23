@@ -4,6 +4,7 @@ Spawner::Spawner(void) {
 }
 
 Spawner::~Spawner(void) {
+	//need free mem here
 }
 
 void	Spawner::spawn(objlist &ol, vector2 const &pos) const {
@@ -28,4 +29,18 @@ void	Spawner::update(objlist &objects, int currFrame) {
 		} else
 			++it;
 	}
+}
+
+void	Spawner::read(std::string fname) {
+	int			sf;
+	vector2	sp;
+	unsigned short	nu, F, pat;
+
+	std::ifstream	f(fname.c_str(), std::ios::in);
+	f.ignore(256, '\n');
+	while (f >> sf >> sp.x >> sp.y
+			>> nu >> F >> pat) {
+		chains.push_back(new objchain(sf, sp, nu, F, pat));
+	}
+	f.close();
 }

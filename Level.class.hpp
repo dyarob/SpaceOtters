@@ -7,20 +7,21 @@
 
 class                   Level
 {
-    protected:
+    private:
         Level(void);
 
     public:
-        Level( std::string nam, int ab_speed );
+		std::string		name;
+		AsteroidField	*af;
+
+        ~Level();
+        Level(std::string nam, int ab_speed);
         Level(Level const & src);
-        virtual ~Level();
-        
         Level   &operator=(Level const &);
 
-		std::string	name;
-		AsteroidField	*af;
-		void	init( WinUI_dialogBox *db );
-        
+		void	init(WinUI_dialogBox *db);
+
+		static short	id;
 };
 
 #endif                  /* !_LEVEL_HPP_ */

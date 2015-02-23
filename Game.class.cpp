@@ -15,12 +15,11 @@ Game::Game(void)// :
 }
 
 void	Game::lvlInit(void) {
-	lvlId = 0;
 	lvls = std::vector<Level*>(NB_LVL);
-	lvls[3] = new Level ("Face Zaz, the final boss!", -1 );
 	lvls[0] = new Level ("Level 1 - Asteroid field", -2 );
 	lvls[1] = new Level ("Level 2 - Asteroid field", -3 );
 	lvls[2] = new Level ("Level 3 - Asteroid field", -1 );
+	lvls[3] = new Level ("Face Zaz, the final boss!", -1 );
 }
 //!*structors
 
@@ -119,8 +118,7 @@ void	Game::keyEvent(Player *player, std::list<AGameObject*> &l){
 void	Game::update(int const currFrame) {
 	//signal(SIGWINCH, do_resize);
 	if (player->pos.x >= W_SCREEN - (W_SCREEN >> 2)) { // player->won the level
-		lvlId++;
-		if ( lvlId >= NB_LVL )
+		if ( ++Level::id >= NB_LVL )
 			exitGame();
 		endwin();
 		//sigwinchReceived = 1;
@@ -147,19 +145,19 @@ void	Game::update(int const currFrame) {
 	objects.clean();
 
 	//new blocs and ennemies generation
-	lvls[lvlId]->af->generateBlocks(objects);
+	lvls[Level::id]->af->generateBlocks(objects);
 	spawner.update(objects, currFrame);
 	//events.exec(&objects, currFrame);
 	/* enemies shoot
 	for (List *l = objects; l; l = l->next) {
-		if (!(rand() % 500 / (lvlId * 2 + 1)) && l->type == 'e')
+		if (!(rand() % 500 / (Level::id * 2 + 1)) && l->type == 'e')
 			objects = objects->push(((EnemyBase*)l->u)->shoot(), 'm');
 	}
 	*/
 
 	//graphical update
 	gameScreen->update(objects);
-	bottBox->fixeDialog(lvls[lvlId]->name, currFrame / 10, 1);
+	bottBox->fixeDialog(lvls[Level::id]->name, currFrame / 10, 1);
 }
 
 void	Game::exitGame(void) {

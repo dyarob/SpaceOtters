@@ -15,4 +15,5 @@ objchain::objchain() {
 }
 
 objchain::~objchain() {
+	//need free mem here
 }

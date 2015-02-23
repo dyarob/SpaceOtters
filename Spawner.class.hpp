@@ -9,6 +9,7 @@ class	Spawner {
 		Spawner();
 		~Spawner();
 
+		void	Spawner::read(std::string fname);
 		void	update(objlist &ol, int currFrame);
 
 	private:
