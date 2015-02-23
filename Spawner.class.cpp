@@ -6,6 +6,26 @@ Spawner::Spawner(void) {
 Spawner::~Spawner(void) {
 }
 
-void	Spawner::spawn(objlist &ol, vector2 const &pos) {
+void	Spawner::spawn(objlist &ol, vector2 const &pos) const {
 	ol.push_back(new EnemyBase(pos, vector2(-2, 0), 1));
+}
+
+void	Spawner::update(objlist &objects, int currFrame) {
+	std::list<objchain*>::iterator	it = chains.begin();
+	std::list<objchain*>::iterator	fi(chains.end());
+
+	for (; it!=fi && (*it)->sf<currFrame;) {
+		// currFrame - it.sf = nb of frames since the chain started.
+		// if we % by the period F and it's 0, it's time to spawn an entity!
+		if (! (currFrame-(*it)->sf) % (*it)->F) {
+			spawn(objects, (*it)->sp);
+			if (! --(*it)->nu) {
+				delete *it;
+				chains.erase(it);
+				--fi;
+			} else
+				++it;
+		} else
+			++it;
+	}
 }

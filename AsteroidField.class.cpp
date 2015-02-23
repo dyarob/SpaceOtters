@@ -5,9 +5,9 @@ void	AsteroidField::generateBlocks(objlist &units) {
 	int x;
 
 	if (!nb_of_blks) {
-		x = rand() % H_MAP;
-		if (!units.isOccupied(W_SCREEN, x))
-			units.push_back(new BlockBase(vector2(W_SCREEN, x), b_speed));
+		x = rand() % (H_MAP-2) +1;
+		if (!units.isOccupied(W_SCREEN-2, x))
+			units.push_back(new BlockBase(vector2(W_SCREEN-2, x), b_speed));
 	}
 }
 

@@ -13,6 +13,7 @@ SRC         =	AGameObject.class.cpp		\
 				Game.class.cpp				\
 				Level.class.cpp				\
 				main.cpp					\
+				objchain.class.cpp		\
 				objlist.class.cpp			\
 				Player.class.cpp			\
 				Projectile.class.cpp		\

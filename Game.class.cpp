@@ -12,15 +12,14 @@ Game::Game(void)// :
 	player = new Player(vector2(5, 15), vector2(0,0));
 	objects.push_back(player);
 	lvlInit();
-	spawner.spawn(objects, vector2(50, 15));
 }
 
 void	Game::lvlInit(void) {
 	lvlId = 0;
 	lvls = std::vector<Level*>(NB_LVL);
-	lvls[1] = new Level ("Face Zaz, the final boss!", -1 );
-	lvls[3] = new Level ("Level 1 - Asteroid field", -2 );
-	lvls[0] = new Level ("Level 2 - Asteroid field", -3 );
+	lvls[3] = new Level ("Face Zaz, the final boss!", -1 );
+	lvls[0] = new Level ("Level 1 - Asteroid field", -2 );
+	lvls[1] = new Level ("Level 2 - Asteroid field", -3 );
 	lvls[2] = new Level ("Level 3 - Asteroid field", -1 );
 }
 //!*structors
@@ -140,9 +139,16 @@ void	Game::update(int const currFrame) {
 
 	keyEvent(player, objects);
 
+	//logical update
+	objects.moveAll(currFrame);
+	objects.collisions();
+	if (player->hp <= 0)
+		exitGame();
+	objects.clean();
 
 	//new blocs and ennemies generation
 	lvls[lvlId]->af->generateBlocks(objects);
+	spawner.update(objects, currFrame);
 	//events.exec(&objects, currFrame);
 	/* enemies shoot
 	for (List *l = objects; l; l = l->next) {
@@ -150,13 +156,6 @@ void	Game::update(int const currFrame) {
 			objects = objects->push(((EnemyBase*)l->u)->shoot(), 'm');
 	}
 	*/
-
-	//logical update
-	objects.moveAll(currFrame);
-	objects.collisions();
-	if (player->hp <= 0)
-		exitGame();
-	objects.clean();
 
 	//graphical update
 	gameScreen->update(objects);

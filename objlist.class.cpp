@@ -73,7 +73,9 @@ void	objlist::collisions(void) {
 	objlist::iterator	it(begin());
 	objlist::iterator	en(end());
 	for (; it!=en; ++it) {
-		if ((*it)->pos.x <= 0) {
+		if ((*it)->pos.x <= 0
+				|| ((*it)->pos.x >= W_SCREEN-1
+					&& (*it)->t == 'm')) {
 			(*it)->hp = 0;
 		}
 		(*it)->detect_collision(*this);
