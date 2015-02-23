@@ -11,16 +11,9 @@ Game::Game(void)// :
 	gameScreen = new WinUI_screen(W_SCREEN, H_MAP, 3, 0);
 	player = new Player(vector2(5, 15), vector2(0,0));
 	objects.push_back(player);
-	lvlInit();
+	Level::lvlsInit();
 }
 
-void	Game::lvlInit(void) {
-	lvls = std::vector<Level*>(NB_LVL);
-	lvls[0] = new Level ("Level 1 - Asteroid field", -2 );
-	lvls[1] = new Level ("Level 2 - Asteroid field", -3 );
-	lvls[2] = new Level ("Level 3 - Asteroid field", -1 );
-	lvls[3] = new Level ("Face Zaz, the final boss!", -1 );
-}
 //!*structors
 
 /*
@@ -145,7 +138,7 @@ void	Game::update(int const currFrame) {
 	objects.clean();
 
 	//new blocs and ennemies generation
-	lvls[Level::id]->af->generateBlocks(objects);
+	Level::update(objects);
 	spawner.update(objects, currFrame);
 	//events.exec(&objects, currFrame);
 	/* enemies shoot
@@ -157,7 +150,7 @@ void	Game::update(int const currFrame) {
 
 	//graphical update
 	gameScreen->update(objects);
-	bottBox->fixeDialog(lvls[Level::id]->name, currFrame / 10, 1);
+	bottBox->fixeDialog(Level::lvls[Level::id]->name, currFrame / 10, 1);
 }
 
 void	Game::exitGame(void) {

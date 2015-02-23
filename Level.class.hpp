@@ -10,6 +10,7 @@ class                   Level
     private:
         Level(void);
 
+
     public:
 		std::string		name;
 		AsteroidField	*af;
@@ -21,7 +22,12 @@ class                   Level
 
 		void	init(WinUI_dialogBox *db);
 
+
 		static short	id;
+		static std::vector<Level*>	lvls;
+
+		static void	lvlsInit();
+		static void	update(objlist &objects);
 };
 
 #endif                  /* !_LEVEL_HPP_ */

@@ -31,7 +31,7 @@ void	Spawner::update(objlist &objects, int currFrame) {
 	}
 }
 
-void	Spawner::read(std::string fname) {
+void	Spawner::loadLvl(std::string fname) {
 	int			sf;
 	vector2	sp;
 	unsigned short	nu, F, pat;
