@@ -1,6 +1,7 @@
 #include "Spawner.class.hpp"
 
 Spawner::Spawner(void) {
+	loadLvl(std::string("test.lvl"));
 }
 
 Spawner::~Spawner(void) {
@@ -12,18 +13,18 @@ void	Spawner::spawn(objlist &ol, vector2 const &pos) const {
 }
 
 void	Spawner::update(objlist &objects, int currFrame) {
-	std::list<objchain*>::iterator	it = chains.begin();
+	std::list<objchain*>::iterator	it(chains.begin());
 	std::list<objchain*>::iterator	fi(chains.end());
+	objects=objects;
 
 	for (; it!=fi && (*it)->sf<currFrame;) {
-		// currFrame - it.sf = nb of frames since the chain started.
-		// if we % by the period F and it's 0, it's time to spawn an entity!
-		if (! (currFrame-(*it)->sf) % (*it)->F) {
+	// currFrame - it.sf = nb of frames since the chain started.
+	// if we % by the period F and it's 0, it's time to spawn an entity!
+		if (!((currFrame-(*it)->sf) % (*it)->F)) {
 			spawn(objects, (*it)->sp);
-			if (! --(*it)->nu) {
-				delete *it;
-				chains.erase(it);
-				--fi;
+			if (!(--(*it)->nu)) {
+				delete (*it);
+				it = chains.erase(it);
 			} else
 				++it;
 		} else

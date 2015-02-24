@@ -2,7 +2,6 @@
 
 //statics
 short	Level::id(0);
-//std::vector<Level*>	Level::lvls(*(new std::vector<Level*>(NB_LVL)));
 std::vector<Level*>	Level::lvls(NB_LVL);
 
 void	Level::lvlsInit() {
@@ -11,6 +10,7 @@ void	Level::lvlsInit() {
 	lvls[2] = new Level ("Level 3 - Asteroid field", -1 );
 	lvls[3] = new Level ("Face Zaz, the final boss!", -1 );
 }
+
 void	Level::update(objlist &objects) {
 	lvls[id]->af->generateBlocks(objects);
 }

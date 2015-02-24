@@ -49,7 +49,7 @@ AGameObject::~AGameObject() {
 AGameObject::AGameObject(unsigned int height, unsigned int width, int hp_,
     int hp_max_, vector2 position, vector2 acceleration, char type)
     : id(AGameObject::_cur_id++), h(height), w(width), hp(hp_),
-    hp_max(hp_max_), dmg(1), t(type) {
+	hp_max(hp_max_), dmg(1), t(type) {
 	sk = skin;
 	pos.x = position.x;
 	pos.y = position.y;
