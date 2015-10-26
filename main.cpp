@@ -1,14 +1,16 @@
 #include <stdlib.h>		//srand
 #include <ncurses.h>	//initscr
-#include "Game.class.hpp"
 #include "Timer.class.hpp"
+#include "Game.class.hpp"
+#include "Display.class.hpp"
 
 void		mainloop(void);
 void		freeexit(void);
 
-static	Timer 		*t = new Timer(100);
-static	unsigned	currFrame(0);
-static	Game			*g = new Game();
+static Timer 		*t = new Timer(100);
+static unsigned	currFrame(0);
+static Game			*g = new Game();
+static Display	*d = new Display();
 
 
 int			main(void) {
@@ -37,6 +39,7 @@ void		mainloop(void) {
 }
 
 void		freeexit(void) {
-	free(t);
-	free(g);
+	delete(t);
+	delete(g);
+	delete(d);
 }

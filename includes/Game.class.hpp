@@ -1,7 +1,8 @@
-#ifndef GAME_CLASS_HPP
-# define GAME_CLASS_HPP
+#ifndef GAME
+# define GAME
 
-class	Game {
+class		Game {
+	public:
 				Game();
 				~Game();
 	int		update(unsigned const currFrame);

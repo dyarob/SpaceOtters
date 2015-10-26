@@ -6,6 +6,8 @@ SRC         =	\
 			Game.class.cpp	\
 			main.cpp	\
 			Timer.class.cpp	\
+			Window.class.cpp	\
+			Wdialog.class.cpp	\
 
 OBJ         = $(SRC:.cpp=.o)
 HDFLAGS     = -I./includes/
