@@ -1,12 +1,12 @@
-#ifndef GAME_CLASS_HPP
-# define GAME_CLASS_HPP
+#ifndef GAME
+# define GAME
 
-#include "Timer.class.hpp"
-
-class	Game {
-	int	mainloop();
-	int	update(int const currFrame);
-	void	exitGame(void);
+class		Game {
+	public:
+				Game();
+				~Game();
+	int		update(unsigned const currFrame);
+	//void	exitGame(void);
 };
 
 #endif

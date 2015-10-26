@@ -2,16 +2,17 @@ CC          = /usr/bin/g++
 NAME        = spaceotters
 SRCDIR      = ./src/
 SRC         =	\
-				main.cpp	\
-				Timer.class.cpp	\
-				Game.class.cpp	\
+			Display.class.cpp	\
+			Game.class.cpp	\
+			main.cpp	\
+			Timer.class.cpp	\
 
 OBJ         = $(SRC:.cpp=.o)
 HDFLAGS     = -I./includes/
 LDFLAGS     = -lncurses
 CFLAGS      =	\
-				$(HDFLAGS) -Wall -Werror -Wextra -ansi -pedantic -g \
-				-std=c++11	# for <thread> in main.cpp on arch-linux
+			$(HDFLAGS) -Wall -Werror -Wextra -ansi -pedantic -g \
+			-std=c++11	# for <thread> in main.cpp on arch-linux
 RM          = rm -rf
 
 all:        $(NAME)
