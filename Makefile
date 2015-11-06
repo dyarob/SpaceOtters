@@ -1,16 +1,15 @@
 CC          = /usr/bin/g++
 NAME        = spaceotters
-SRCDIR      = ./src/
 SRC         =	\
-			Display.class.cpp	\
+			data.cpp	\
+			display.cpp	\
 			Game.class.cpp	\
 			main.cpp	\
 			Timer.class.cpp	\
-			Window.class.cpp	\
-			Wdialog.class.cpp	\
 
-OBJ         = $(SRC:.cpp=.o)
-HDFLAGS     = -I./includes/
+OBJDIR			= ./obj/
+OBJ         = $(addprefix $(OBJDIR), $(SRC:.cpp=.o))
+HDFLAGS     = -I./includes/ -I../boost_1_59_0/
 LDFLAGS     = -lncurses
 CFLAGS      =	\
 			$(HDFLAGS) -Wall -Werror -Wextra -ansi -pedantic -g \
@@ -23,7 +22,7 @@ $(NAME):    $(OBJ)
 			@echo "\033[1;32m[Linking] \t\033[0m: \033[0;32m" | tr -d '\n'
 			$(CC) -o $@ $^ $(LDFLAGS) 
 			@echo "\033[0m" | tr -d '\n'
-%.o:        %.cpp
+$(addprefix $(OBJDIR), %.o):        %.cpp
 			@echo "\033[1;36m[Compiling] \t\033[0m: \033[1;37m" | tr -d '\n'
 			$(CC) $(CFLAGS) -c $< -o $@
 			@echo "\033[0m" | tr -d '\n'

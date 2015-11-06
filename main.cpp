@@ -2,7 +2,7 @@
 #include <ncurses.h>	//initscr
 #include "Timer.class.hpp"
 #include "Game.class.hpp"
-#include "Display.class.hpp"
+#include "display.hpp"
 
 void		mainloop(void);
 void		freeexit(void);
@@ -10,17 +10,16 @@ void		freeexit(void);
 static Timer 		*t = new Timer(100);
 static unsigned	currFrame(0);
 static Game			*g = new Game();
-static Display	*d = new Display();
 
 
 int			main(void) {
 	srand(time(NULL));
-
+	//ncurses init
 	initscr();
 	start_color();
-
+	//launch
 	mainloop();
-
+	//end
 	freeexit();
 	return EXIT_SUCCESS;
 }
@@ -31,7 +30,7 @@ void		mainloop(void) {
 		t->start();
 
 		g->update(currFrame);
-		//display.update();
+		x::update(currFrame);
 
 		t->stop();
 		t->wait();
@@ -41,5 +40,4 @@ void		mainloop(void) {
 void		freeexit(void) {
 	delete(t);
 	delete(g);
-	delete(d);
 }
