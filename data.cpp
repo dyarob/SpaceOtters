@@ -11,6 +11,9 @@ void	d::initiate() {
 	atexit(d::terminate);
 }
 
+void	d::foreach(idhmap_int	*map) {
+}
+
 void	d::terminate() {
 	resource.clear();
 }

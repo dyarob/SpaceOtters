@@ -18,6 +18,7 @@ namespace d {
 	extern multimap	depth;
 
 	extern void	initiate();
+	extern void	foreach(idhmap_int *map);
 	extern void	terminate();
 
 }
