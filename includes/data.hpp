@@ -7,18 +7,19 @@
 namespace d {
 
 	typedef boost::unordered_map<unsigned, int>	idhmap_int;
-	typedef boost::unordered_map<unsigned, void*>	idhmap_void;
+	typedef boost::unordered_map<unsigned, unsigned>	idhmap_uns;
+	typedef boost::unordered_map<unsigned, void*>	idhmapvoid;
 	typedef boost::container::multimap<unsigned, unsigned>	multimap;
 
 	extern idhmap_int	x;
 	extern idhmap_int	y;
-	extern idhmap_int	w;
-	extern idhmap_int	l;
-	extern idhmap_void	resource;
+	extern idhmap_uns	w;
+	extern idhmap_uns	l;
+	extern idhmapvoid	resource;
 	extern multimap	depth;
+	extern unsigned	maxid;
 
 	extern void	initiate();
-	extern void	foreach(idhmap_int *map);
 	extern void	terminate();
 
 }

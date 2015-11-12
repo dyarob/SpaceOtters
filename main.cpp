@@ -3,6 +3,8 @@
 #include "Timer.class.hpp"
 #include "Game.class.hpp"
 #include "display.hpp"
+#include "data.hpp"
+#include "entities.hpp"
 
 void		mainloop(void);
 void		freeexit(void);
@@ -29,7 +31,10 @@ void		mainloop(void) {
 		currFrame++;
 		t->start();
 
-		g->update(currFrame);
+		//g->update(currFrame);
+		unsigned e = e::create(1,1,1,1,1);
+		d::resource[e] = malloc(1);
+		*((char*)d::resource[e]) = 'e';
 		x::update(currFrame);
 
 		t->stop();

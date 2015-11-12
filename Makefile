@@ -3,6 +3,7 @@ NAME        = spaceotters
 SRC         =	\
 			data.cpp	\
 			display.cpp	\
+			entities.cpp	\
 			Game.class.cpp	\
 			main.cpp	\
 			Timer.class.cpp	\

@@ -9,8 +9,12 @@ void	x::initiate() {
 
 int	x::update(unsigned const currFrame) {
 	(void)currFrame;
-//	for (const auto depth : d::depth) {
-		//draw here
-//	}
+	for (const auto depth : d::depth) {
+		draw(depth.second);
+	}
 	return 0;
+}
+
+void	x::draw(int const id) {
+	write(1, d::resource[id], 1);
 }
