@@ -19,6 +19,7 @@ int			main(void) {
 	//ncurses init
 	initscr();
 	start_color();
+	x::initiate();
 	//launch
 	mainloop();
 	//end

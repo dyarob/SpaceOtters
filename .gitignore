@@ -1,4 +1,5 @@
 # config maison
+spaceotters
 *.DSYM/*
 logs
 a.out

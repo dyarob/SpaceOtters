@@ -41,11 +41,11 @@ badd +1 display.cpp
 badd +1 includes/display.hpp
 badd +1 data.cpp
 badd +1 includes/data.hpp
-badd +0 test_idhmap.cpp
-badd +0 ../kalejdoskopo/test_firstmain.c
-badd +0 entities.cpp
-badd +0 includes/entities.hpp
-badd +0 Game.class.cpp
+badd +1 test_idhmap.cpp
+badd +1 ../kalejdoskopo/test_firstmain.c
+badd +1 entities.cpp
+badd +1 includes/entities.hpp
+badd +1 Game.class.cpp
 args main.cpp
 edit main.cpp
 set splitbelow splitright
@@ -60,9 +60,9 @@ set nosplitbelow
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
-exe 'vert 1resize ' . ((&columns * 59 + 93) / 186)
-exe 'vert 2resize ' . ((&columns * 60 + 93) / 186)
-exe 'vert 3resize ' . ((&columns * 65 + 93) / 186)
+exe 'vert 1resize ' . ((&columns * 62 + 97) / 194)
+exe 'vert 2resize ' . ((&columns * 62 + 97) / 194)
+exe 'vert 3resize ' . ((&columns * 68 + 97) / 194)
 argglobal
 setlocal autoindent
 setlocal nobinary
@@ -159,12 +159,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 37 - ((36 * winheight(0) + 31) / 63)
+let s:l = 24 - ((23 * winheight(0) + 35) / 71)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-37
-normal! 010l
+24
+normal! 011l
 wincmd w
 argglobal
 edit test_idhmap.cpp
@@ -263,7 +263,7 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 1 - ((0 * winheight(0) + 31) / 63)
+let s:l = 1 - ((0 * winheight(0) + 35) / 71)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -367,16 +367,16 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 9 - ((6 * winheight(0) + 31) / 63)
+let s:l = 9 - ((0 * winheight(0) + 35) / 71)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 9
 normal! 017l
 wincmd w
-exe 'vert 1resize ' . ((&columns * 59 + 93) / 186)
-exe 'vert 2resize ' . ((&columns * 60 + 93) / 186)
-exe 'vert 3resize ' . ((&columns * 65 + 93) / 186)
+exe 'vert 1resize ' . ((&columns * 62 + 97) / 194)
+exe 'vert 2resize ' . ((&columns * 62 + 97) / 194)
+exe 'vert 3resize ' . ((&columns * 68 + 97) / 194)
 tabedit display.cpp
 set splitbelow splitright
 wincmd _ | wincmd |
@@ -390,9 +390,9 @@ set nosplitbelow
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
-exe 'vert 1resize ' . ((&columns * 61 + 93) / 186)
-exe 'vert 2resize ' . ((&columns * 61 + 93) / 186)
-exe 'vert 3resize ' . ((&columns * 62 + 93) / 186)
+exe 'vert 1resize ' . ((&columns * 64 + 97) / 194)
+exe 'vert 2resize ' . ((&columns * 63 + 97) / 194)
+exe 'vert 3resize ' . ((&columns * 65 + 97) / 194)
 argglobal
 setlocal autoindent
 setlocal nobinary
@@ -489,12 +489,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 19 - ((18 * winheight(0) + 31) / 63)
+let s:l = 34 - ((33 * winheight(0) + 35) / 71)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-19
-normal! 01l
+34
+normal! 042l
 wincmd w
 argglobal
 edit includes/display.hpp
@@ -593,7 +593,7 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 11 - ((10 * winheight(0) + 31) / 63)
+let s:l = 11 - ((10 * winheight(0) + 35) / 71)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -697,16 +697,16 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 5 - ((4 * winheight(0) + 31) / 63)
+let s:l = 5 - ((4 * winheight(0) + 35) / 71)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 5
 normal! 0
 wincmd w
-exe 'vert 1resize ' . ((&columns * 61 + 93) / 186)
-exe 'vert 2resize ' . ((&columns * 61 + 93) / 186)
-exe 'vert 3resize ' . ((&columns * 62 + 93) / 186)
+exe 'vert 1resize ' . ((&columns * 64 + 97) / 194)
+exe 'vert 2resize ' . ((&columns * 63 + 97) / 194)
+exe 'vert 3resize ' . ((&columns * 65 + 97) / 194)
 tabedit entities.cpp
 set splitbelow splitright
 wincmd _ | wincmd |
@@ -717,8 +717,8 @@ set nosplitbelow
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
-exe 'vert 1resize ' . ((&columns * 92 + 93) / 186)
-exe 'vert 2resize ' . ((&columns * 93 + 93) / 186)
+exe 'vert 1resize ' . ((&columns * 96 + 97) / 194)
+exe 'vert 2resize ' . ((&columns * 97 + 97) / 194)
 argglobal
 setlocal autoindent
 setlocal nobinary
@@ -815,7 +815,7 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 9 - ((8 * winheight(0) + 31) / 63)
+let s:l = 9 - ((8 * winheight(0) + 35) / 71)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -919,15 +919,15 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 6 - ((5 * winheight(0) + 31) / 63)
+let s:l = 6 - ((5 * winheight(0) + 35) / 71)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 6
 normal! 015l
 wincmd w
-exe 'vert 1resize ' . ((&columns * 92 + 93) / 186)
-exe 'vert 2resize ' . ((&columns * 93 + 93) / 186)
+exe 'vert 1resize ' . ((&columns * 96 + 97) / 194)
+exe 'vert 2resize ' . ((&columns * 97 + 97) / 194)
 tabedit data.cpp
 set splitbelow splitright
 wincmd _ | wincmd |
@@ -938,8 +938,8 @@ set nosplitbelow
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
-exe 'vert 1resize ' . ((&columns * 89 + 93) / 186)
-exe 'vert 2resize ' . ((&columns * 96 + 93) / 186)
+exe 'vert 1resize ' . ((&columns * 93 + 97) / 194)
+exe 'vert 2resize ' . ((&columns * 100 + 97) / 194)
 argglobal
 setlocal autoindent
 setlocal nobinary
@@ -1036,11 +1036,11 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 14 - ((13 * winheight(0) + 31) / 63)
+let s:l = 11 - ((10 * winheight(0) + 35) / 71)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-14
+11
 normal! 0
 wincmd w
 argglobal
@@ -1140,16 +1140,16 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 11 - ((10 * winheight(0) + 31) / 63)
+let s:l = 11 - ((10 * winheight(0) + 35) / 71)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 11
 normal! 057l
 wincmd w
-exe 'vert 1resize ' . ((&columns * 89 + 93) / 186)
-exe 'vert 2resize ' . ((&columns * 96 + 93) / 186)
-tabnext 1
+exe 'vert 1resize ' . ((&columns * 93 + 97) / 194)
+exe 'vert 2resize ' . ((&columns * 100 + 97) / 194)
+tabnext 2
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf
 endif
