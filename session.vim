@@ -42,7 +42,7 @@ badd +1 includes/display.hpp
 badd +1 data.cpp
 badd +1 includes/data.hpp
 badd +1 test_idhmap.cpp
-badd +1 ../kalejdoskopo/test_firstmain.c
+badd +5 ../kalejdoskopo/test_firstmain.c
 badd +1 entities.cpp
 badd +1 includes/entities.hpp
 badd +1 Game.class.cpp
@@ -60,9 +60,9 @@ set nosplitbelow
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
-exe 'vert 1resize ' . ((&columns * 62 + 97) / 194)
-exe 'vert 2resize ' . ((&columns * 62 + 97) / 194)
-exe 'vert 3resize ' . ((&columns * 68 + 97) / 194)
+exe 'vert 1resize ' . ((&columns * 63 + 98) / 196)
+exe 'vert 2resize ' . ((&columns * 62 + 98) / 196)
+exe 'vert 3resize ' . ((&columns * 69 + 98) / 196)
 argglobal
 setlocal autoindent
 setlocal nobinary
@@ -159,12 +159,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 24 - ((23 * winheight(0) + 35) / 71)
+let s:l = 40 - ((16 * winheight(0) + 35) / 71)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-24
-normal! 011l
+40
+normal! 02l
 wincmd w
 argglobal
 edit test_idhmap.cpp
@@ -374,25 +374,21 @@ normal! zt
 9
 normal! 017l
 wincmd w
-exe 'vert 1resize ' . ((&columns * 62 + 97) / 194)
-exe 'vert 2resize ' . ((&columns * 62 + 97) / 194)
-exe 'vert 3resize ' . ((&columns * 68 + 97) / 194)
+exe 'vert 1resize ' . ((&columns * 63 + 98) / 196)
+exe 'vert 2resize ' . ((&columns * 62 + 98) / 196)
+exe 'vert 3resize ' . ((&columns * 69 + 98) / 196)
 tabedit display.cpp
 set splitbelow splitright
 wincmd _ | wincmd |
 vsplit
-wincmd _ | wincmd |
-vsplit
-2wincmd h
-wincmd w
+1wincmd h
 wincmd w
 set nosplitbelow
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
-exe 'vert 1resize ' . ((&columns * 64 + 97) / 194)
-exe 'vert 2resize ' . ((&columns * 63 + 97) / 194)
-exe 'vert 3resize ' . ((&columns * 65 + 97) / 194)
+exe 'vert 1resize ' . ((&columns * 97 + 98) / 196)
+exe 'vert 2resize ' . ((&columns * 98 + 98) / 196)
 argglobal
 setlocal autoindent
 setlocal nobinary
@@ -489,12 +485,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 34 - ((33 * winheight(0) + 35) / 71)
+let s:l = 35 - ((34 * winheight(0) + 35) / 71)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-34
-normal! 042l
+35
+normal! 0
 wincmd w
 argglobal
 edit includes/display.hpp
@@ -593,120 +589,15 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 11 - ((10 * winheight(0) + 35) / 71)
+let s:l = 3 - ((2 * winheight(0) + 35) / 71)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-11
+3
 normal! 0
 wincmd w
-argglobal
-edit ../kalejdoskopo/test_firstmain.c
-setlocal autoindent
-setlocal nobinary
-setlocal bufhidden=
-setlocal buflisted
-setlocal buftype=
-setlocal cindent
-setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
-setlocal cinoptions=
-setlocal cinwords=if,else,while,do,for,switch
-setlocal colorcolumn=
-setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://
-setlocal commentstring=/*%s*/
-setlocal complete=.,w,b,u,t,i
-setlocal completefunc=
-setlocal nocopyindent
-setlocal cryptmethod=
-setlocal nocursorbind
-setlocal nocursorcolumn
-setlocal nocursorline
-setlocal define=
-setlocal dictionary=
-setlocal nodiff
-setlocal equalprg=
-setlocal errorformat=
-setlocal noexpandtab
-if &filetype != 'c'
-setlocal filetype=c
-endif
-setlocal foldcolumn=0
-setlocal foldenable
-setlocal foldexpr=0
-setlocal foldignore=#
-setlocal foldlevel=0
-setlocal foldmarker={{{,}}}
-setlocal foldmethod=manual
-setlocal foldminlines=1
-setlocal foldnestmax=20
-setlocal foldtext=foldtext()
-setlocal formatexpr=
-setlocal formatoptions=croql
-setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
-setlocal grepprg=
-setlocal iminsert=0
-setlocal imsearch=0
-setlocal include=
-setlocal includeexpr=
-setlocal indentexpr=
-setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
-setlocal noinfercase
-setlocal iskeyword=@,48-57,_,192-255
-setlocal keywordprg=
-setlocal nolinebreak
-setlocal nolisp
-setlocal nolist
-setlocal makeprg=
-setlocal matchpairs=(:),{:},[:]
-setlocal modeline
-setlocal modifiable
-setlocal nrformats=octal,hex
-set number
-setlocal number
-setlocal numberwidth=4
-setlocal omnifunc=ccomplete#Complete
-setlocal path=
-setlocal nopreserveindent
-setlocal nopreviewwindow
-setlocal quoteescape=\\
-setlocal noreadonly
-setlocal norelativenumber
-setlocal noscrollbind
-setlocal shiftwidth=2
-setlocal noshortname
-setlocal smartindent
-setlocal softtabstop=0
-setlocal nospell
-setlocal spellcapcheck=
-setlocal spellfile=
-setlocal spelllang=en
-setlocal statusline=
-setlocal suffixesadd=
-setlocal swapfile
-setlocal synmaxcol=3000
-if &syntax != 'c'
-setlocal syntax=c
-endif
-setlocal tabstop=2
-setlocal tags=
-setlocal textwidth=0
-setlocal thesaurus=
-setlocal noundofile
-setlocal nowinfixheight
-setlocal nowinfixwidth
-setlocal wrap
-setlocal wrapmargin=0
-silent! normal! zE
-let s:l = 5 - ((4 * winheight(0) + 35) / 71)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-5
-normal! 0
-wincmd w
-exe 'vert 1resize ' . ((&columns * 64 + 97) / 194)
-exe 'vert 2resize ' . ((&columns * 63 + 97) / 194)
-exe 'vert 3resize ' . ((&columns * 65 + 97) / 194)
+exe 'vert 1resize ' . ((&columns * 97 + 98) / 196)
+exe 'vert 2resize ' . ((&columns * 98 + 98) / 196)
 tabedit entities.cpp
 set splitbelow splitright
 wincmd _ | wincmd |
@@ -717,8 +608,8 @@ set nosplitbelow
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
-exe 'vert 1resize ' . ((&columns * 96 + 97) / 194)
-exe 'vert 2resize ' . ((&columns * 97 + 97) / 194)
+exe 'vert 1resize ' . ((&columns * 97 + 98) / 196)
+exe 'vert 2resize ' . ((&columns * 98 + 98) / 196)
 argglobal
 setlocal autoindent
 setlocal nobinary
@@ -926,8 +817,8 @@ normal! zt
 6
 normal! 015l
 wincmd w
-exe 'vert 1resize ' . ((&columns * 96 + 97) / 194)
-exe 'vert 2resize ' . ((&columns * 97 + 97) / 194)
+exe 'vert 1resize ' . ((&columns * 97 + 98) / 196)
+exe 'vert 2resize ' . ((&columns * 98 + 98) / 196)
 tabedit data.cpp
 set splitbelow splitright
 wincmd _ | wincmd |
@@ -938,8 +829,8 @@ set nosplitbelow
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
-exe 'vert 1resize ' . ((&columns * 93 + 97) / 194)
-exe 'vert 2resize ' . ((&columns * 100 + 97) / 194)
+exe 'vert 1resize ' . ((&columns * 94 + 98) / 196)
+exe 'vert 2resize ' . ((&columns * 101 + 98) / 196)
 argglobal
 setlocal autoindent
 setlocal nobinary
@@ -1147,9 +1038,9 @@ normal! zt
 11
 normal! 057l
 wincmd w
-exe 'vert 1resize ' . ((&columns * 93 + 97) / 194)
-exe 'vert 2resize ' . ((&columns * 100 + 97) / 194)
-tabnext 2
+exe 'vert 1resize ' . ((&columns * 94 + 98) / 196)
+exe 'vert 2resize ' . ((&columns * 101 + 98) / 196)
+tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf
 endif

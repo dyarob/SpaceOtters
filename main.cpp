@@ -34,8 +34,10 @@ void		mainloop(void) {
 
 		//g->update(currFrame);
 		unsigned e = e::create(1,1,1,1,1);
+		unsigned e2 = e::create(2,2,2,2,2);
 		d::resource[e] = malloc(1);
 		*((char*)d::resource[e]) = 'e';
+		d::resource[e2] = strdup("xter");
 		x::update(currFrame);
 
 		t->stop();

@@ -18,24 +18,24 @@ void	x::initiate() {
 }
 
 int	x::update(unsigned const currFrame) {
-	(void)currFrame;
 	static char *cl = strdup("cl");
 	static char *cm = strdup("cm");
 	tputs(tgetstr(cl, NULL), 1, testputc);
+	write(1, "\033[38;5;161m", 11);
 	for (const auto depth : d::depth) {
 		draw(depth.second);
 	}
-	tputs(tgoto(tgetstr(cm, NULL), 0, 0), 1, testputc);
 
-		//write(1, (char*)d::resource[0], 120);
 	for (int i=0; i<30; ++i) {
+		tputs(tgoto(tgetstr(cm, NULL), 0, i), 1, testputc);
 		write(1, (char*)d::resource[0]+i*120, 120);
-		//write(1, "\n", 1);
-		tputs(tgoto(tgetstr(cm, NULL), 1, i+1), 1, testputc);
 	}
-	return 0;
+	return currFrame;
 }
 
 void	x::draw(int const id) {
-		((char*)d::resource[0])[d::x[id]+120*d::y[id]] = 'e';
+		//((char*)d::resource[0])[d::x[id]+120*d::y[id]] = 'e';
+		for (unsigned i=0; i<d::l[id]; ++i) {
+			memcpy((char*)d::resource[0]+120*(d::y[id]+i)+d::x[id], (char*)d::resource[id]+d::w[id]*i, d::w[id]);
+		}
 }
