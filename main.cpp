@@ -1,7 +1,6 @@
 #include <stdlib.h>		//srand
-#include <ncurses.h>	//initscr
+#include "libkalejdoskopo.h"
 #include "Timer.class.hpp"
-#include "Game.class.hpp"
 #include "display.hpp"
 #include "data.hpp"
 #include "entities.hpp"
@@ -11,14 +10,11 @@ void		freeexit(void);
 
 static Timer 		*t = new Timer(100);
 static unsigned	currFrame(0);
-static Game			*g = new Game();
 
 
 int			main(void) {
 	srand(time(NULL));
-	//ncurses init
-	initscr();
-	start_color();
+	terminit();
 	x::initiate();
 	//launch
 	mainloop();
@@ -32,7 +28,6 @@ void		mainloop(void) {
 		currFrame++;
 		t->start();
 
-		//g->update(currFrame);
 		unsigned e = e::create(1,1,1,1,1);
 		unsigned e2 = e::create(2,2,2,2,2);
 		d::resource[e] = malloc(1);
@@ -47,5 +42,4 @@ void		mainloop(void) {
 
 void		freeexit(void) {
 	delete(t);
-	delete(g);
 }

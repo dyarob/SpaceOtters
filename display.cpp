@@ -1,6 +1,6 @@
 #include "display.hpp"
 #include "data.hpp"
-#include "kalejdoskopo.h"
+#include "libkalejdoskopo.h"
 #include "term.h"
 
 int	testputc(int c) {

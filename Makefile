@@ -4,16 +4,20 @@ SRC         =	\
 			data.cpp	\
 			display.cpp	\
 			entities.cpp	\
-			Game.class.cpp	\
 			main.cpp	\
 			Timer.class.cpp	\
 
 OBJDIR			= ./obj/
 OBJ         = $(addprefix $(OBJDIR), $(SRC:.cpp=.o))
-HDFLAGS     = -I./includes/ -I../boost_1_59_0/
-LDFLAGS     = -lncurses
+HDFLAGS     = -I./inc/ -I../boost_1_59_0/
+LDFLAGS     = -L./lib/ -ltermcap -lkalejdoskopo
 CFLAGS      =	\
-			$(HDFLAGS) -Wall -Werror -Wextra -ansi -pedantic -g \
+			$(HDFLAGS)	\
+			-Wall -Werror -Wextra	\
+			-ansi	\
+			-pedantic	\
+			-g	\
+			-v	\
 			-std=c++11	# for <thread> in main.cpp on arch-linux
 RM          = rm -rf
 
@@ -21,7 +25,7 @@ all:        $(NAME)
 
 $(NAME):    $(OBJ)
 			@echo "\033[1;32m[Linking] \t\033[0m: \033[0;32m" | tr -d '\n'
-			$(CC) -o $@ $^ $(LDFLAGS) 
+			$(CC) -o $@ $^ $(LDFLAGS)
 			@echo "\033[0m" | tr -d '\n'
 $(addprefix $(OBJDIR), %.o):        %.cpp
 			@echo "\033[1;36m[Compiling] \t\033[0m: \033[1;37m" | tr -d '\n'
