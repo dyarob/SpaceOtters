@@ -52,6 +52,7 @@ int		main( int ac, char **av ) {
 				displayMemo();
 				return (0);
 			}
+			return (0);			// <===
 		case 4:
 			// ==== ncurses init ====
 			initscr();
@@ -75,8 +76,8 @@ int		main( int ac, char **av ) {
 			img->draw( winimg, 1, 1 );
 			break;
 		default:
-		displayDefaultHelp();
-		return (0);
+			displayDefaultHelp();
+			return (0);
 	}
 
 
