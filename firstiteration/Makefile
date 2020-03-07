@@ -78,6 +78,6 @@ EDITOR_SRC   =	\
 
 e:
 	rm -f editor
-	g++ -Wall -Wextra -Werror -g $(EDITOR_SRC) -lncurses -o editor
+	g++ -Wall -Wextra -Werror -g $(EDITOR_SRC) -I includes -lncurses -o editor
 
 .PHONY:     all clean re fclean
