@@ -11,6 +11,7 @@ protected:
     unsigned int    _fire_rate;
 
 public:
+    using Weapon::fire;
     WeaponEnemy(void);
     //WeaponEnemy(WeaponEnemy const &src);
     //WeaponEnemy              &operator=(WeaponEnemy const &);
